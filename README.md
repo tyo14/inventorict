@@ -1,9 +1,10 @@
-# CodeIgniter 2
-Open Source PHP Framework (originally from EllisLab)
+Inventori
+============
 
-For more info, please refer to the user-guide at http://www.codeigniter.com/userguide2/  
-(also available within the download package for offline use)
+kerjakan dengan aturan :
 
-**WARNING:** *CodeIgniter 2.x is no longer under development and only receives security patches until October 31st, 2015.
-Please update your installation to the latest CodeIgniter 3.x version available
-(upgrade instructions [here](http://www.codeigniter.com/userguide3/installation/upgrade_300.html)).*
+1. pull terlebih dahulu sebelum push
+2. jangan nyampah commit, biasa aja
+3. komunikasi tetap dijaga
+4. baca bismillah sebelum mengerjakan
+5. semangat guys :)

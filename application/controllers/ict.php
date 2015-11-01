@@ -32,11 +32,16 @@
 			//$md5pass = md5($pass);
 			$sql = $this->global_model->find_by('registration', array('User_ID'=>$username, 'Password'=> $pass));
 			if($sql!=null){
+				$datasession = array(
+					'useridsession'=>$sql['User_ID'],
+					'fullnamesession'=>$sql['Full_Name']
+					);
+
+				 $this->session->set_userdata($datasession);
+
 				 redirect(site_url('ict/dashboard'));
 			}else
 			{
-				
-				
 				redirect(site_url('/'));
 			}
 		}

@@ -41,9 +41,9 @@
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
             <li class="active"><a href="<?php echo base_url();?>index.php/dashboard/daftarbarang">Daftar Barang<span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Data Unit</a></li>
-            <li><a href="#">Data Divisi</a></li>
-            <li><a href="#">Data Rakitan</a></li>
+            <li><a href="<?php echo base_url();?>index.php/dashboard/dataunit">Data Unit</a></li>
+            <li><a href="<?php echo base_url();?>index.php/dashboard/datadivisi">Data Divisi</a></li>
+            <li><a href="<?php echo base_url();?>index.php/dashboard/datarakitan">Data Rakitan</a></li>
           </ul>
           <ul class="nav nav-sidebar">
             <li><a href="">Nav item</a></li>

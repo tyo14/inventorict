@@ -19,8 +19,28 @@
  	public function daftarbarang()
  	{
  		$this->load->view('head');
- 		$this->load->view('barang'); //Contains
+ 		$this->load->view('daftarbarang'); //Contains
  		$this->load->view('footdash');
  	}
-	
+
+	public function dataunit()
+ 	{
+ 		$this->load->view('head');
+ 		$this->load->view('dataunit'); //Contains
+ 		$this->load->view('footdash');
+ 	}
+
+ 	public function datadivisi()
+ 	{
+ 		$this->load->view('head');
+ 		$this->load->view('datadivisi'); //Contains
+ 		$this->load->view('footdash');
+ 	}
+
+ 	public function datarakitan()
+ 	{
+ 		$this->load->view('head');
+ 		$this->load->view('datarakitan'); //Contains
+ 		$this->load->view('footdash');
+ 	}
  }

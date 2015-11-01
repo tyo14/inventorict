@@ -46,4 +46,10 @@
 			}
 		}
 	}
+
+	public function logout(){
+		$this->session->unset_userdata('useridsession', 'fullnamesession');
+        
+        redirect(site_url('/'));
+	}
  }

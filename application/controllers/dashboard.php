@@ -1,5 +1,5 @@
 <?php if (! defined('BASEPATH')) exit('No direct script acces allowed');
- class Login extends CI_Controller {
+ class Dashboard extends CI_Controller {
 
  	function __construct()
  	{
@@ -15,5 +15,12 @@
  		$this->load->view('login'); //Contains
  		$this->load->view('footer');
  	}
- 	
+
+ 	public function daftarbarang()
+ 	{
+ 		$this->load->view('head');
+ 		$this->load->view('barang'); //Contains
+ 		$this->load->view('footdash');
+ 	}
+	
  }

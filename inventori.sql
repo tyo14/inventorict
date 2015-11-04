@@ -1,4 +1,5 @@
 -- phpMyAdmin SQL Dump
+<<<<<<< HEAD
 -- version 4.4.14
 -- http://www.phpmyadmin.net
 --
@@ -6,6 +7,15 @@
 -- Generation Time: 03 Nov 2015 pada 05.14
 -- Versi Server: 5.6.26
 -- PHP Version: 5.6.12
+=======
+-- version 4.3.11
+-- http://www.phpmyadmin.net
+--
+-- Host: 127.0.0.1
+-- Generation Time: Nov 01, 2015 at 11:53 AM
+-- Server version: 5.6.24
+-- PHP Version: 5.6.8
+>>>>>>> 3b30cc9f0613087d0e245ea12ebb97e6d7f1afe3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +24,11 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+<<<<<<< HEAD
 /*!40101 SET NAMES utf8mb4 */;
+=======
+/*!40101 SET NAMES utf8 */;
+>>>>>>> 3b30cc9f0613087d0e245ea12ebb97e6d7f1afe3
 
 --
 -- Database: `inventori`
@@ -23,6 +37,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
 -- Struktur dari tabel `barang`
 --
 
@@ -74,6 +89,9 @@ CREATE TABLE IF NOT EXISTS `rakitan_header` (
 
 --
 -- Struktur dari tabel `registration`
+=======
+-- Table structure for table `registration`
+>>>>>>> 3b30cc9f0613087d0e245ea12ebb97e6d7f1afe3
 --
 
 CREATE TABLE IF NOT EXISTS `registration` (
@@ -83,12 +101,17 @@ CREATE TABLE IF NOT EXISTS `registration` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+<<<<<<< HEAD
 -- Dumping data untuk tabel `registration`
+=======
+-- Dumping data for table `registration`
+>>>>>>> 3b30cc9f0613087d0e245ea12ebb97e6d7f1afe3
 --
 
 INSERT INTO `registration` (`User_ID`, `Password`, `Full_Name`) VALUES
 ('tyo', '26081995', 'Tyo');
 
+<<<<<<< HEAD
 -- --------------------------------------------------------
 
 --
@@ -112,11 +135,14 @@ CREATE TABLE IF NOT EXISTS `unit` (
   `Nama_Unit` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+=======
+>>>>>>> 3b30cc9f0613087d0e245ea12ebb97e6d7f1afe3
 --
 -- Indexes for dumped tables
 --
 
 --
+<<<<<<< HEAD
 -- Indexes for table `barang`
 --
 ALTER TABLE `barang`
@@ -141,11 +167,14 @@ ALTER TABLE `rakitan_header`
   ADD PRIMARY KEY (`Kode_Rakit`);
 
 --
+=======
+>>>>>>> 3b30cc9f0613087d0e245ea12ebb97e6d7f1afe3
 -- Indexes for table `registration`
 --
 ALTER TABLE `registration`
   ADD PRIMARY KEY (`User_ID`);
 
+<<<<<<< HEAD
 --
 -- Indexes for table `unit`
 --
@@ -161,6 +190,8 @@ ALTER TABLE `unit`
 --
 ALTER TABLE `rakitan_detail`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+=======
+>>>>>>> 3b30cc9f0613087d0e245ea12ebb97e6d7f1afe3
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

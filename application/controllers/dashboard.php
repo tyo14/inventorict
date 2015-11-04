@@ -18,9 +18,14 @@
 
  	public function daftarbarang()
  	{
+<<<<<<< HEAD
  		$data['kodeunit'] = $this->global_model->find_all('unit');
  		$this->load->view('head');
  		$this->load->view('daftarbarang',$data); //Contains
+=======
+ 		$this->load->view('head');
+ 		$this->load->view('daftarbarang'); //Contains
+>>>>>>> 3b30cc9f0613087d0e245ea12ebb97e6d7f1afe3
  		$this->load->view('footdash');
  	}
 
@@ -44,6 +49,7 @@
  		$this->load->view('datarakitan'); //Contains
  		$this->load->view('footdash');
  	}
+<<<<<<< HEAD
 
  	public function insertapply(){
 		if($this->input->post('simpan'))
@@ -84,3 +90,6 @@
 	}
 
 }
+=======
+ }
+>>>>>>> 3b30cc9f0613087d0e245ea12ebb97e6d7f1afe3

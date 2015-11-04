@@ -18,8 +18,9 @@
 
  	public function daftarbarang()
  	{
+ 		$data['kodeunit'] = $this->global_model->find_all('unit');
  		$this->load->view('head');
- 		$this->load->view('daftarbarang'); //Contains
+ 		$this->load->view('daftarbarang',$data); //Contains
  		$this->load->view('footdash');
  	}
 
@@ -50,7 +51,6 @@
 			//get untuk table barang
 			$data1 = array(
 				'Kode_Barang'=>$this->input->post('Kode_Barang'),
-				'User_ID'=>$this->session->userdata('useridsession'),
 				'Tgl_Beli'=>$this->input->post('Tgl_Beli'),
 				'Nama_Barang'=>$this->input->post('Nama_Barang'),
 				'Deskripsi'=>$this->input->post('Deskripsi')
@@ -60,6 +60,24 @@
 			$this->global_model->create('barang', $data1);
 
 			redirect(site_url('dashboard/daftarbarang'));
+
+
+		}
+	}
+
+	public function insertunit(){
+		if($this->input->post('simpan'))
+		{
+			//get untuk table barang
+			$data1 = array(
+				'Kode_Unit'=>$this->input->post('Kode_Unit'),
+				'Nama_Unit'=>$this->input->post('Nama_Unit')
+				);
+
+			//untuk table barang
+			$this->global_model->create('unit', $data1);
+
+			redirect(site_url('dashboard/dataunit'));
 
 
 		}

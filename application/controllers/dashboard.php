@@ -11,8 +11,8 @@
 
  	public function index()
  	{
- 		$this->load->view('headlogin');
- 		$this->load->view('login'); //Contains
+ 		$this->load->view('head');
+ 		$this->load->view('dash'); //Contains
  		$this->load->view('footer');
  	}
 

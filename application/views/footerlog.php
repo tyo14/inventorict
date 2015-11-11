@@ -1,17 +1,17 @@
-    </div>
-
-    <!-- jQuery -->
-    <script src="<?php echo base_url();?>assets/sbadmin/js/jquery.min.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="<?php echo base_url();?>assets/sbadmin/js/bootstrap.min.js"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="<?php echo base_url();?>assets/sbadmin/js/metisMenu.min.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="<?php echo base_url();?>assets/sbadmin/js/sb-admin-2.js"></script>
-
-</body>
-
+<!-- jQuery 2.1.4 -->
+    <script src="<?php echo base_url();?>assets/admin/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <!-- Bootstrap 3.3.5 -->
+    <script src="<?php echo base_url();?>assets/admin/bootstrap/js/bootstrap.min.js"></script>
+    <!-- iCheck -->
+    <script src="<?php echo base_url();?>assets/admin/plugins/iCheck/icheck.min.js"></script>
+    <script>
+      $(function () {
+        $('input').iCheck({
+          checkboxClass: 'icheckbox_square-blue',
+          radioClass: 'iradio_square-blue',
+          increaseArea: '20%' // optional
+        });
+      });
+    </script>
+  </body>
 </html>

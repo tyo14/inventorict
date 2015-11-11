@@ -11,6 +11,27 @@
 
  	public function index()
  	{
+ 		
+ 		//validasi login
+ 		if($this->input->post('masuk'))
+ 		{
+ 			$email 	= $this->input->post('email');
+ 			$pass	= $this->input->post('password');
+ 			$md5pass = md5($pass);
+
+ 			$sql = $this->global_model->find_by('user', array('email' => $email, 'password' => $md5pass));
+
+ 			if($sql!=null){
+
+ 				redirect(site_url('dashboard'));
+
+ 			}else {
+
+ 				redirect(site_url('/'));
+ 			}
+
+ 		}
+
  		$this->load->view('headlog');
  		$this->load->view('masuk'); //Contains
  		$this->load->view('footerlog');

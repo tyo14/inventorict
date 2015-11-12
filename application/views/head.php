@@ -12,11 +12,20 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/plugins/datatables/dataTables.bootstrap.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/dist/css/skins/_all-skins.min.css">
+    <script type="text/javascript" charset="utf8" src="<?php echo base_url(); ?>assets/admin/bootstrap/js/jquery-1.10.2.min.js"></script>
+    <!-- page script -->
+    <script>
+      $(document).ready(function () {
+        $("#example1").DataTable(); 
+      });
+    </script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -300,13 +309,13 @@
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">Navigasi Utama</li>
-            <li class="active"><a href="documentation/index.html"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+            <li class="active"><a href="<?php echo base_url(); ?>index.php/dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-book"></i> <span>Master</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="index.html"><i class="fa fa-circle-o"></i> Daftar Barang</a></li>
+                <li><a href="<?php echo base_url(); ?>index.php/dashboard/barang"><i class="fa fa-circle-o"></i> Daftar Barang</a></li>
                 <li><a href="index2.html"><i class="fa fa-circle-o"></i> Daftar Unit</a></li>
                 <li><a href="index2.html"><i class="fa fa-circle-o"></i> Daftar Divisi</a></li>
                 <li><a href="index2.html"><i class="fa fa-circle-o"></i> Daftar Rakitan</a></li>

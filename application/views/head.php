@@ -327,7 +327,7 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="<?php echo base_url(); ?>index.php/barang"><i class="fa fa-circle-o"></i> Daftar Barang</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Daftar Unit</a></li>
+                <li><a href="<?php echo base_url(); ?>index.php/unitdiv"><i class="fa fa-circle-o"></i> Daftar Unit</a></li>
                 <li><a href="#"><i class="fa fa-circle-o"></i> Daftar Divisi</a></li>
                 <li><a href="#"><i class="fa fa-circle-o"></i> Daftar Rakitan</a></li>
               </ul>
@@ -337,10 +337,9 @@
                 <i class="fa fa-book"></i> <span>Form Input</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="<?php echo base_url(); ?>index.php/barang/tambah"><i class="fa fa-circle-o"></i> Input Barang</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Input Unit</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Input Divisi</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Input Rakitan</a></li>
+                <li><a href="<?php echo base_url(); ?>index.php/barang/tambah"><i class="fa fa-circle-o"></i> Barang</a></li>
+                <li><a href="<?php echo base_url(); ?>index.php/unitdiv/tambah"><i class="fa fa-circle-o"></i> Unit & Divisi</a></li>                
+                <li><a href="#"><i class="fa fa-circle-o"></i> Rakitan</a></li>
               </ul>
             </li>
           </ul>

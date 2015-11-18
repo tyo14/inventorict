@@ -24,20 +24,17 @@
             <div class="box-body">
               <div class="row">
               <!-- form start -->
-              <form class="form-horizontal">
+              <form class="form-horizontal" method="POST" action="">
                 <div class="col-md-7">
                       <div class="box-body">
                         <div class="form-group">
                           <label for="inputUnit" class="col-sm-3 control-label">Unit</label>
                           <div class="col-sm-8">
                             <select class="form-control select2" style="width: 100%;">
-                              <option selected="selected">Alabama</option>
-                              <option>Alaska</option>
-                              <option>California</option>
-                              <option>Delaware</option>
-                              <option>Tennessee</option>
-                              <option>Texas</option>
-                              <option>Washington</option>
+                              <?php foreach ($dataunit as $unit) {
+                              ?>
+                              <option value="<?php echo $unit['nama_unit'];?>"><?php echo $unit['nama_unit'];?></option>
+                              <?php } ?>
                             </select>
                           </div>
                         </div>
@@ -76,7 +73,7 @@
                   <div class="form-group">
                     <label for="inputKodeBarang" class="col-sm-4 control-label">Kondisi Barang</label>
                     <div class="col-sm-6">
-                      <input type="number" class="form-control" max="100" min="0" placeholder="0">
+                      <input type="number" class="form-control" max="100" min="0" step="1">
                       <small>* % Health</small>
                     </div>
                   </div>
@@ -98,12 +95,19 @@
                     </div>
                   </div>
                 </div><!-- /.col -->
-              </form>
               </div><!-- /.row -->
             </div><!-- /.box-body -->
             <div class="box-footer">
-              Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and information about the plugin.
+              <div class="pull-right">
+                <div class="btn-group">
+                  <a class="btn btn-default" href="#">Cancel</a>
+                </div>
+                <div class="btn-group">
+                  <input type="submit" class="btn btn-primary" value="Simpan" name="simpan" />
+                </div>
+              </div>  
             </div>
+            </form>
           </div><!-- /.box -->
         </section>  
         

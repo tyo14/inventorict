@@ -8,7 +8,7 @@
           <ol class="breadcrumb">
             <li><a href="<?php echo base_url(); ?>index.php/dashboard/"><i class="fa fa-dashboard"></i> Home</a></li>
             <li>Dashboard</li>
-            <li class="active">Input Data Barang</li>
+            <li class="active">Input Data Unit dan Divisi</li>
           </ol>
         </section>
         <!-- Main content -->
@@ -26,23 +26,23 @@
             <div class="box-body">
               
               <!-- form start -->
-              <form method="POST" action="">
+              <form method="POST" action="<?php echo base_url();?>index.php/unitdiv/simpanunit">
                 <div class="form-group">
                     <label for="inputKodeUnit">Kode Unit</label>                          
-                    <input type="text" class="form-control" placeholder="Kode Unit">
+                    <input type="text" name="kode_unit" class="form-control" placeholder="Kode Unit" maxlength="3" style="text-transform:uppercase;">
                 </div>
                 <div class="form-group">
                     <label for="inputNamaUnit">Nama Unit</label>
-                    <input type="text" class="form-control" placeholder="Nama Unit">
+                    <input type="text" name="nama_unit" class="form-control" placeholder="Nama Unit">
                 </div>
             </div><!-- /.box-body -->
             <div class="box-footer">
               <div class="pull-right">
                 <div class="btn-group">
-                  <a class="btn btn-default" href="#">Cancel</a>
+                  <input type="reset" class="btn btn-default" value="Cancel" />
                 </div>
                 <div class="btn-group">
-                  <input type="submit" class="btn btn-primary" value="Simpan" name="simpan" />
+                  <input type="submit" class="btn btn-primary" value="Simpan" name="saveunit" />
                 </div>
               </div>  
             </div>
@@ -60,23 +60,23 @@
             <div class="box-body">
               
               <!-- form start -->
-              <form method="POST" action="">
+              <form method="POST" action="<?php echo base_url();?>index.php/unitdiv/simpandevisi">
                 <div class="form-group">
-                    <label for="inputKodeUnit">Kode Divisi</label>                          
-                    <input type="text" class="form-control" placeholder="Kode Unit">
+                    <label for="inputKodeDivisi">Kode Divisi</label>                          
+                    <input type="text" name="kode_devisi" class="form-control" placeholder="Kode Divisi" maxlength="3" style="text-transform:uppercase;">
                 </div>
                 <div class="form-group">
-                    <label for="inputNamaUnit">Nama Unit</label>
-                    <input type="text" class="form-control" placeholder="Nama Unit">
+                    <label for="inputNamaDivisi">Nama Divisi</label>
+                    <input type="text" name="nama_devisi" class="form-control" placeholder="Nama Divisi">
                 </div>
             </div><!-- /.box-body -->
             <div class="box-footer">
               <div class="pull-right">
                 <div class="btn-group">
-                  <a class="btn btn-default" href="#">Cancel</a>
+                  <input type="reset" class="btn btn-default" value="Cancel" />
                 </div>
                 <div class="btn-group">
-                  <input type="submit" class="btn btn-primary" value="Simpan" name="simpan" />
+                  <input type="submit" class="btn btn-primary" value="Simpan" name="savedevisi" />
                 </div>
               </div>  
             </div>

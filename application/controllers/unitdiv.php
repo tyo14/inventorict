@@ -24,5 +24,32 @@
  		$this->load->view('footer');	
  	}
 
+ 	public function simpanunit()
+ 	{
+ 		if($this->input->post('saveunit')){
+
+ 			$data = $this->input->post();
+ 			unset($data['saveunit']);
+
+ 			$this->global_model->create('unit',$data);
+
+ 			redirect(site_url('unitdiv/tambah'));
+
+ 		}
+ 	}
+ 	public function simpandevisi()
+ 	{
+ 		if($this->input->post('savedevisi')){
+
+ 			$data = $this->input->post();
+ 			unset($data['savedevisi']);
+
+ 			$this->global_model->create('devisi',$data);
+
+ 			redirect(site_url('unitdiv/tambah'));
+
+ 		}
+ 	}
+
 
 }

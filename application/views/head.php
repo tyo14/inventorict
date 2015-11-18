@@ -16,14 +16,25 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/plugins/datatables/dataTables.bootstrap.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/dist/css/AdminLTE.min.css">
+    <!-- Bootstrap time Picker -->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/plugins/timepicker/bootstrap-timepicker.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/plugins/select2/select2.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/dist/css/skins/_all-skins.min.css">
     <script type="text/javascript" charset="utf8" src="<?php echo base_url(); ?>assets/admin/bootstrap/js/jquery-1.10.2.min.js"></script>
     <!-- page script -->
     <script>
-      $(document).ready(function () {
+      $(function () {
         $("#example1").DataTable(); 
+        //Datemask dd/mm/yyyy
+        $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+        //Datemask2 mm/dd/yyyy
+        $("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
+        //Money Euro
+        $("[data-mask]").inputmask();
+        $(".select2").select2();
       });
     </script>
 
@@ -316,9 +327,20 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="<?php echo base_url(); ?>index.php/dashboard/barang"><i class="fa fa-circle-o"></i> Daftar Barang</a></li>
-                <li><a href="index2.html"><i class="fa fa-circle-o"></i> Daftar Unit</a></li>
-                <li><a href="index2.html"><i class="fa fa-circle-o"></i> Daftar Divisi</a></li>
-                <li><a href="index2.html"><i class="fa fa-circle-o"></i> Daftar Rakitan</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Daftar Unit</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Daftar Divisi</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Daftar Rakitan</a></li>
+              </ul>
+            </li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-book"></i> <span>Form Input</span> <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="#"><i class="fa fa-circle-o"></i> Input Barang</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Input Unit</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Input Divisi</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Input Rakitan</a></li>
               </ul>
             </li>
           </ul>

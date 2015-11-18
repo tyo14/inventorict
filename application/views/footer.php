@@ -10,6 +10,11 @@
     <script src="<?php echo base_url(); ?>assets/admin/plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- Bootstrap 3.3.5 -->
     <script src="<?php echo base_url(); ?>assets/admin/bootstrap/js/bootstrap.min.js"></script>
+    <!-- InputMask -->
+    <script src="<?php echo base_url(); ?>assets/admin/plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="<?php echo base_url(); ?>assets/admin/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+    <!-- Select2 -->
+    <script src="<?php echo base_url(); ?>assets/admin/plugins/select2/select2.full.min.js"></script>
     <!-- DataTables -->
     <script src="<?php echo base_url(); ?>assets/admin/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/admin/plugins/datatables/dataTables.bootstrap.min.js"></script>
@@ -23,5 +28,6 @@
     <script src="<?php echo base_url(); ?>assets/admin/dist/js/pages/dashboard.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="<?php echo base_url(); ?>assets/admin/dist/js/demo.js"></script>
+
   </body>
 </html>

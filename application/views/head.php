@@ -261,7 +261,7 @@
                   <li class="user-header">
                     <img src="<?php echo base_url(); ?>assets/admin/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                     <p>
-                      Administrator
+                      <?php echo $this->session->userdata('namapengguna'); ?>
                       <small>Member since Nov. 2012</small>
                     </p>
                   </li>
@@ -283,7 +283,7 @@
                       <a href="#" class="btn btn-default btn-flat">Profile</a>
                     </div>
                     <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                      <a href="<?php echo base_url();?>index.php/login/logout" class="btn btn-default btn-flat">Sign out</a>
                     </div>
                   </li>
                 </ul>
@@ -303,7 +303,7 @@
               <img src="<?php echo base_url(); ?>assets/admin/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-              <p>Administrator</p>
+              <p><?php echo $this->session->userdata('namapengguna'); ?></p>
               <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
           </div>

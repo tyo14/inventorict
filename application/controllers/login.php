@@ -22,7 +22,13 @@
  			$sql = $this->global_model->find_by('user', array('email' => $email, 'password' => $md5pass));
 
  			if($sql!=null){
+ 				$sessiondata = array(
+ 								'username' => $sql['username'],
+ 								'namapengguna' => $sql['nama_pengguna'],
+ 								'email' => $sql['email'],
+ 								'status' => $sql['status']);
 
+ 				$this->session->set_userdata($sessiondata);
  				redirect(site_url('dashboard'));
 
  			}else {
@@ -35,6 +41,11 @@
  		$this->load->view('headlog');
  		$this->load->view('masuk'); //Contains
  		$this->load->view('footerlog');
+ 	}
+ 	public function logout()
+ 	{
+ 		$this->session->sess_destroy();
+ 		redirect(site_url('/'));
  	}
 
  }

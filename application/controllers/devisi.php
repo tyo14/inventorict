@@ -1,5 +1,5 @@
 <?php if (! defined('BASEPATH')) exit('No direct script acces allowed');
- class Unitdiv extends CI_Controller {
+ class Devisi extends CI_Controller {
 
  	function __construct()
  	{
@@ -11,33 +11,20 @@
 
  	public function index()
  	{
- 		$data['unit'] = $this->global_model->find_all('unit');
+ 		$data['devisi'] = $this->global_model->find_all('devisi');
  		$this->load->view('head');
- 		$this->load->view('daftarunit', $data); //Contains
+ 		$this->load->view('daftardivisi', $data); //Contains
  		$this->load->view('footer');
  	}
 
  	public function tambah()
  	{
  		$this->load->view('head');
- 		$this->load->view('inputunit'); //Contains
+ 		$this->load->view('inputdevisi'); //Contains
  		$this->load->view('footer');	
  	}
 
- 	public function simpanunit()
- 	{
- 		if($this->input->post('saveunit')){
-
- 			$data = $this->input->post();
- 			unset($data['saveunit']);
-
- 			$this->global_model->create('unit',$data);
-
- 			redirect(site_url('unitdiv/tambah'));
-
- 		}
- 	}
- 	public function simpandevisi()
+ 	public function simpan()
  	{
  		if($this->input->post('savedevisi')){
 
@@ -46,7 +33,7 @@
 
  			$this->global_model->create('devisi',$data);
 
- 			redirect(site_url('unitdiv/tambah'));
+ 			redirect(site_url('devisi/tambah'));
 
  		}
  	}

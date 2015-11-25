@@ -327,8 +327,8 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="<?php echo base_url(); ?>index.php/barang"><i class="fa fa-circle-o"></i> Daftar Barang</a></li>
-                <li><a href="<?php echo base_url(); ?>index.php/unitdiv"><i class="fa fa-circle-o"></i> Daftar Unit</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Daftar Divisi</a></li>
+                <li><a href="<?php echo base_url(); ?>index.php/unit"><i class="fa fa-circle-o"></i> Daftar Unit</a></li>
+                <li><a href="<?php echo base_url(); ?>index.php/devisi"><i class="fa fa-circle-o"></i> Daftar Divisi</a></li>
                 <li><a href="#"><i class="fa fa-circle-o"></i> Daftar Rakitan</a></li>
               </ul>
             </li>
@@ -338,7 +338,8 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="<?php echo base_url(); ?>index.php/barang/tambah"><i class="fa fa-circle-o"></i> Barang</a></li>
-                <li><a href="<?php echo base_url(); ?>index.php/unitdiv/tambah"><i class="fa fa-circle-o"></i> Unit & Divisi</a></li>                
+                <li><a href="<?php echo base_url(); ?>index.php/unit/tambah"><i class="fa fa-circle-o"></i> Unit</a></li>                
+                <li><a href="<?php echo base_url(); ?>index.php/devisi/tambah"><i class="fa fa-circle-o"></i> Devisi</a></li>
                 <li><a href="#"><i class="fa fa-circle-o"></i> Rakitan</a></li>
               </ul>
             </li>

@@ -2,8 +2,8 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Form Unit
-            <small>Input Data Unit</small>
+            Form Devisi
+            <small>Input Data Devisi</small>
           </h1>
         </section>
         <!-- Main content -->
@@ -13,7 +13,7 @@
           <div class="col-md-6">
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Input Data Unit</h3>
+              <h3 class="box-title">Input Data Devisi</h3>
               <div class="box-tools pull-right">
                 <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
               </div>
@@ -21,14 +21,14 @@
             <div class="box-body">
               
               <!-- form start -->
-              <form method="POST" action="<?php echo base_url();?>index.php/unit/simpan">
+              <form method="POST" action="<?php echo base_url();?>index.php/devisi/simpan">
                 <div class="form-group">
-                    <label for="inputKodeUnit">Kode Unit</label>                          
-                    <input type="text" name="kode_unit" class="form-control" placeholder="Kode Unit" maxlength="3" style="text-transform:uppercase;">
+                    <label for="inputKodeDevisi">Kode Devisi</label>                          
+                    <input type="text" name="kode_devisi" class="form-control" placeholder="Kode Devisi" maxlength="3" style="text-transform:uppercase;">
                 </div>
                 <div class="form-group">
-                    <label for="inputNamaUnit">Nama Unit</label>
-                    <input type="text" name="nama_unit" class="form-control" placeholder="Nama Unit">
+                    <label for="inputNamaDevisi">Nama Devisi</label>
+                    <input type="text" name="nama_devisi" class="form-control" placeholder="Nama Devisi">
                 </div>
             </div><!-- /.box-body -->
             <div class="box-footer">
@@ -37,7 +37,7 @@
                   <input type="reset" class="btn btn-default" value="Cancel" />
                 </div>
                 <div class="btn-group">
-                  <input type="submit" class="btn btn-primary" value="Simpan" name="saveunit" />
+                  <input type="submit" class="btn btn-primary" value="Simpan" name="savedevisi" />
                 </div>
               </div>  
             </div>

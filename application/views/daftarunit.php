@@ -27,10 +27,13 @@
                       </tr>
                     </thead>
                     <tbody>
-                    <?php foreach ($unit as $fetchdata) {
+                    <?php 
+                    $no = 0;
+                    foreach ($unit as $fetchdata) {
+                      $no++;
                     ?>
                       <tr>
-                        <td></td>
+                        <td><?php echo $no; ?></td>
                         <td><?php echo $fetchdata['kode_unit']; ?></td>
                         <td><?php echo $fetchdata['nama_unit']; ?></td>
                         <td><a>Edit</a> | <a>Hapus</a> | <a>Detail</a></td>

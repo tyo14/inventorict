@@ -1,4 +1,4 @@
-Inventori
+Inventorict
 ============
 
 kerjakan dengan aturan :

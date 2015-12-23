@@ -2,8 +2,8 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Form Devisi
-            <small>Input Data Devisi</small>
+            Form Unit
+            <small>Ubah Data Unit</small>
           </h1>
         </section>
         <!-- Main content -->
@@ -13,7 +13,7 @@
           <div class="col-md-6">
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Input Data Devisi</h3>
+              <h3 class="box-title">Ubah Data Unit</h3>
               <div class="box-tools pull-right">
                 <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
               </div>
@@ -21,15 +21,18 @@
             <div class="box-body">
               
               <!-- form start -->
-              <form method="POST" action="<?php echo base_url();?>index.php/devisi/simpan">
+              <form method="POST" action="<?php echo base_url();?>index.php/unit/ubah">
+                <?php foreach ($getid as $fetchdata) {
+                  ?>
                 <div class="form-group">
-                    <label for="inputKodeDevisi">Kode Devisi</label>                          
-                    <input type="text" name="kode_divisi" class="form-control" placeholder="Kode Devisi" maxlength="3" style="text-transform:uppercase;">
+                    <label for="inputKodeUnit">Kode Unit</label>                          
+                    <input type="text" name="kode_unit" class="form-control" placeholder="Kode Unit" maxlength="3" style="text-transform:uppercase;" value="<?php echo $fetchdata['kode_unit'];?>">
                 </div>
                 <div class="form-group">
-                    <label for="inputNamaDevisi">Nama Devisi</label>
-                    <input type="text" name="nama_divisi" class="form-control" placeholder="Nama Devisi">
+                    <label for="inputNamaUnit">Nama Unit</label>
+                    <input type="text" name="nama_unit" class="form-control" placeholder="Nama Unit" value="<?php echo $fetchdata['nama_unit'];?>">
                 </div>
+                <?php }?>
             </div><!-- /.box-body -->
             <div class="box-footer">
               <div class="pull-right">
@@ -37,7 +40,7 @@
                   <input type="reset" class="btn btn-default" value="Cancel" />
                 </div>
                 <div class="btn-group">
-                  <input type="submit" class="btn btn-primary" value="Simpan" name="savedevisi" />
+                  <input type="submit" class="btn btn-primary" value="Simpan" name="saveunit" />
                 </div>
               </div>  
             </div>

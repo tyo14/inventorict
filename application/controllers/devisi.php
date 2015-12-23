@@ -11,7 +11,7 @@
 
  	public function index()
  	{
- 		$data['devisi'] = $this->global_model->find_all('devisi');
+ 		$data['devisi'] = $this->global_model->find_all('divisi');
  		$this->load->view('head');
  		$this->load->view('daftardivisi', $data); //Contains
  		$this->load->view('footer');
@@ -28,14 +28,36 @@
  	{
  		if($this->input->post('savedevisi')){
 
- 			$data = $this->input->post();
- 			unset($data['savedevisi']);
+ 			$kodedivisi = $this->input->post('kode_divisi');
+ 			$namadivisi = $this->input->post('nama_divisi');
 
- 			$this->global_model->create('devisi',$data);
+ 			$sql = $this->global_model->find_by('divisi', array('kode_divisi' => $kodedivisi, 'nama_divisi' => $namadivisi));
 
- 			redirect(site_url('devisi/tambah'));
+ 			if($sql != null){
+
+ 				//alert message
+
+ 				redirect(site_url('devisi/tambah'));
+
+ 			}else{
+
+ 				$data = $this->input->post();
+ 				$data['kode_divisi'] = strtoupper($data['kode_divisi']);
+	 			unset($data['savedevisi']);
+
+	 			$this->global_model->create('divisi',$data);
+
+	 			redirect(site_url('devisi/tambah'));
+
+ 			}
 
  		}
+ 	}
+
+ 	public function hapus($id)
+ 	{
+ 		$this->global_model->delete('divisi', array('kode_divisi' => $id));
+ 		redirect(site_url('divisi'));
  	}
 
 

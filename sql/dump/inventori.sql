@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.14
+-- version 4.5.2
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 07, 2015 at 03:23 PM
--- Server version: 5.6.26
--- PHP Version: 5.6.12
+-- Generation Time: Dec 23, 2015 at 09:18 AM
+-- Server version: 10.1.9-MariaDB
+-- PHP Version: 5.6.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,23 +26,30 @@ SET time_zone = "+00:00";
 -- Table structure for table `barang`
 --
 
-CREATE TABLE IF NOT EXISTS `barang` (
+CREATE TABLE `barang` (
   `kode_barang` varchar(6) NOT NULL,
   `tgl_beli` date NOT NULL,
   `nama_barang` varchar(50) NOT NULL,
-  `deskripsi` varchar(255) NOT NULL
+  `deskripsi` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `devisi`
+-- Table structure for table `divisi`
 --
 
-CREATE TABLE IF NOT EXISTS `devisi` (
-  `kode_devisi` int(3) NOT NULL,
-  `nama_devisi` varchar(50) NOT NULL
+CREATE TABLE `divisi` (
+  `kode_divisi` varchar(3) NOT NULL,
+  `nama_divisi` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `divisi`
+--
+
+INSERT INTO `divisi` (`kode_divisi`, `nama_divisi`) VALUES
+('JRG', 'Jaringan');
 
 -- --------------------------------------------------------
 
@@ -50,11 +57,11 @@ CREATE TABLE IF NOT EXISTS `devisi` (
 -- Table structure for table `rakitan_detail`
 --
 
-CREATE TABLE IF NOT EXISTS `rakitan_detail` (
+CREATE TABLE `rakitan_detail` (
   `id` int(11) NOT NULL,
   `kode_rakit` varchar(10) NOT NULL,
   `kode_barang` varchar(6) NOT NULL,
-  `configurasi` varchar(50) NOT NULL
+  `konfigurasi` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -63,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `rakitan_detail` (
 -- Table structure for table `rakitan_header`
 --
 
-CREATE TABLE IF NOT EXISTS `rakitan_header` (
+CREATE TABLE `rakitan_header` (
   `kode_rakit` varchar(10) NOT NULL,
   `tanggal_rakit` date NOT NULL,
   `pengguna` varchar(50) NOT NULL,
@@ -76,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `rakitan_header` (
 -- Table structure for table `status_barang`
 --
 
-CREATE TABLE IF NOT EXISTS `status_barang` (
+CREATE TABLE `status_barang` (
   `status_stok` enum('used','not used') DEFAULT NULL,
   `kondisi_barang` int(3) NOT NULL,
   `kode_barang` varchar(6) NOT NULL
@@ -88,10 +95,39 @@ CREATE TABLE IF NOT EXISTS `status_barang` (
 -- Table structure for table `unit`
 --
 
-CREATE TABLE IF NOT EXISTS `unit` (
-  `kode_unit` int(3) NOT NULL,
+CREATE TABLE `unit` (
+  `kode_unit` varchar(3) NOT NULL,
   `nama_unit` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `unit`
+--
+
+INSERT INTO `unit` (`kode_unit`, `nama_unit`) VALUES
+('MTR', 'Monitor');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `nama_pengguna` varchar(50) NOT NULL,
+  `username` varchar(25) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `status` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `nama_pengguna`, `username`, `password`, `email`, `status`) VALUES
+(1, 'Administrator', 'admin', '0192023a7bbd73250516f069df18b500', 'admin@gmail.com', 'admin');
 
 --
 -- Indexes for dumped tables
@@ -104,18 +140,18 @@ ALTER TABLE `barang`
   ADD PRIMARY KEY (`kode_barang`);
 
 --
--- Indexes for table `devisi`
+-- Indexes for table `divisi`
 --
-ALTER TABLE `devisi`
-  ADD PRIMARY KEY (`kode_devisi`);
+ALTER TABLE `divisi`
+  ADD PRIMARY KEY (`kode_divisi`);
 
 --
 -- Indexes for table `rakitan_detail`
 --
 ALTER TABLE `rakitan_detail`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `kode_rakit` (`kode_rakit`),
-  ADD KEY `kode_barang` (`kode_barang`);
+  ADD KEY `kode_barang` (`kode_barang`),
+  ADD KEY `kode_rakit` (`kode_rakit`);
 
 --
 -- Indexes for table `rakitan_header`
@@ -136,6 +172,12 @@ ALTER TABLE `unit`
   ADD PRIMARY KEY (`kode_unit`);
 
 --
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -144,6 +186,11 @@ ALTER TABLE `unit`
 --
 ALTER TABLE `rakitan_detail`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Constraints for dumped tables
 --

@@ -36,7 +36,9 @@
                         <td><?php echo $no; ?></td>
                         <td><?php echo $fetchdata['kode_unit']; ?></td>
                         <td><?php echo $fetchdata['nama_unit']; ?></td>
-                        <td><a>Edit</a> | <a>Hapus</a> | <a>Detail</a></td>
+                        <td><a href="<?php echo base_url();?>index.php/unit/ubah/<?php echo $fetchdata['kode_unit'];?>">Edit</a> | 
+                            <a href="<?php echo base_url();?>index.php/unit/hapus/<?php echo $fetchdata['kode_unit'];?>">Hapus</a> | 
+                            <a href="<?php echo base_url();?>index.php/unit/detail/<?php echo $fetchdata['kode_unit'];?>">Detail</a></td>
                       </tr>
                       <?php } ?>
                     </tbody>

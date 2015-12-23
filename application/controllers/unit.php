@@ -28,27 +28,45 @@
  	{
  		if($this->input->post('saveunit')){
 
- 			$data = $this->input->post();
- 			unset($data['saveunit']);
+ 			//validasi data yang sama
+ 			$kodeunit = $this->input->post('kode_unit');
+ 			$namaunit = $this->input->post('nama_unit');
 
- 			$this->global_model->create('unit',$data);
+ 			$sql = $this->global_model->find_by('unit', array('kode_unit' => $kodeunit, 'nama_unit' => $namaunit));
 
- 			redirect(site_url('unit/tambah'));
+ 			if($sql != null)
+ 			{
+ 				//alert message
+
+ 				redirect(site_url('unit/tambah'));
+
+ 			}
+ 			else{
+
+ 				$data = $this->input->post();
+ 				$data['kode_unit'] = strtoupper($data['kode_unit']);
+	 			unset($data['saveunit']);
+
+	 			$this->global_model->create('unit',$data);
+
+	 			redirect(site_url('unit/tambah'));
+ 			}
 
  		}
  	}
- 	public function simpandevisi()
+
+ 	public function ubah($id)
  	{
- 		if($this->input->post('savedevisi')){
+ 		$data['getid'] = $this->global_model->find_by('unit', array('kode_unit' => $id));
+ 		$this->load->view('head');
+ 		$this->load->view('ubahunit', $data); //Contains
+ 		$this->load->view('footer');
+ 	}
 
- 			$data = $this->input->post();
- 			unset($data['savedevisi']);
-
- 			$this->global_model->create('devisi',$data);
-
- 			redirect(site_url('unitdiv/tambah'));
-
- 		}
+ 	public function hapus($id)
+ 	{
+ 		$this->global_model->delete('unit', array('kode_unit' => $id));
+ 		redirect(site_url('unit'));
  	}
 
 

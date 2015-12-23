@@ -34,9 +34,11 @@
                     ?>
                       <tr>
                         <td><?php echo $no; ?></td>
-                        <td><?php echo $fetchdata['kode_devisi']; ?></td>
-                        <td><?php echo $fetchdata['nama_devisi']; ?></td>
-                        <td><a>Edit</a> | <a>Hapus</a> | <a>Detail</a></td>
+                        <td><?php echo $fetchdata['kode_divisi']; ?></td>
+                        <td><?php echo $fetchdata['nama_divisi']; ?></td>
+                        <td><a>Edit</a> | 
+                        <a href="<?php echo base_url();?>index.php/devisi/hapus/<?php echo $fetchdata['kode_divisi'];?>">Hapus</a> | 
+                        <a>Detail</a></td>
                       </tr>
                       <?php } ?>
                     </tbody>

@@ -30,7 +30,7 @@
                         <div class="form-group">
                           <label for="inputUnit" class="col-sm-3 control-label">Unit</label>
                           <div class="col-sm-8">
-                            <select class="form-control select2" style="width: 100%;">
+                            <select class="form-control select2" style="width: 100%;" name="namaunit" onChange="showCustomer(this.value)">
                               <?php foreach ($dataunit as $unit) {
                               ?>
                               <option value="<?php echo $unit['nama_unit'];?>"><?php echo $unit['nama_unit'];?></option>
@@ -41,7 +41,7 @@
                         <div class="form-group">
                           <label for="inputKodeBarang" class="col-sm-3 control-label">Kode Barang</label>
                           <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="Kode Barang" disabled="">
+                            <input type="text" class="form-control" id="txtHint" readonly="" />
                           </div>
                         </div>
                         <div class="form-group">
@@ -58,7 +58,7 @@
                         <div class="form-group">
                           <label for="inputNamaBarang" class="col-sm-3 control-label">Nama Barang</label>
                           <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="Nama Barang">
+                            <input type="text" class="form-control" placeholder="Nama Barang" id="txtHint">
                           </div>
                         </div>
                         <div class="form-group">
@@ -111,4 +111,28 @@
           </div><!-- /.box -->
         </section>  
         
-</div>        
+</div>
+<script type="text/javascript">
+      function showCustomer(str) {
+        var xhttp;    
+        if (str == "") {
+          document.getElementById("txtHint").innerHTML = "";
+          return;
+        }
+        var url="http://localhost/inventorict/index.php/barang/ajaxbarang/"
+
+
+        url=url+str
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (xhttp.readyState == 4 && xhttp.status == 200) {
+            document.getElementById("txtHint").innerHTML = xhttp.responseText
+            document.getElementById("txtHint").value = xhttp.responseText
+          }
+        };
+        xhttp.open("GET",url, true);
+        xhttp.send(null);
+
+      }
+
+</script>

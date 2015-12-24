@@ -25,5 +25,11 @@
  		$this->load->view('footer');		
  	}
 
+ 	public function ajaxbarang($id)
+ 	{
+ 		$data = $this->global_model->find_by('unit', array('nama_unit' => $id));
+ 		echo $data['kode_unit'];
+ 	}
+
  	
  }

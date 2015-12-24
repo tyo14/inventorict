@@ -30,6 +30,7 @@
  	{
  		if($this->input->post('simpan')){
 
+
  			$inputbarang = array('kode_barang' => $this->input->post('kode_barang'),
  								 'tgl_beli' => $this->input->post('tgl_beli'),
  								 'nama_barang' => $this->input->post('nama_barang'),
@@ -39,6 +40,30 @@
  			$inputstatus = array('kondisi_barang' => $this->input->post('kondisi_barang'),
  								 'status_stok' => $this->input->post('status_stok'),
  								 'kode_barang' => $this->input->post('kode_barang'));
+
+ 			$kodebarangs = $this->input->post('kode_barang');
+
+ 			$sql = $this->global_model->find_by('barang', array('kode_barang' => $kodebarangs));
+
+ 			if($sql != null){
+
+ 				//alert message
+
+ 				redirect(site_url('barang/tambah'));
+
+ 			}else {
+
+ 				unset($data['simpan']);
+
+	 			$this->global_model->create('barang',$inputbarang);
+	 			$this->global_model->create('status_barang',$inputstatus);
+
+	 			redirect(site_url('barang/tambah'));
+
+
+ 			}
+
+
  		}
  	}
 
@@ -57,10 +82,10 @@
  		if ($checkbarang != null){
  			//jika kode unit ada maka check kode barang terakhir
  			//ambil sample kode barang terakhir
- 			$kodebrg = $checkbarang['kode_barang'];
  			//pisahkan kodeunit dan number
- 			$pisah = explode("-", $kodebrg);
- 			$number = (int)$pisah[1];
+ 			$pisah = explode("-", $checkbarang['kode_barang']);
+
+ 			$number = $pisah[1];
 
  			$number = $number+1;
 
@@ -85,25 +110,6 @@
 
  		}
 
-
-
-
- 		/*algoritma generate kode
-
-		//string yang akan dipecah
-		$teks = "MTR-001";
-		//pecah string berdasarkan string ","
-		$pecah = explode("-", $teks);
-		//mencari element array 0
-		$hasil = $pecah[0];
-		$hasil2 = (int)$pecah[1];
-
-
-		//tampilkan hasil pemecahan
-		echo $hasil;
-		echo $hasil2;
-
-		end algoritma generate kode*/
  	}
 
  	

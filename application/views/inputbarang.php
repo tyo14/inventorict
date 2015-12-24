@@ -64,7 +64,7 @@
                         <div class="form-group">
                           <label for="inputDeskripsi" class="col-sm-3 control-label">Deskripsi</label>
                           <div class="col-sm-8">
-                            <textarea class="form-control" rows="3" placeholder="Deskripsi barang" name="deskripsi" required></textarea>
+                            <textarea class="form-control" rows="3" placeholder="Deskripsi barang" name="deskripsi"></textarea>
                           </div>
                         </div>
                       </div><!-- /.box-body -->              

@@ -24,13 +24,13 @@
             <div class="box-body">
               <div class="row">
               <!-- form start -->
-              <form class="form-horizontal" method="POST" action="">
+              <form class="form-horizontal" method="POST" action="<?php echo base_url();?>index.php/barang/simpan">
                 <div class="col-md-7">
                       <div class="box-body">
                         <div class="form-group">
                           <label for="inputUnit" class="col-sm-3 control-label">Unit</label>
                           <div class="col-sm-8">
-                            <select class="form-control select2" style="width: 100%;" name="namaunit" onChange="showCustomer(this.value)">
+                            <select class="form-control select2" style="width: 100%;" onChange="showCustomer(this.value)">
                               <?php foreach ($dataunit as $unit) {
                               ?>
                               <option value="<?php echo $unit['nama_unit'];?>"><?php echo $unit['nama_unit'];?></option>
@@ -41,7 +41,7 @@
                         <div class="form-group">
                           <label for="inputKodeBarang" class="col-sm-3 control-label">Kode Barang</label>
                           <div class="col-sm-8">
-                            <input type="text" class="form-control" id="txtHint" readonly="" />
+                            <input type="text" class="form-control" id="txtHint" readonly="" name="kode_barang" required />
                           </div>
                         </div>
                         <div class="form-group">
@@ -51,20 +51,20 @@
                               <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                               </div>
-                              <input type="text" class="form-control" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>
+                              <input type="text" class="form-control" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask name="tgl_beli" required>
                             </div><!-- /.input group -->
                           </div>
                         </div>
                         <div class="form-group">
                           <label for="inputNamaBarang" class="col-sm-3 control-label">Nama Barang</label>
                           <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="Nama Barang" id="txtHint">
+                            <input type="text" class="form-control" placeholder="Nama Barang" name="nama_barang" required>
                           </div>
                         </div>
                         <div class="form-group">
                           <label for="inputDeskripsi" class="col-sm-3 control-label">Deskripsi</label>
                           <div class="col-sm-8">
-                            <textarea class="form-control" rows="3" placeholder="Deskripsi barang"></textarea>
+                            <textarea class="form-control" rows="3" placeholder="Deskripsi barang" name="deskripsi" required></textarea>
                           </div>
                         </div>
                       </div><!-- /.box-body -->              
@@ -73,7 +73,7 @@
                   <div class="form-group">
                     <label for="inputKodeBarang" class="col-sm-4 control-label">Kondisi Barang</label>
                     <div class="col-sm-6">
-                      <input type="number" class="form-control" max="100" min="0" step="1">
+                      <input type="number" class="form-control" max="100" min="0" step="1" name="kondisi_barang" required>
                       <small>* % Health</small>
                     </div>
                   </div>
@@ -82,13 +82,13 @@
                     <div class="col-sm-6">
                       <div class="radio">
                         <label>
-                          <input name="optionsRadios" id="optionsRadios1" value="used" checked="" type="radio">
+                          <input name="status_stok" id="optionsRadios1" value="used" checked="" type="radio">
                           Used
                         </label>
                       </div>
                       <div class="radio">
                         <label>
-                          <input name="optionsRadios" id="optionsRadios1" value="not used" checked="" type="radio">
+                          <input name="status_stok" id="optionsRadios1" value="not used" checked="" type="radio">
                           Not used
                         </label>
                       </div>

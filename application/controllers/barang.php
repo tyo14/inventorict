@@ -29,6 +29,23 @@
  	{
  		$data = $this->global_model->find_by('unit', array('nama_unit' => $id));
  		echo $data['kode_unit'];
+
+ 		//algoritma generate kode
+
+		//string yang akan dipecah
+		$teks = "MTR-001";
+		//pecah string berdasarkan string ","
+		$pecah = explode("-", $teks);
+		//mencari element array 0
+		$hasil = $pecah[0];
+		$hasil2 = (int)$pecah[1];
+
+
+		//tampilkan hasil pemecahan
+		echo $hasil;
+		echo $hasil2;
+
+		//end algoritma generate kode
  	}
 
  	

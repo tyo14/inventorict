@@ -6,8 +6,7 @@
             <small>Data - Data Unit</small>
           </h1>
           <ol class="breadcrumb">
-            <li><a href="<?php echo base_url(); ?>index.php/dashboard/"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li>Dashboard</li>
+            <li><a href="<?php echo base_url(); ?>index.php/dashboard/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
             <li class="active">Daftar Unit</li>
           </ol>
         </section>

@@ -6,9 +6,9 @@
             <small>Input Data Barang</small>
           </h1>
           <ol class="breadcrumb">
-            <li><a href="<?php echo base_url(); ?>index.php/dashboard/"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li>Dashboard</li>
-            <li class="active">Input Data Barang</li>
+            <li><a href="<?php echo base_url(); ?>index.php/dashboard/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/barang/">Barang</a></li>
+            <li class="active">Tambah data</li>
           </ol>
         </section>
         <!-- Main content -->

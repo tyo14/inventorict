@@ -2,13 +2,12 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Daftar Devisi
-            <small>Data - Data Devisi</small>
+            Daftar Divisi
+            <small>Data - Data Divisi</small>
           </h1>
           <ol class="breadcrumb">
-            <li><a href="<?php echo base_url(); ?>index.php/dashboard/"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li>Dashboard</li>
-            <li class="active">Daftar Devisi</li>
+            <li><a href="<?php echo base_url(); ?>index.php/dashboard/"><i class="fa fa-dashboard"></i> Dashboard</a></li>  
+            <li class="active">Daftar Divisi</li>
           </ol>
         </section>
         <!-- Main content -->
@@ -21,8 +20,8 @@
                     <thead>
                       <tr>
                         <th>No.</th>
-                        <th>Kode Devisi</th>
-                        <th>Nama Devisi</th>
+                        <th>Kode Divisi</th>
+                        <th>Nama Divisi</th>
                         <th>Aksi</th>
                       </tr>
                     </thead>
@@ -45,8 +44,8 @@
                     <tfoot>
                       <tr>
                         <th>No.</th>
-                        <th>Kode Devisi</th>
-                        <th>Nama Devisi</th>
+                        <th>Kode Divisi</th>
+                        <th>Nama Divisi</th>
                         <th>Aksi</th>
                       </tr>
                     </tfoot>

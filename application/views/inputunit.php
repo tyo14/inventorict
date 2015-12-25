@@ -4,7 +4,12 @@
           <h1>
             Form Unit
             <small>Input Data Unit</small>
-          </h1>
+          </h1><br>
+          <p>
+            <a href="<?php echo base_url(); ?>index.php/dashboard/"><i class="fa fa-dashboard"></i> Dashboard</a> &nbsp;>  
+            <a href="<?php echo base_url(); ?>index.php/unit/"> Unit</a> &nbsp;>
+            <a> &nbsp;Tambah data</a>
+          </p>
         </section>
         <!-- Main content -->
         <section class="content">

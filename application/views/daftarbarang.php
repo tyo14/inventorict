@@ -32,13 +32,18 @@
                     </thead>
                     <tbody>
                     <?php foreach ($barang as $fetchdata) {
+                      list($tahun,$bulan,$tanggal) = explode("-", $fetchdata['tgl_beli']);
+
+                      $fetchdata['tgl_beli'] = $bulan."/".$tanggal."/".$tahun;
                     ?>
                       <tr>
                         <td><?php echo $fetchdata['kode_barang']; ?></td>
                         <td><?php echo $fetchdata['nama_barang']; ?></td>
                         <td><?php echo $fetchdata['tgl_beli']; ?></td>
                         <td>Baik</td>
-                        <td><a>Edit</a> | <a>Hapus</a> | <a>Detail</a></td>
+                        <td><a>Edit</a> | 
+                        <a href="<?php echo base_url();?>index.php/barang/hapus/<?php echo $fetchdata['kode_barang'];?>" onclick="return confirm_delete()">Hapus</a> | 
+                        <a>Detail</a></td>
                       </tr>
                       <?php } ?>
                     </tbody>
@@ -58,3 +63,8 @@
           </div>
         </section>  
 </div>        
+<script type="text/javascript">
+function confirm_delete() {
+  return confirm('apa anda yakin ingin menghapus ?');
+}
+</script>

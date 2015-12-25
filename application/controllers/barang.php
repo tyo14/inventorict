@@ -19,8 +19,7 @@
 
  	public function tambah()
  	{
- 		$data['dataunit'] = $this->global_model->find_all('unit');
- 		
+ 		$data['dataunit'] = $this->global_model->find_all('unit'); 		
  		$this->load->view('head');
  		$this->load->view('inputbarang',$data); //Contains
  		$this->load->view('footer');		
@@ -117,6 +116,11 @@
 
  		}
 
+ 	}
+
+ 	public function hapus($id){
+ 		$this->global_model->delete('barang', array('kode_barang' => $id));
+ 		redirect(site_url('barang'));
  	}
 
  	

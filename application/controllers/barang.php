@@ -11,7 +11,7 @@
 
  	public function index()
  	{
- 		$data['barang'] = $this->global_model->find_all('barang','tgl_beli DESC');
+ 		$data['barang'] = $this->global_model->query('select * from barang inner join status_barang on barang.kode_barang = status_barang.kode_barang');
  		$this->load->view('head');
  		$this->load->view('daftarbarang',$data);
  		$this->load->view('footer');

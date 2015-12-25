@@ -24,11 +24,11 @@
               <form method="POST" action="<?php echo base_url();?>index.php/unit/simpan">
                 <div class="form-group">
                     <label for="inputKodeUnit">Kode Unit</label>                          
-                    <input type="text" name="kode_unit" class="form-control" placeholder="Kode Unit" maxlength="3" style="text-transform:uppercase;">
+                    <input type="text" name="kode_unit" class="form-control" placeholder="Kode Unit" maxlength="3" style="text-transform:uppercase;" required>
                 </div>
                 <div class="form-group">
                     <label for="inputNamaUnit">Nama Unit</label>
-                    <input type="text" name="nama_unit" class="form-control" placeholder="Nama Unit">
+                    <input type="text" name="nama_unit" class="form-control" placeholder="Nama Unit" required>
                 </div>
             </div><!-- /.box-body -->
             <div class="box-footer">

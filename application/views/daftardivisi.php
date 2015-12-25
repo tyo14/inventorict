@@ -35,7 +35,7 @@
                         <td><?php echo $no; ?></td>
                         <td><?php echo $fetchdata['kode_divisi']; ?></td>
                         <td><?php echo $fetchdata['nama_divisi']; ?></td>
-                        <td><a>Edit</a> | 
+                        <td><a href="<?php echo base_url();?>index.php/devisi/ubah/<?php echo $fetchdata['kode_divisi'];?>">Edit</a> | 
                         <a href="<?php echo base_url();?>index.php/devisi/hapus/<?php echo $fetchdata['kode_divisi'];?>" onclick="return confirm_delete()">Hapus</a> | 
                         <a>Detail</a></td>
                       </tr>

@@ -57,7 +57,20 @@
 
  	public function ubah($id)
  	{
- 		$data['getid'] = $this->global_model->find_by('unit', array('kode_unit' => $id));
+ 		if($this->input->post('saveunit')){
+
+ 			$data = $this->input->post();
+ 			$data['kode_unit'] = strtoupper($data['kode_unit']);
+ 			unset($data['saveunit']);
+
+ 			$this->global_model->update('unit',$data, array('kode_unit' => $id));
+
+ 			redirect(site_url('unit'));
+
+
+ 		}
+
+ 		$data['unit'] = $this->global_model->find_by('unit', array('kode_unit' => $id));
  		$this->load->view('head');
  		$this->load->view('ubahunit', $data); //Contains
  		$this->load->view('footer');

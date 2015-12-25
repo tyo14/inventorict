@@ -123,5 +123,12 @@
  		redirect(site_url('barang'));
  	}
 
+ 	public function ubah($id){
+ 		$data['unit'] = $this->global_model->find_all('unit'); 		
+ 		$this->load->view('head');
+ 		$this->load->view('ubahbarang',$data); //Contains
+ 		$this->load->view('footer');
+ 	}
+
  	
  }

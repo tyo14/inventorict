@@ -2,14 +2,15 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Form Unit
-            <small>Ubah Data Unit</small>
+            Form Divisi
+            <small>Input Data Divisi</small>
           </h1><br>
           <p>
             <a href="<?php echo base_url(); ?>index.php/dashboard/"><i class="fa fa-dashboard"></i> Dashboard</a> &nbsp;>  
-            <a href="<?php echo base_url(); ?>index.php/unit/"> Unit</a> &nbsp;>
+            <a href="<?php echo base_url(); ?>index.php/devisi/"> Divisi</a> &nbsp;>
             <a> &nbsp;Ubah data</a> &nbsp;>
-            <a> <?php echo $unit['kode_unit']; ?></a>
+            <a> <?php echo $devisi['kode_divisi'];?></a>
+
           </p>
         </section>
         <!-- Main content -->
@@ -19,7 +20,7 @@
           <div class="col-md-6">
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Input Data Unit</h3>
+              <h3 class="box-title">Input Data Divisi</h3>
               <div class="box-tools pull-right">
                 <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
               </div>
@@ -29,12 +30,12 @@
               <!-- form start -->
               <form method="POST" action="">
                 <div class="form-group">
-                    <label for="inputKodeUnit">Kode Unit</label>                          
-                    <input type="text" name="kode_unit" class="form-control" placeholder="Kode Unit" maxlength="3" style="text-transform:uppercase;" value="<?php echo $unit['kode_unit']; ?>" required>
+                    <label for="inputKodeDevisi">Kode divisi</label>                          
+                    <input type="text" name="kode_divisi" class="form-control" placeholder="Kode Divisi" maxlength="3" style="text-transform:uppercase;" value="<?php echo $devisi['kode_divisi']; ?>" required>
                 </div>
                 <div class="form-group">
-                    <label for="inputNamaUnit">Nama Unit</label>
-                    <input type="text" name="nama_unit" class="form-control" placeholder="Nama Unit" value="<?php echo $unit['nama_unit']; ?>" required>
+                    <label for="inputNamaDevisi">Nama Divisi</label>
+                    <input type="text" name="nama_divisi" class="form-control" placeholder="Nama Divisi" value="<?php echo $devisi['nama_divisi']; ?>" required>
                 </div>
             </div><!-- /.box-body -->
             <div class="box-footer">
@@ -43,7 +44,7 @@
                   <input type="reset" class="btn btn-default" value="Cancel" />
                 </div>
                 <div class="btn-group">
-                  <input type="submit" class="btn btn-primary" value="Simpan" name="saveunit" />
+                  <input type="submit" class="btn btn-primary" value="Simpan" name="savedevisi" />
                 </div>
               </div>  
             </div>

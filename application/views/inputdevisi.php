@@ -24,11 +24,11 @@
               <form method="POST" action="<?php echo base_url();?>index.php/devisi/simpan">
                 <div class="form-group">
                     <label for="inputKodeDevisi">Kode Devisi</label>                          
-                    <input type="text" name="kode_divisi" class="form-control" placeholder="Kode Devisi" maxlength="3" style="text-transform:uppercase;">
+                    <input type="text" name="kode_divisi" class="form-control" placeholder="Kode Devisi" maxlength="3" style="text-transform:uppercase;" required>
                 </div>
                 <div class="form-group">
                     <label for="inputNamaDevisi">Nama Devisi</label>
-                    <input type="text" name="nama_divisi" class="form-control" placeholder="Nama Devisi">
+                    <input type="text" name="nama_divisi" class="form-control" placeholder="Nama Devisi" required>
                 </div>
             </div><!-- /.box-body -->
             <div class="box-footer">

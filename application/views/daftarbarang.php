@@ -41,7 +41,7 @@
                         <td><?php echo $fetchdata['nama_barang']; ?></td>
                         <td><?php echo $fetchdata['tgl_beli']; ?></td>
                         <td><?php echo $fetchdata['kondisi_barang']." %";  ?></td>
-                        <td><a>Edit</a> | 
+                        <td><a href="<?php echo base_url();?>index.php/barang/ubah/<?php echo $fetchdata['kode_barang'];?>">Edit</a> | 
                         <a href="<?php echo base_url();?>index.php/barang/hapus/<?php echo $fetchdata['kode_barang'];?>" onclick="return confirm_delete()">Hapus</a> | 
                         <a>Detail</a></td>
                       </tr>

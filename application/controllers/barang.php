@@ -124,7 +124,39 @@
  	}
 
  	public function ubah($id){
- 		$data['unit'] = $this->global_model->find_all('unit'); 		
+
+ 		if($this->input->post('simpan')){
+
+ 			$inputbarang = array('kode_barang' => $this->input->post('kode_barang'),
+ 								 'tgl_beli' => $this->input->post('tgl_beli'),
+ 								 'nama_barang' => $this->input->post('nama_barang'),
+ 								 'deskripsi' => $this->input->post('deskripsi'));
+
+
+ 			$inputstatus = array('kondisi_barang' => $this->input->post('kondisi_barang'),
+ 								 'status_stok' => $this->input->post('status_stok'),
+ 								 'kode_barang' => $this->input->post('kode_barang'));
+
+ 				unset($data['simpan']);
+
+ 				list($bulan,$tanggal,$tahun) = explode('/', $this->input->post('tgl_beli'));
+
+ 				$inputbarang['tgl_beli'] = $tahun."-".$bulan."-".$tanggal;
+
+	 			$this->global_model->update('barang',$inputbarang, array('kode_barang' => $id));
+	 			$this->global_model->update('status_barang',$inputstatus, array('kode_barang' => $id));
+
+	 			redirect(site_url('barang'));
+ 		}
+
+ 		$kdbrg = $this->global_model->find_by('barang', array('kode_barang' => $id));
+ 		list($kode,$digit) = explode('-', $kdbrg['kode_barang']);
+
+ 		$data['nama'] = $this->global_model->find_by('unit', array('kode_unit' => $kode));
+
+ 		$data['dataunit'] = $this->global_model->find_all('unit');
+ 		$data['barang'] = $this->global_model->find_by('barang', array('kode_barang' => $id));
+ 		$data['status'] = $this->global_model->find_by('status_barang', array('kode_barang' => $id));
  		$this->load->view('head');
  		$this->load->view('ubahbarang',$data); //Contains
  		$this->load->view('footer');

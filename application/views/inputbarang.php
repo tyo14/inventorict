@@ -100,7 +100,7 @@
             <div class="box-footer">
               <div class="pull-right">
                 <div class="btn-group">
-                  <a class="btn btn-default" href="#">Cancel</a>
+                  <input type="reset" class="btn btn-default" value="Cancel" />
                 </div>
                 <div class="btn-group">
                   <input type="submit" class="btn btn-primary" value="Simpan" name="simpan" />

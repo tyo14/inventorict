@@ -20,6 +20,7 @@
  	public function tambah()
  	{
  		$data['dataunit'] = $this->global_model->find_all('unit');
+ 		
  		$this->load->view('head');
  		$this->load->view('inputbarang',$data); //Contains
  		$this->load->view('footer');		
@@ -55,6 +56,10 @@
 
  				unset($data['simpan']);
 
+ 				list($bulan,$tanggal,$tahun) = explode('/', $this->input->post('tgl_beli'));
+
+ 				$inputbarang['tgl_beli'] = $tahun."-".$bulan."-".$tanggal;
+
 	 			$this->global_model->create('barang',$inputbarang);
 	 			$this->global_model->create('status_barang',$inputstatus);
 
@@ -82,25 +87,27 @@
  		if ($checkbarang != null){
  			//jika kode unit ada maka check kode barang terakhir
  			//ambil sample kode barang terakhir
- 			//pisahkan kodeunit dan number
- 			$pisah = explode("-", $checkbarang['kode_barang']);
+ 			//pisahkan kodeunit dan number 			
+ 			$pisah = explode('-', $checkbarang[0]['kode_barang']);
 
- 			$number = $pisah[1];
+ 			
+ 			$number =  (int) $pisah[1];
 
- 			$number = $number+1;
+ 			$digit = intval($number) + 1;
 
- 			if ($number >= 1 and $number <= 9){
+ 			if ($digit >= 1 and $digit <= 9){
 
-				echo $kodeunit."-00".$number; 				
+				echo $kodeunit."-00".$digit; 				
 
- 			}else if($number >= 10 and $number <= 99){
+ 			}else if($digit >= 10 and $digit <= 99){
 
- 				echo $kodeunit."-0".$number;
+ 				echo $kodeunit."-0".$digit;
 
  			}else{
 
- 				echo $kodeunit."-".$number; 				
+ 				echo $kodeunit."-".$digit; 				
  			}
+
 
  		}else{
  			//jika kode unit tidak ada maka buat kode barang default

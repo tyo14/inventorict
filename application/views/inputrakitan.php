@@ -83,7 +83,7 @@
                         <td><input type="checkbox" name="chk"/></td>
                         <td><input type="text" class="form-control" name="txt" placeholder="Konfigurasi"/></td>
                         <td>
-                            <select class="form-control select2" style="width: 100%;">
+                            <select class="form-control" style="width: 100%;">
                               <?php foreach ($databarang as $barang) {
                               ?>
                               <option value="<?php echo $barang['kode_barang'];?>"><?php echo $barang['kode_barang'];?> - <?php echo $barang['nama_barang'];?></option>

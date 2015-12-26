@@ -2,12 +2,12 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Form Barang
-            <small>Input Data Barang</small>
+            Form Rakitan
+            <small>Input Data Rakitan</small>
           </h1>
           <ol class="breadcrumb">
             <li><a href="<?php echo base_url(); ?>index.php/dashboard/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-            <li><a href="<?php echo base_url(); ?>index.php/barang/">Barang</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/rakitan/">Rakitan</a></li>
             <li class="active">Tambah data</li>
           </ol>
         </section>
@@ -16,7 +16,7 @@
           <!-- SELECT2 EXAMPLE -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Input Data Barang</h3>
+              <h3 class="box-title">Input Data Rakitan</h3>
               <div class="box-tools pull-right">
                 <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
               </div>
@@ -24,47 +24,48 @@
             <div class="box-body">
               <div class="row">
               <!-- form start -->
-              <form class="form-horizontal" method="POST" action="<?php echo base_url();?>index.php/barang/simpan">
+              <form class="form-horizontal" method="POST" action="<?php echo base_url();?>index.php/rakitan/simpan">
                 <div class="col-md-7">
                       <div class="box-body">
                         <div class="form-group">
-                          <label for="inputUnit" class="col-sm-3 control-label">Unit</label>
+                          <label for="inputUnit" class="col-sm-3 control-label">Divisi</label>
                           <div class="col-sm-8">
-                            <select class="form-control select2" style="width: 100%;" onChange="showKodeBarang(this.value)">
-                              <?php foreach ($dataunit as $unit) {
+                            <select class="form-control select2" style="width: 100%;" onChange="showKodeRakit(this.value)">
+                              <?php foreach ($datadivisi as $divisi) {
                               ?>
-                              <option value="<?php echo $unit['nama_unit'];?>"><?php echo $unit['nama_unit'];?></option>
+                              <option value="<?php echo $divisi['nama_divisi'];?>"><?php echo $divisi['nama_divisi'];?></option>
                               <?php } ?>
                             </select>
                           </div>
                         </div>
                         <div class="form-group">
-                          <label for="inputKodeBarang" class="col-sm-3 control-label">Kode Barang</label>
+                          <label for="inputKodeBarang" class="col-sm-3 control-label">Kode Rakit</label>
                           <div class="col-sm-8">
-                            <input type="text" class="form-control" id="txtHint" readonly="" name="kode_barang" required />
+                            <input type="text" class="form-control" id="txtHint" readonly="" name="kode_rakit" id="txtHint" required />
                           </div>
                         </div>
                         <div class="form-group">
-                          <label for="inputTanggalBeli" class="col-sm-3 control-label">VI/VU(Tanggal beli)</label>
+                          <label for="inputTanggalBeli" class="col-sm-3 control-label">Tanggal Rakit</label>
                           <div class="col-sm-8">
                             <div class="input-group">
                               <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                               </div>
-                              <input type="text" class="form-control" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask name="tgl_beli" required>
+                              <input type="text" class="form-control" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask name="tanggal_rakit" required>
                             </div><!-- /.input group -->
                           </div>
                         </div>
                         <div class="form-group">
-                          <label for="inputNamaBarang" class="col-sm-3 control-label">Nama Barang</label>
+                          <label for="inputNamaBarang" class="col-sm-3 control-label">Pengguna</label>
                           <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="Nama Barang" name="nama_barang" required>
+                            <input type="text" class="form-control" placeholder="Pengguna" name="pengguna" required>
                           </div>
                         </div>
                         <div class="form-group">
-                          <label for="inputDeskripsi" class="col-sm-3 control-label">Deskripsi</label>
+                          <label for="inputKodeBarang" class="col-sm-3 control-label">Unit Health</label>
                           <div class="col-sm-8">
-                            <textarea class="form-control" rows="3" placeholder="Deskripsi barang" name="deskripsi"></textarea>
+                            <input type="number" class="form-control" max="100" min="0" step="1" name="unit_health" required>
+                            <small>* % Health</small>
                           </div>
                         </div>
                       </div><!-- /.box-body -->              
@@ -113,13 +114,13 @@
         
 </div>
 <script type="text/javascript">
-      function showKodeBarang(str) {
+      function showKodeRakit(str) {
         var xhttp;    
         if (str == "") {
           document.getElementById("txtHint").innerHTML = "";
           return;
         }
-        var url="http://localhost/inventorict/index.php/barang/ajaxbarang/"
+        var url="http://localhost/inventorict/index.php/rakitan/ajaxrakitan/"
 
 
         url=url+str

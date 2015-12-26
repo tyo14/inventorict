@@ -341,7 +341,7 @@
                 <li><a href="<?php echo base_url(); ?>index.php/barang/tambah"><i class="fa fa-circle-o"></i> Barang</a></li>
                 <li><a href="<?php echo base_url(); ?>index.php/unit/tambah"><i class="fa fa-circle-o"></i> Unit</a></li>                
                 <li><a href="<?php echo base_url(); ?>index.php/devisi/tambah"><i class="fa fa-circle-o"></i> Devisi</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Rakitan</a></li>
+                <li><a href="<?php echo base_url(); ?>index.php/rakitan/tambah"><i class="fa fa-circle-o"></i> Rakitan</a></li>
               </ul>
             </li>
           </ul>

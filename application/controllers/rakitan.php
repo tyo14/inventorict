@@ -19,6 +19,7 @@
  	public function tambah()
  	{
  		$data['datadivisi'] = $this->global_model->find_all('divisi');
+ 		$data['databarang'] = $this->global_model->find_all('barang');
  		$this->load->view('head');
  		$this->load->view('inputrakitan', $data);
  		$this->load->view('footer');	

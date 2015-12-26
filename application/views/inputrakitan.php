@@ -72,27 +72,20 @@
                 </div><!-- /.col -->
                 <div class="col-md-5">
                   <div class="form-group">
-                    <label for="inputKodeBarang" class="col-sm-4 control-label">Kondisi Barang</label>
+                    <label for="inputKodeBarang" class="col-sm-4 control-label">Nama Barang</label>
                     <div class="col-sm-6">
-                      <input type="number" class="form-control" max="100" min="0" step="1" name="kondisi_barang" required>
-                      <small>* % Health</small>
+                      <select class="form-control select2" style="width: 100%;">
+                              <?php foreach ($databarang as $barang) {
+                              ?>
+                              <option value="<?php echo $barang['kode_barang'];?>"><?php echo $barang['nama_barang'];?> - <?php echo $barang['kode_barang'];?></option>
+                              <?php } ?>
+                            </select>
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="inputKodeBarang" class="col-sm-4 control-label">Status Stok</label>
+                    <label for="inputKodeBarang" class="col-sm-4 control-label">Konfigurasi</label>
                     <div class="col-sm-6">
-                      <div class="radio">
-                        <label>
-                          <input name="status_stok" id="optionsRadios1" value="used" checked="" type="radio">
-                          Used
-                        </label>
-                      </div>
-                      <div class="radio">
-                        <label>
-                          <input name="status_stok" id="optionsRadios1" value="not used" checked="" type="radio">
-                          Not used
-                        </label>
-                      </div>
+                      <textarea class="form-control" rows="3" name="deskripsi"></textarea>
                     </div>
                   </div>
                 </div><!-- /.col -->

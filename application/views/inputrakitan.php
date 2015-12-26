@@ -138,26 +138,31 @@
 
 <script language="javascript">
         function addRow(tableID) {
- 
-            var table = document.getElementById(tableID);
+          var table = document.getElementById(tableID);
  
             var rowCount = table.rows.length;
             var row = table.insertRow(rowCount);
  
-            var cell1 = row.insertCell(0);
-            var element1 = document.createElement("input");
-            element1.type = "checkbox";
-            element1.name="chkbox[]";
-            cell1.appendChild(element1);
+            var colCount = table.rows[0].cells.length;
  
-            var cell2 = row.insertCell(1);
-            cell2.innerHTML = rowCount + 1;
+            for(var i=0; i<colCount; i++) {
  
-            var cell3 = row.insertCell(2);
-            var element2 = document.createElement("input");
-            element2.type = "text";
-            element2.name = "txtbox[]";
-            cell3.appendChild(element2);
+                var newcell = row.insertCell(i);
+ 
+                newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+                //alert(newcell.childNodes);
+                switch(newcell.childNodes[0].type) {
+                    case "text":
+                            newcell.childNodes[0].value = "";
+                            break;
+                    case "checkbox":
+                            newcell.childNodes[0].checked = false;
+                            break;
+                    case "select-one":
+                            newcell.childNodes[0].selectedIndex = 0;
+                            break;
+                }
+            }
         }
  
         function deleteRow(tableID) {

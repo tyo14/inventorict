@@ -3,7 +3,7 @@
         <section class="content-header">
           <h1>
             Form Rakitan
-            <small>Input Data Rakitan</small>
+            <small>input Data Rakitan</small>
           </h1>
           <ol class="breadcrumb">
             <li><a href="<?php echo base_url(); ?>index.php/dashboard/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
@@ -13,10 +13,10 @@
         </section>
         <!-- Main content -->
         <section class="content">
-          <!-- SELECT2 EXAMPLE -->
+          <!-- select2 EXAMPLE -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Input Data Rakitan</h3>
+              <h3 class="box-title">input Data Rakitan</h3>
               <div class="box-tools pull-right">
                 <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
               </div>
@@ -70,25 +70,30 @@
                         </div>
                       </div><!-- /.box-body -->              
                 </div><!-- /.col -->
-                <div class="col-md-5">
-                  <div class="form-group">
-                    <label for="inputKodeBarang" class="col-sm-4 control-label">Nama Barang</label>
-                    <div class="col-sm-6">
-                      <select class="form-control select2" style="width: 100%;">
+
+                <div class="col-md-12">
+                <div class="btn-group">
+                  <input type="button" class="btn btn-default" onclick="addRow('dataTable');" value="Add Konfigurasi" />
+                </div>
+                <div class="btn-group">
+                  <input type="button" class="btn btn-default" onclick="deleteRow('dataTable');" value="Hapus Konfigurasi" />
+                </div><br /><br />
+                <table id="dataTable" class="table table-hovered table-striped">
+                    <tr>
+                        <td><input type="checkbox" name="chk"/></td>
+                        <td><input type="text" class="form-control" name="txt" placeholder="Konfigurasi"/></td>
+                        <td>
+                            <select class="form-control select2" style="width: 100%;">
                               <?php foreach ($databarang as $barang) {
                               ?>
-                              <option value="<?php echo $barang['kode_barang'];?>"><?php echo $barang['nama_barang'];?> - <?php echo $barang['kode_barang'];?></option>
+                              <option value="<?php echo $barang['kode_barang'];?>"><?php echo $barang['kode_barang'];?> - <?php echo $barang['nama_barang'];?></option>
                               <?php } ?>
                             </select>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputKodeBarang" class="col-sm-4 control-label">Konfigurasi</label>
-                    <div class="col-sm-6">
-                      <textarea class="form-control" rows="3" name="deskripsi"></textarea>
-                    </div>
-                  </div>
-                </div><!-- /.col -->
+                        </td>
+                    </tr>
+                </table>
+                </div>
+
               </div><!-- /.row -->
             </div><!-- /.box-body -->
             <div class="box-footer">
@@ -130,3 +135,54 @@
       }
 
 </script>
+
+<script language="javascript">
+        function addRow(tableID) {
+ 
+            var table = document.getElementById(tableID);
+ 
+            var rowCount = table.rows.length;
+            var row = table.insertRow(rowCount);
+ 
+            var cell1 = row.insertCell(0);
+            var element1 = document.createElement("input");
+            element1.type = "checkbox";
+            element1.name="chkbox[]";
+            cell1.appendChild(element1);
+ 
+            var cell2 = row.insertCell(1);
+            cell2.innerHTML = rowCount + 1;
+ 
+            var cell3 = row.insertCell(2);
+            var element2 = document.createElement("input");
+            element2.type = "text";
+            element2.name = "txtbox[]";
+            cell3.appendChild(element2);
+        }
+ 
+        function deleteRow(tableID) {
+            try {
+            var table = document.getElementById(tableID);
+            var rowCount = table.rows.length;
+ 
+            for(var i=0; i<rowCount; i++) {
+                var row = table.rows[i];
+                var chkbox = row.cells[0].childNodes[0];
+                if(null != chkbox && true == chkbox.checked) {
+                    if(rowCount <= 1) {
+                        alert("Cannot delete all the rows.");
+                        break;
+                    }
+                    table.deleteRow(i);
+                    rowCount--;
+                    i--;
+                }
+ 
+ 
+            }
+            }catch(e) {
+                alert(e);
+            }
+        }
+ 
+    </script>

@@ -72,4 +72,44 @@
 
  	}
 
+ 	public function simpan()
+ 	{
+ 		if($this->input->post('simpan')){
+ 			
+ 			//kumpulkan inputan
+ 			$data = $this->input->post();
+ 			unset($data['simpan']);
+
+ 			//untuk data header
+ 			$dataheader = array('kode_rakit' => $data['kode_rakit'],
+ 								'tanggal_rakit' => $data['tanggal_rakit'],
+ 								'pengguna' => $data['pengguna'],
+ 								'unit_health' => $data['unit_health']);
+
+ 			list($bulan,$tanggal,$tahun) = explode('/', $this->input->post('tanggal_rakit'));
+
+ 			$dataheader['tanggal_rakit'] = $tahun."-".$bulan."-".$tanggal;
+
+ 			$this->global_model->create('rakitan_header',$dataheader);
+
+ 			//untuk data detail
+ 			$kdrakit = $this->input->post('kode_rakit');
+ 			$konf = $this->input->post('konfigurasi');
+ 			$kdbrg = $this->input->post('kode_barang');
+
+
+ 			foreach($konf as $a => $b){
+  				$datadetail = array('kode_rakit' => $kdrakit,
+  									'kode_barang' => $kdbrg[$a],
+  									'konfigurasi' => $konf[$a]);
+
+  				$this->global_model->create('rakitan_detail',$datadetail);
+ 			}
+
+ 			redirect(site_url('rakitan/tambah'));
+
+ 			
+ 		}
+ 	}
+
  }

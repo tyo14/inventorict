@@ -16,7 +16,7 @@
           <!-- select2 EXAMPLE -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">input Data Rakitan</h3>
+              <h3 class="box-title">Input Data Rakitan</h3>
               <div class="box-tools pull-right">
                 <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
               </div>
@@ -41,7 +41,7 @@
                         <div class="form-group">
                           <label for="inputKodeBarang" class="col-sm-3 control-label">Kode Rakit</label>
                           <div class="col-sm-8">
-                            <input type="text" class="form-control" id="txtHint" readonly="" name="kode_rakit" id="txtHint" required />
+                            <input type="text" class="form-control" id="txtHint" readonly="" name="kode_rakit" required />
                           </div>
                         </div>
                         <div class="form-group">
@@ -80,10 +80,10 @@
                 </div><br /><br />
                 <table id="dataTable" class="table table-hovered table-striped">
                     <tr>
-                        <td><input type="checkbox" name="chk"/></td>
-                        <td><input type="text" class="form-control" name="txt" placeholder="Konfigurasi"/></td>
+                        <td><input type="checkbox"/></td>
+                        <td><input type="text" class="form-control" name="konfigurasi[]" placeholder="Konfigurasi"/></td>
                         <td>
-                            <select class="form-control" style="width: 100%;">
+                            <select class="form-control" style="width: 100%;" name="kode_barang[]">
                               <?php foreach ($databarang as $barang) {
                               ?>
                               <option value="<?php echo $barang['kode_barang'];?>"><?php echo $barang['kode_barang'];?> - <?php echo $barang['nama_barang'];?></option>

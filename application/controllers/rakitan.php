@@ -122,7 +122,7 @@
 
  		$data['rakitanheader'] = $this->global_model->find_by('rakitan_header', array('kode_rakit' => $id));
 
- 		$data['rakitan'] = $this->global_model->find_all_by('rakitan_detail', array('kode_rakit' => $id));
+ 		$data['rakitandetail'] = $this->global_model->query("select * from barang inner join rakitan_detail on barang.kode_barang = rakitan_detail.kode_barang where rakitan_detail.kode_rakit = '$id'");
  		$data['datadivisi'] = $this->global_model->find_all('divisi');
  		$data['databarang'] = $this->global_model->find_all('barang');
 

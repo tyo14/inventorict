@@ -90,13 +90,13 @@
                         <tbody>
                         <?php
                         $no = 0;
-                         foreach ($rakitan as $datarakitan) {
+                         foreach ($rakitandetail as $datarakitan) {
                           $no++;
                         ?>
                           <tr>
                             <td><?php echo $no;?></td>
-                            <td><?php echo $datarakitan['kode_barang'];?></td>
-                            <td><a href="#">Hapus</a></td>
+                            <td><?php echo $datarakitan['nama_barang'];?></td>
+                            <td><a href="<?php echo base_url();?>index.php/rakitan/hapusbarang/<?php echo $datarakitan['kode_rakit'];?>" onclick="return confirm_delete()">Hapus</a></td>
                           </tr>
                           <?php }?>
                         </tbody>
@@ -223,3 +223,8 @@
         }
  
     </script>
+<script type="text/javascript">
+function confirm_delete() {
+  return confirm('apa anda yakin ingin menghapus ?');
+}
+</script>

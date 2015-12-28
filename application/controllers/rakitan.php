@@ -11,8 +11,9 @@
 
  	public function index()
  	{
+ 		$data['rakitan'] = $this->global_model->find_all('rakitan_header');
  		$this->load->view('head');
- 		$this->load->view('inputrakitan');
+ 		$this->load->view('daftarrakitan',$data);
  		$this->load->view('footer');
  	}
 
@@ -110,6 +111,25 @@
 
  			
  		}
+ 	}
+
+ 	public function hapus($id){
+ 		$this->global_model->delete('rakitan_header', array('kode_rakit' => $id));
+ 		redirect(site_url('rakitan'));
+ 	}
+
+ 	public function ubah($id){
+
+ 		$data['rakitanheader'] = $this->global_model->find_by('rakitan_header', array('kode_rakit' => $id));
+
+ 		$data['rakitan'] = $this->global_model->find_all_by('rakitan_detail', array('kode_rakit' => $id));
+ 		$data['datadivisi'] = $this->global_model->find_all('divisi');
+ 		$data['databarang'] = $this->global_model->find_all('barang');
+
+ 		$this->load->view('head');
+ 		$this->load->view('ubahrakitan', $data);
+ 		$this->load->view('footer');
+
  	}
 
  }

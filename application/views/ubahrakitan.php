@@ -8,7 +8,8 @@
           <ol class="breadcrumb">
             <li><a href="<?php echo base_url(); ?>index.php/dashboard/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
             <li><a href="<?php echo base_url(); ?>index.php/rakitan/">Rakitan</a></li>
-            <li class="active">Tambah data</li>
+            <li>Ubah data</li>
+            <li class="active"><?php echo $rakitanheader['kode_rakit']; ?></li>
           </ol>
         </section>
         <!-- Main content -->
@@ -16,7 +17,7 @@
           <!-- select2 EXAMPLE -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Input Data Rakitan</h3>
+              <h3 class="box-title">Ubah Data Rakitan</h3>
               <div class="box-tools pull-right">
                 <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
               </div>
@@ -41,7 +42,7 @@
                         <div class="form-group">
                           <label for="inputKodeBarang" class="col-sm-3 control-label">Kode Rakit</label>
                           <div class="col-sm-8">
-                            <input type="text" class="form-control" id="txtHint" readonly="" name="kode_rakit" required />
+                            <input type="text" class="form-control" id="txtHint" readonly="" name="kode_rakit" value="<?php echo $rakitanheader['kode_rakit']; ?>" required />
                           </div>
                         </div>
                         <div class="form-group">
@@ -51,24 +52,55 @@
                               <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                               </div>
-                              <input type="text" class="form-control" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask name="tanggal_rakit" required>
+                              <input type="text" class="form-control" data-inputmask="'alias': 'mm/dd/yyyy'"
+                               value="
+                               <?php
+                               list($tahun,$bulan,$tanggal) = explode('-', $rakitanheader['tanggal_rakit']);
+                               $rakitanheader['tanggal_rakit'] = $bulan.'/'.$tanggal.'/'.$tahun;
+                               echo $rakitanheader['tanggal_rakit'];
+                                ?>
+                               "
+                               data-mask name="tanggal_rakit" required>
                             </div><!-- /.input group -->
                           </div>
                         </div>
                         <div class="form-group">
                           <label for="inputNamaBarang" class="col-sm-3 control-label">Pengguna</label>
                           <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="Pengguna" name="pengguna" required>
+                            <input type="text" class="form-control" placeholder="Pengguna" name="pengguna" value="<?php echo $rakitanheader['pengguna']; ?>" required>
                           </div>
                         </div>
                         <div class="form-group">
                           <label for="inputKodeBarang" class="col-sm-3 control-label">Unit Health</label>
                           <div class="col-sm-8">
-                            <input type="number" class="form-control" max="100" min="0" step="1" name="unit_health" required>
+                            <input type="number" class="form-control" max="100" min="0" step="1" name="unit_health" value="<?php echo $rakitanheader['unit_health']; ?>" required>
                             <small>* % Health</small>
                           </div>
                         </div>
                       </div><!-- /.box-body -->              
+                </div><!-- /.col -->
+
+                <div class="col-md-5">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                          <th>No.</th>
+                          <th>Nama Barang</th>
+                          <th class="text-center">Aksi</th>
+                        </thead>
+                        <tbody>
+                        <?php
+                        $no = 0;
+                         foreach ($rakitan as $datarakitan) {
+                          $no++;
+                        ?>
+                          <tr>
+                            <td><?php echo $no;?></td>
+                            <td><?php echo $datarakitan['kode_barang'];?></td>
+                            <td><a href="#">Hapus</a></td>
+                          </tr>
+                          <?php }?>
+                        </tbody>
+                    </table>
                 </div><!-- /.col -->
 
                 <div class="col-md-12">

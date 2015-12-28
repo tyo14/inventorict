@@ -330,7 +330,7 @@
                 <li><a href="<?php echo base_url(); ?>index.php/barang"><i class="fa fa-circle-o"></i> Daftar Barang</a></li>
                 <li><a href="<?php echo base_url(); ?>index.php/unit"><i class="fa fa-circle-o"></i> Daftar Unit</a></li>
                 <li><a href="<?php echo base_url(); ?>index.php/devisi"><i class="fa fa-circle-o"></i> Daftar Divisi</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Daftar Rakitan</a></li>
+                <li><a href="<?php echo base_url(); ?>index.php/rakitan"><i class="fa fa-circle-o"></i> Daftar Rakitan</a></li>
               </ul>
             </li>
             <li class="treeview">

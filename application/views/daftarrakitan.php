@@ -2,12 +2,12 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Daftar Barang
-            <small>Data - Data Barang</small>
+            Daftar Rakitan
+            <small>Data - Data Rakitan</small>
           </h1>
           <ol class="breadcrumb">
             <li><a href="<?php echo base_url(); ?>index.php/dashboard/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-            <li class="active">Daftar Barang</li>
+            <li class="active">Daftar Rakitan</li>
           </ol>
         </section>
         <!-- Main content -->
@@ -20,27 +20,27 @@
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
-                        <th>Kode Barang</th>
-                        <th>Nama Barang</th>
-                        <th>UI / VO</th>
-                        <th>Kondisi</th>
+                        <th>Kode Rakit</th>
+                        <th>Pengguna</th>
+                        <th>Tanggal</th>
+                        <th>Health</th>
                         <th>Aksi</th>
                       </tr>
                     </thead>
                     <tbody>
-                    <?php foreach ($barang as $fetchdata) {
-                      list($tahun,$bulan,$tanggal) = explode("-", $fetchdata['tgl_beli']);
+                    <?php foreach ($rakitan as $fetchdata) {
+                      list($tahun,$bulan,$tanggal) = explode("-", $fetchdata['tanggal_rakit']);
 
-                      $fetchdata['tgl_beli'] = $bulan."/".$tanggal."/".$tahun;
+                      $fetchdata['tanggal_rakit'] = $bulan."/".$tanggal."/".$tahun;
 
                     ?>
                       <tr>
-                        <td><?php echo $fetchdata['kode_barang']; ?></td>
-                        <td><?php echo $fetchdata['nama_barang']; ?></td>
-                        <td><?php echo $fetchdata['tgl_beli']; ?></td>
-                        <td><?php echo $fetchdata['kondisi_barang']." %";  ?></td>
-                        <td><a href="<?php echo base_url();?>index.php/barang/ubah/<?php echo $fetchdata['kode_barang'];?>">Edit</a> | 
-                        <a href="<?php echo base_url();?>index.php/barang/hapus/<?php echo $fetchdata['kode_barang'];?>" onclick="return confirm_delete()">Hapus</a> | 
+                        <td><?php echo $fetchdata['kode_rakit']; ?></td>
+                        <td><?php echo $fetchdata['pengguna']; ?></td>
+                        <td><?php echo $fetchdata['tanggal_rakit']; ?></td>
+                        <td><?php echo $fetchdata['unit_health']." %";  ?></td>
+                        <td><a href="<?php echo base_url();?>index.php/rakitan/ubah/<?php echo $fetchdata['kode_rakit'];?>">Edit</a> | 
+                        <a href="<?php echo base_url();?>index.php/rakitan/hapus/<?php echo $fetchdata['kode_rakit'];?>" onclick="return confirm_delete()">Hapus</a> | 
                         <a>Detail</a></td>
                       </tr>
                       <?php } ?>

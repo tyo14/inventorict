@@ -9,7 +9,7 @@
             <li><a href="<?php echo base_url(); ?>index.php/dashboard/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
             <li class="active">Daftar Rakitan</li>
           </ol>
-        </section>
+        </section>  
         <!-- Main content -->
         <section class="content">
           <div class="row">
@@ -20,6 +20,7 @@
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
+                        <th>Divisi</th>
                         <th>Kode Rakit</th>
                         <th>Pengguna</th>
                         <th>Tanggal</th>
@@ -33,8 +34,13 @@
 
                       $fetchdata['tanggal_rakit'] = $bulan."/".$tanggal."/".$tahun;
 
+                      list($huruf,$digit) = explode("-", $fetchdata['kode_rakit']);
+
+                      $row = $this->global_model->find_by('divisi', array('kode_divisi' => $huruf));
+
                     ?>
                       <tr>
+                        <td><?php echo $row['nama_divisi']; ?></td>
                         <td><?php echo $fetchdata['kode_rakit']; ?></td>
                         <td><?php echo $fetchdata['pengguna']; ?></td>
                         <td><?php echo $fetchdata['tanggal_rakit']; ?></td>

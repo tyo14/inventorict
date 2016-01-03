@@ -10,8 +10,9 @@
  	}
 
  	public function index(){
+ 		$data['profile'] = $this->global_model->find_by('user', array('username' => $this->session->userdata('username')));
  		$this->load->view('head');
- 		$this->load->view('profile'); //Contains
+ 		$this->load->view('profile',$data); //Contains
  		$this->load->view('footer');
  	}
 

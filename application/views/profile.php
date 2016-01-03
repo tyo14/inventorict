@@ -29,19 +29,19 @@
                         <div class="form-group">
                           <label for="inputUnit" class="col-sm-3 control-label">Nama Lengkap</label>
                           <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="Nama Lengkap" name="nama_pengguna" required>
+                            <input type="text" class="form-control" placeholder="Nama Lengkap" name="nama_pengguna" value="<?php echo $profile['nama_pengguna']; ?>" required>
                           </div>
                         </div>
                         <div class="form-group">
                           <label for="inputKodeBarang" class="col-sm-3 control-label">Email</label>
                           <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="Email" name="email" required>
+                            <input type="text" class="form-control" placeholder="Email" name="email" value="<?php echo $profile['email']; ?>" required>
                           </div>
                         </div>
                         <div class="form-group">
                           <label for="inputNamaBarang" class="col-sm-3 control-label">Username</label>
                           <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="Username" name="username" required>
+                            <input type="text" class="form-control" placeholder="Username" name="username" value="<?php echo $profile['username']; ?>" required>
                           </div>
                         </div>
                         <div class="form-group">
@@ -53,7 +53,7 @@
                         <div class="form-group">
                           <label for="inputDeskripsi" class="col-sm-3 control-label">Deskripsi</label>
                           <div class="col-sm-8">
-                            <textarea class="form-control" rows="3" placeholder="Deskripsi" name="deskripsi"></textarea>
+                            <textarea class="form-control" rows="3" placeholder="Deskripsi" name="deskripsi"><?php echo $profile['deskripsi']; ?></textarea>
                           </div>
                         </div>
                         <div class="form-group">

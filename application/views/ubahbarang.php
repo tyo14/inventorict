@@ -8,8 +8,8 @@
           <ol class="breadcrumb">
             <li><a href="<?php echo base_url(); ?>index.php/dashboard/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
             <li><a href="<?php echo base_url(); ?>index.php/barang/">Barang</a></li>
-            <li>Ubah data</li>
-            <li><?php echo $barang['kode_barang'];?></li>
+            <li class="active">Ubah data</li>
+            <li class="active"><?php echo $barang['kode_barang'];?></li>
 
           </ol>
         </section>

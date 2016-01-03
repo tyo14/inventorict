@@ -124,17 +124,6 @@
                 <li class="<?php if($this->uri->segment(1)=="rakitan"){echo "active";}?>"><a href="<?php echo base_url(); ?>index.php/rakitan"><i class="fa fa-circle-o"></i> Daftar Rakitan</a></li>
               </ul>
             </li>
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-book"></i> <span>Form Input</span> <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="<?php echo base_url(); ?>index.php/barang/tambah"><i class="fa fa-circle-o"></i> Barang</a></li>
-                <li><a href="<?php echo base_url(); ?>index.php/unit/tambah"><i class="fa fa-circle-o"></i> Unit</a></li>                
-                <li><a href="<?php echo base_url(); ?>index.php/devisi/tambah"><i class="fa fa-circle-o"></i> Devisi</a></li>
-                <li><a href="<?php echo base_url(); ?>index.php/rakitan/tambah"><i class="fa fa-circle-o"></i> Rakitan</a></li>
-              </ul>
-            </li>
           </ul>
         </section>
         <!-- /.sidebar -->

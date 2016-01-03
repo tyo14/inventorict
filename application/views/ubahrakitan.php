@@ -8,7 +8,7 @@
           <ol class="breadcrumb">
             <li><a href="<?php echo base_url(); ?>index.php/dashboard/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
             <li><a href="<?php echo base_url(); ?>index.php/rakitan/">Rakitan</a></li>
-            <li>Ubah data</li>
+            <li class="active">Ubah data</li>
             <li class="active"><?php echo $rakitanheader['kode_rakit']; ?></li>
           </ol>
         </section>

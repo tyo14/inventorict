@@ -82,7 +82,7 @@
                 <p> Note : jika ingin menyimpan detail rakitan, silahkan di checklist data yang ingin disimpan </p>
                 <table id="dataTable" class="table table-hovered table-striped">
                     <tr>
-                        <td><input type="checkbox" value="0" name="validasi[]"/></td>
+                        <td><input type="checkbox" value="1" name="validasi[]"/></td>
                         <td><input type="text" class="form-control" name="konfigurasi[]" placeholder="Konfigurasi"/></td>
                         <td>
                             <select class="form-control" style="width: 100%;" name="kode_barang[]">
@@ -159,7 +159,7 @@
                             break;
                     case "checkbox":
                             newcell.childNodes[0].checked = false;
-                            //newcell.childNodes[0].value = rowCount+1;
+                            newcell.childNodes[0].value = rowCount+1;
                             break;
                     case "select-one":
                             newcell.childNodes[0].selectedIndex = 0;
@@ -167,10 +167,10 @@
                 }
             }
 
-            for(var a = 1; a < colCount; a++){
+            /*for(var a = 1; a < colCount; a++){
               var baris = table.rows[a];
               baris.cells[0].childNodes[0].value = a;
-            }
+            }*/
 
 
         }
@@ -183,7 +183,7 @@
             for(var i=0; i<rowCount; i++) {
                 var row = table.rows[i];
                 var chkbox = row.cells[0].childNodes[0];
-                row.cells[0].childNodes[0].value = i;
+                row.cells[0].childNodes[0].value = i+1;
                 if(null != chkbox && true == chkbox.checked) {
                     if(rowCount <= 1) {
                         alert("Cannot delete all the rows.");

@@ -103,7 +103,7 @@
 
  			if(is_array($validasi)){
 				 for($i = 0; $i < count($validasi); $i++){
-					$number[$i] = (int) $validasi[$i];
+					$number[$i] = (int) $validasi[$i] - 1;
 					
 				 }
 				 foreach($number as $nilai => $hasil){

@@ -25,7 +25,7 @@
             <div class="box-body">
               <div class="row">
               <!-- form start -->
-              <form class="form-horizontal" method="POST" action="<?php echo base_url();?>index.php/rakitan/simpan">
+              <form class="form-horizontal" method="POST" action="<?php echo base_url();?>index.php/rakitan/ubahsimpan">
                 <div class="col-md-7">
                       <div class="box-body">
                         <div class="form-group">
@@ -110,7 +110,7 @@
                 <div class="btn-group">
                   <input type="button" class="btn btn-default" onclick="deleteRow('dataTable');" value="Hapus Konfigurasi" />
                 </div><br /><br />
-                <p> Note : jika ingin manambah detail rakitan, silahkan di checklist data yang ingin disimpan </p>
+                <p> Note : jika ingin menambah detail rakitan, silahkan di checklist data yang ingin disimpan </p>
                 <table id="dataTable" class="table table-hovered table-striped">
                     <tr>
                         <td><input type="checkbox" value="1" name="validasi[]"/></td>

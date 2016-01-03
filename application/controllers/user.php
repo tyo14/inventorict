@@ -7,6 +7,12 @@
  		$this->load->model('global_model');
  		$this->load->helper('url');
  		$this->load->library('session');
+
+ 		if(!$this->session->userdata(
+ 			'username','namapengguna','email','status','deskripsi'))
+        {
+            redirect(site_url('/'));
+        }
  	}
 
  	public function index(){

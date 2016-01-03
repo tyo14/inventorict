@@ -26,7 +26,8 @@
  								'username' => $sql['username'],
  								'namapengguna' => $sql['nama_pengguna'],
  								'email' => $sql['email'],
- 								'status' => $sql['status']);
+ 								'status' => $sql['status'],
+ 								'deskripsi' => $sql['deskripsi']);
 
  				$this->session->set_userdata($sessiondata);
  				redirect(site_url('dashboard'));

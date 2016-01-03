@@ -36,7 +36,7 @@
                   <p>Data Rakitan</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-stats-bars"></i>
+                  <i class="ion ion-levels"></i>
                 </div>
                 <a href="<?php echo base_url();?>index.php/rakitan" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
@@ -49,7 +49,7 @@
                   <p>Data Unit</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-person-add"></i>
+                  <i class="ion ion-ios-pricetags"></i>
                 </div>
                 <a href="<?php echo base_url();?>index.php/unit" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
@@ -62,7 +62,7 @@
                   <p>Data Divisi</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-pie-graph"></i>
+                  <i class="ion ion-person-stalker"></i>
                 </div>
                 <a href="<?php echo base_url();?>index.php/devisi" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>

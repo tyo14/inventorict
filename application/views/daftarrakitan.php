@@ -9,7 +9,10 @@
             <li><a href="<?php echo base_url(); ?>index.php/dashboard/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
             <li class="active">Daftar Rakitan</li>
           </ol>
-        </section>  
+        </section> 
+        <section class="content-header">
+          <a href="<?php echo base_url(); ?>index.php/rakitan/tambah" class="btn btn-primary"><i class="fa fa-plus-square"></i> Tambah data</a>
+        </section> 
         <!-- Main content -->
         <section class="content">
           <div class="row">

@@ -10,6 +10,9 @@
             <li class="active">Daftar Unit</li>
           </ol>
         </section>
+        <section class="content-header">
+          <a href="<?php echo base_url(); ?>index.php/unit/tambah" class="btn btn-primary"><i class="fa fa-plus-square"></i> Tambah data</a>
+        </section>
         <!-- Main content -->
         <section class="content">
           <div class="row">

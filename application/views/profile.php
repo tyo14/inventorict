@@ -6,8 +6,7 @@
           </h1>
           <ol class="breadcrumb">
             <li><a href="<?php echo base_url(); ?>index.php/dashboard/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-            <li><a href="<?php echo base_url(); ?>index.php/barang/">Barang</a></li>
-            <li class="active">Tambah data</li>
+            <li class="active">User Profile</li>
           </ol>
         </section>
         <!-- Main content -->
@@ -47,7 +46,8 @@
                         <div class="form-group">
                           <label for="inputNamaBarang" class="col-sm-3 control-label">Kata Sandi</label>
                           <div class="col-sm-8">
-                            <input type="password" class="form-control" placeholder="Kata Sandi" name="password" required>
+                            <input type="password" class="form-control" placeholder="Kata Sandi" name="password">
+                            <p>* Isi kolom jika ingin mengganti kata sandi</p>
                           </div>
                         </div>
                         <div class="form-group">

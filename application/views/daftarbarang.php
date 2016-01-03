@@ -24,6 +24,7 @@
                         <th>Nama Barang</th>
                         <th>UI / VO</th>
                         <th>Kondisi</th>
+                        <th>Status</th>
                         <th>Aksi</th>
                       </tr>
                     </thead>
@@ -33,12 +34,15 @@
 
                       $fetchdata['tgl_beli'] = $bulan."/".$tanggal."/".$tahun;
 
+                      $row = $this->global_model->find_by('status_barang', array('kode_barang' => $fetchdata['kode_barang']));
+
                     ?>
                       <tr>
                         <td><?php echo $fetchdata['kode_barang']; ?></td>
                         <td><?php echo $fetchdata['nama_barang']; ?></td>
                         <td><?php echo $fetchdata['tgl_beli']; ?></td>
                         <td><?php echo $fetchdata['kondisi_barang']." %";  ?></td>
+                        <td><?php echo $row['status_stok']; ?></td>
                         <td><a href="<?php echo base_url();?>index.php/barang/ubah/<?php echo $fetchdata['kode_barang'];?>">Edit</a> | 
                         <a href="<?php echo base_url();?>index.php/barang/hapus/<?php echo $fetchdata['kode_barang'];?>" onclick="return confirm_delete()">Hapus</a> | 
                         <a>Detail</a></td>

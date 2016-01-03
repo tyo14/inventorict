@@ -24,6 +24,7 @@
  		$this->load->view('head');
  		$this->load->view('inputrakitan', $data);
  		$this->load->view('footer');	
+
  	}
 
  	public function ajaxrakitan($id)
@@ -94,20 +95,40 @@
  			$this->global_model->create('rakitan_header',$dataheader);
 
  			//untuk data detail
+
+ 			$validasi = $this->input->post('validasi');
  			$kdrakit = $this->input->post('kode_rakit');
  			$konf = $this->input->post('konfigurasi');
  			$kdbrg = $this->input->post('kode_barang');
 
+ 			if(is_array($validasi)){
+				 for($i = 0; $i < count($validasi); $i++){
+					$number[$i] = (int) $validasi[$i];
+					
+				 }
+				 foreach($number as $nilai => $hasil){
+				 	$datadetail = array('kode_rakit' => $kdrakit,
+  									'kode_barang' => $kdbrg[$hasil],
+  									'konfigurasi' => $konf[$hasil]);
+					//echo $country[$hasil]."-".$txtbox[$hasil];
+					//echo "<br />";  
+					$this->global_model->create('rakitan_detail',$datadetail);
+				 }
 
- 			foreach($konf as $a => $b){
+				 redirect(site_url('rakitan/tambah'));
+					
+			}else if(empty($validasi)){
+				  redirect(site_url('rakitan/tambah'));
+			}
+
+
+ 			/*foreach($konf as $a => $b){
   				$datadetail = array('kode_rakit' => $kdrakit,
   									'kode_barang' => $kdbrg[$a],
   									'konfigurasi' => $konf[$a]);
 
   				$this->global_model->create('rakitan_detail',$datadetail);
- 			}
-
- 			redirect(site_url('rakitan/tambah'));
+ 			}*/
 
  			
  		}

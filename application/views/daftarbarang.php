@@ -25,10 +25,10 @@
                       <tr>
                         <th>Kode Barang</th>
                         <th>Nama Barang</th>
-                        <th>UI / VO</th>
-                        <th>Kondisi</th>
-                        <th>Status</th>
-                        <th>Aksi</th>
+                        <th class="text-center">UI / VO</th>
+                        <th class="text-center">Kondisi</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Aksi</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -43,12 +43,11 @@
                       <tr>
                         <td><?php echo $fetchdata['kode_barang']; ?></td>
                         <td><?php echo $fetchdata['nama_barang']; ?></td>
-                        <td><?php echo $fetchdata['tgl_beli']; ?></td>
-                        <td><?php echo $fetchdata['kondisi_barang']." %";  ?></td>
-                        <td><?php echo $row['status_stok']; ?></td>
-                        <td><a href="<?php echo base_url();?>index.php/barang/ubah/<?php echo $fetchdata['kode_barang'];?>">Edit</a> | 
-                        <a href="<?php echo base_url();?>index.php/barang/hapus/<?php echo $fetchdata['kode_barang'];?>" onclick="return confirm_delete()">Hapus</a> | 
-                        <a>Detail</a></td>
+                        <td class="text-center"><?php echo $fetchdata['tgl_beli']; ?></td>
+                        <td class="text-center"><?php echo $fetchdata['kondisi_barang']." %";  ?></td>
+                        <td class="text-center"><?php echo $row['status_stok']; ?></td>
+                        <td class="text-center"><a href="<?php echo base_url();?>index.php/barang/ubah/<?php echo $fetchdata['kode_barang'];?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a> 
+                        <a href="<?php echo base_url();?>index.php/barang/hapus/<?php echo $fetchdata['kode_barang'];?>" onclick="return confirm_delete()" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a></td>
                       </tr>
                       <?php } ?>
                     </tbody>
@@ -56,9 +55,10 @@
                       <tr>
                         <th>Kode Barang</th>
                         <th>Nama Barang</th>
-                        <th>UI / VO</th>
-                        <th>Kondisi</th>
-                        <th>Aksi</th>
+                        <th class="text-center">UI / VO</th>
+                        <th class="text-center">Kondisi</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Aksi</th>
                       </tr>
                     </tfoot>
                   </table>

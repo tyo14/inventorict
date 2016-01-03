@@ -26,9 +26,9 @@
                         <th>Divisi</th>
                         <th>Kode Rakit</th>
                         <th>Pengguna</th>
-                        <th>Tanggal</th>
-                        <th>Health</th>
-                        <th>Aksi</th>
+                        <th class="text-center">Tanggal</th>
+                        <th class="text-center">Health</th>
+                        <th class="text-center">Aksi</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -46,21 +46,21 @@
                         <td><?php echo $row['nama_divisi']; ?></td>
                         <td><?php echo $fetchdata['kode_rakit']; ?></td>
                         <td><?php echo $fetchdata['pengguna']; ?></td>
-                        <td><?php echo $fetchdata['tanggal_rakit']; ?></td>
-                        <td><?php echo $fetchdata['unit_health']." %";  ?></td>
-                        <td><a href="<?php echo base_url();?>index.php/rakitan/ubah/<?php echo $fetchdata['kode_rakit'];?>">Edit</a> | 
-                        <a href="<?php echo base_url();?>index.php/rakitan/hapus/<?php echo $fetchdata['kode_rakit'];?>" onclick="return confirm_delete()">Hapus</a> | 
-                        <a>Detail</a></td>
+                        <td class="text-center"><?php echo $fetchdata['tanggal_rakit']; ?></td>
+                        <td class="text-center"><?php echo $fetchdata['unit_health']." %";  ?></td>
+                        <td class="text-center"><a href="<?php echo base_url();?>index.php/rakitan/ubah/<?php echo $fetchdata['kode_rakit'];?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
+                        <a href="<?php echo base_url();?>index.php/rakitan/hapus/<?php echo $fetchdata['kode_rakit'];?>" onclick="return confirm_delete()" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a></td>
                       </tr>
                       <?php } ?>
                     </tbody>
                     <tfoot>
                       <tr>
-                        <th>Kode Barang</th>
-                        <th>Nama Barang</th>
-                        <th>UI / VO</th>
-                        <th>Kondisi</th>
-                        <th>Aksi</th>
+                        <th>Divisi</th>
+                        <th>Kode Rakit</th>
+                        <th>Pengguna</th>
+                        <th class="text-center">Tanggal</th>
+                        <th class="text-center">Health</th>
+                        <th class="text-center">Aksi</th>
                       </tr>
                     </tfoot>
                   </table>

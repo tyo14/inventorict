@@ -25,7 +25,7 @@
                         <th>No.</th>
                         <th>Kode Unit</th>
                         <th>Nama Unit</th>
-                        <th>Aksi</th>
+                        <th class="text-center">Aksi</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -38,9 +38,8 @@
                         <td><?php echo $no; ?></td>
                         <td><?php echo $fetchdata['kode_unit']; ?></td>
                         <td><?php echo $fetchdata['nama_unit']; ?></td>
-                        <td><a href="<?php echo base_url();?>index.php/unit/ubah/<?php echo $fetchdata['kode_unit'];?>">Edit</a> | 
-                            <a href="<?php echo base_url();?>index.php/unit/hapus/<?php echo $fetchdata['kode_unit'];?>" onclick="return confirm_delete()">Hapus</a> | 
-                            <a href="<?php echo base_url();?>index.php/unit/detail/<?php echo $fetchdata['kode_unit'];?>">Detail</a></td>
+                        <td class="text-center"><a href="<?php echo base_url();?>index.php/unit/ubah/<?php echo $fetchdata['kode_unit'];?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
+                            <a href="<?php echo base_url();?>index.php/unit/hapus/<?php echo $fetchdata['kode_unit'];?>" onclick="return confirm_delete()" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a></td>
                       </tr>
                       <?php } ?>
                     </tbody>
@@ -49,7 +48,7 @@
                         <th>No.</th>
                         <th>Kode Unit</th>
                         <th>Nama Unit</th>
-                        <th>Aksi</th>
+                        <th class="text-center">Aksi</th>
                       </tr>
                     </tfoot>
                   </table>

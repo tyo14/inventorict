@@ -25,7 +25,7 @@
                         <th>No.</th>
                         <th>Kode Divisi</th>
                         <th>Nama Divisi</th>
-                        <th>Aksi</th>
+                        <th class="text-center">Aksi</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -38,9 +38,8 @@
                         <td><?php echo $no; ?></td>
                         <td><?php echo $fetchdata['kode_divisi']; ?></td>
                         <td><?php echo $fetchdata['nama_divisi']; ?></td>
-                        <td><a href="<?php echo base_url();?>index.php/devisi/ubah/<?php echo $fetchdata['kode_divisi'];?>">Edit</a> | 
-                        <a href="<?php echo base_url();?>index.php/devisi/hapus/<?php echo $fetchdata['kode_divisi'];?>" onclick="return confirm_delete()">Hapus</a> | 
-                        <a>Detail</a></td>
+                        <td class="text-center"><a href="<?php echo base_url();?>index.php/devisi/ubah/<?php echo $fetchdata['kode_divisi'];?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
+                        <a href="<?php echo base_url();?>index.php/devisi/hapus/<?php echo $fetchdata['kode_divisi'];?>" onclick="return confirm_delete()" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a></td>                        
                       </tr>
                       <?php } ?>
                     </tbody>
@@ -49,7 +48,7 @@
                         <th>No.</th>
                         <th>Kode Divisi</th>
                         <th>Nama Divisi</th>
-                        <th>Aksi</th>
+                        <th class="text-center">Aksi</th>
                       </tr>
                     </tfoot>
                   </table>

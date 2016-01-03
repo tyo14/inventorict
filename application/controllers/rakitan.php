@@ -240,4 +240,12 @@
  		}	
  	}
 
+ 	public function hapusbarang($id){
+ 		$sql = $this->global_model->find_by('rakitan_detail', array('id'=> $id));
+
+ 		$getid = $sql['kode_rakit'];
+ 		$this->global_model->delete('rakitan_detail', array('id' => $id));
+ 		redirect(site_url('rakitan/ubah/'.$getid));	
+ 	}
+
  }

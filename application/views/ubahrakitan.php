@@ -96,7 +96,7 @@
                           <tr>
                             <td><?php echo $no;?></td>
                             <td><?php echo $datarakitan['nama_barang'];?></td>
-                            <td><a href="<?php echo base_url();?>index.php/rakitan/hapusbarang/<?php echo $datarakitan['kode_rakit'];?>" onclick="return confirm_delete()">Hapus</a></td>
+                            <td><a href="<?php echo base_url();?>index.php/rakitan/hapusbarang/<?php echo $datarakitan['id'];?>" onclick="return confirm_delete()">Hapus</a></td>
                           </tr>
                           <?php }?>
                         </tbody>

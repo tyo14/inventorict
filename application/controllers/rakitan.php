@@ -131,6 +131,52 @@
  	}
 
  	public function ubah($id){
+ 		if($this->input->post('simpanrakitan')){
+ 			
+ 			//kumpulkan inputan
+ 			$data = $this->input->post();
+ 			unset($data['simpanrakitan']);
+
+ 			//untuk data header
+ 			$dataheader = array('kode_rakit' => $data['kode_rakit'],
+ 								'tanggal_rakit' => $data['tanggal_rakit'],
+ 								'pengguna' => $data['pengguna'],
+ 								'unit_health' => $data['unit_health']);
+
+ 			list($bulan,$tanggal,$tahun) = explode('/', $this->input->post('tanggal_rakit'));
+
+ 			$dataheader['tanggal_rakit'] = $tahun."-".$bulan."-".$tanggal;
+
+ 			$this->global_model->update('rakitan_header',$dataheader,array('kode_rakit'=>$id));
+
+ 			//untuk data detail
+
+ 			$validasi = $this->input->post('validasi');
+ 			$kdrakit = $this->input->post('kode_rakit');
+ 			$konf = $this->input->post('konfigurasi');
+ 			$kdbrg = $this->input->post('kode_barang');
+
+ 			if(is_array($validasi)){
+				 for($i = 0; $i < count($validasi); $i++){
+					$number[$i] = (int) $validasi[$i] - 1;
+					
+				 }
+				 foreach($number as $nilai => $hasil){
+				 	$datadetail = array('kode_rakit' => $kdrakit,
+  									'kode_barang' => $kdbrg[$hasil],
+  									'konfigurasi' => $konf[$hasil]);
+					//echo $country[$hasil]."-".$txtbox[$hasil];
+					//echo "<br />";  
+					$this->global_model->create('rakitan_detail',$datadetail);
+				 }
+
+				 redirect(site_url('rakitan'));
+					
+			}else if(empty($validasi)){
+				  redirect(site_url('rakitan'));
+			}
+ 			
+ 		}
 
  		$data['rakitanheader'] = $this->global_model->find_by('rakitan_header', array('kode_rakit' => $id));
 
@@ -145,55 +191,53 @@
  	}
 
  	public function ubahsimpan($id){
-	 	if($this->input->post('simpan')){
-	 			
-	 			//kumpulkan inputan
-	 			$data = $this->input->post();
-	 			unset($data['simpan']);
+ 	if($this->input->post('simpanrakitan')){
+ 			
+ 			//kumpulkan inputan
+ 			$data = $this->input->post();
+ 			unset($data['simpanrakitan']);
 
-	 			//untuk data header
-	 			$dataheader = array('kode_rakit' => $data['kode_rakit'],
-	 								'tanggal_rakit' => $data['tanggal_rakit'],
-	 								'pengguna' => $data['pengguna'],
-	 								'unit_health' => $data['unit_health']);
+ 			//untuk data header
+ 			$dataheader = array('kode_rakit' => $data['kode_rakit'],
+ 								'tanggal_rakit' => $data['tanggal_rakit'],
+ 								'pengguna' => $data['pengguna'],
+ 								'unit_health' => $data['unit_health']);
 
-	 			list($bulan,$tanggal,$tahun) = explode('/', $this->input->post('tanggal_rakit'));
+ 			list($bulan,$tanggal,$tahun) = explode('/', $this->input->post('tanggal_rakit'));
 
-	 			$dataheader['tanggal_rakit'] = $tahun."-".$bulan."-".$tanggal;
+ 			$dataheader['tanggal_rakit'] = $tahun."-".$bulan."-".$tanggal;
 
-	 			$this->global_model->update('rakitan_header',$dataheader, array('kode_rakit' => $id));
+ 			$this->global_model->update('rakitan_header',$dataheader,array('kode_rakit'=>$id));
 
-	 			//untuk data detail
+ 			//untuk data detail
 
-	 			$validasi = $this->input->post('validasi');
-	 			$kdrakit = $this->input->post('kode_rakit');
-	 			$konf = $this->input->post('konfigurasi');
-	 			$kdbrg = $this->input->post('kode_barang');
+ 			$validasi = $this->input->post('validasi');
+ 			$kdrakit = $this->input->post('kode_rakit');
+ 			$konf = $this->input->post('konfigurasi');
+ 			$kdbrg = $this->input->post('kode_barang');
 
-	 			$url = 'rakitan/ubah/'.$kdrakit;
+ 			if(is_array($validasi)){
+				 for($i = 0; $i < count($validasi); $i++){
+					$number[$i] = (int) $validasi[$i] - 1;
+					
+				 }
+				 foreach($number as $nilai => $hasil){
+				 	$datadetail = array('kode_rakit' => $kdrakit,
+  									'kode_barang' => $kdbrg[$hasil],
+  									'konfigurasi' => $konf[$hasil]);
+					//echo $country[$hasil]."-".$txtbox[$hasil];
+					//echo "<br />";  
+					$this->global_model->create('rakitan_detail',$datadetail);
+				 }
 
-	 			if(is_array($validasi)){
-					 for($i = 0; $i < count($validasi); $i++){
-						$number[$i] = (int) $validasi[$i] - 1;
-						
-					 }
-					 foreach($number as $nilai => $hasil){
-					 	$datadetail = array('kode_rakit' => $kdrakit,
-	  									'kode_barang' => $kdbrg[$hasil],
-	  									'konfigurasi' => $konf[$hasil]);
-						//echo $country[$hasil]."-".$txtbox[$hasil];
-						//echo "<br />";  
-						$this->global_model->create('rakitan_detail',$datadetail);
-					 }
+				 redirect(site_url('rakitan'));
+					
+			}else if(empty($validasi)){
+				  redirect(site_url('rakitan'));
+			}
 
-					 redirect(site_url($url));
-						
-				}else if(empty($validasi)){
-					  redirect(site_url($url));
-				}
-
-	 			
-	 		}	
-	 }
+ 			
+ 		}	
+ 	}
 
  }

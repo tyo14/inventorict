@@ -25,7 +25,7 @@
             <div class="box-body">
               <div class="row">
               <!-- form start -->
-              <form class="form-horizontal" method="POST" action="<?php echo base_url();?>index.php/rakitan/ubahsimpan">
+              <form class="form-horizontal" method="POST" action="">
                 <div class="col-md-7">
                       <div class="box-body">
                         <div class="form-group">
@@ -135,7 +135,7 @@
                   <input type="reset" class="btn btn-default" value="Cancel" />
                 </div>
                 <div class="btn-group">
-                  <input type="submit" class="btn btn-primary" value="Simpan" name="simpan" />
+                  <input type="submit" class="btn btn-primary" value="Simpan" name="simpanrakitan" />
                 </div>
               </div>  
             </div>

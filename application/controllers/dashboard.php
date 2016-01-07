@@ -18,13 +18,13 @@
 
  	public function index()
  	{ 		
- 		$data['barang'] = count($this->global_model->find_all('barang'));
+ 		/*$data['barang'] = count($this->global_model->find_all('barang'));
  		$data['rakitan'] = count($this->global_model->find_all('rakitan_header'));
  		$data['unit'] = count($this->global_model->find_all('unit'));
- 		$data['divisi'] = count($this->global_model->find_all('divisi'));
+ 		$data['divisi'] = count($this->global_model->find_all('divisi'));*/
 
  		$this->load->view('head');
- 		$this->load->view('dash', $data); //Contains
+ 		$this->load->view('dash'); //Contains
  		$this->load->view('footer');
  	}
 

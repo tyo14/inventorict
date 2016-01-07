@@ -25,7 +25,7 @@
 
  	public function tambah()
  	{
- 		$data['dataunit'] = $this->global_model->find_all('unit'); 		
+ 		$data['divisi'] = $this->global_model->find_all('divisi');
  		$this->load->view('head');
  		$this->load->view('inputbarang',$data); //Contains
  		$this->load->view('footer');		
@@ -40,7 +40,8 @@
  			$inputbarang = array('kode_barang' => $this->input->post('kode_barang'),
  								 'tgl_beli' => $this->input->post('tgl_beli'),
  								 'nama_barang' => $this->input->post('nama_barang'),
- 								 'deskripsi' => $this->input->post('deskripsi'));
+ 								 'deskripsi' => $this->input->post('deskripsi'),
+ 								 'kode_unit' => $this->input->post('kode_unit'));
 
 
  			$inputstatus = array('kondisi_barang' => $this->input->post('kondisi_barang'),
@@ -82,7 +83,7 @@
  		/*generate kode barang*/
 
  		//get kode unit
- 		$data = $this->global_model->find_by('unit', array('nama_unit' => $id));
+ 		$data = $this->global_model->find_by('unit', array('kode_unit' => $id));
 
  		$kodeunit = $data['kode_unit'];
 

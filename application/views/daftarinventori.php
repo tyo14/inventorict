@@ -11,7 +11,7 @@
           </ol>
         </section>
         <section class="content-header">
-          <a href="<?php echo base_url(); ?>index.php/unit/tambah" class="btn btn-primary"><i class="fa fa-plus-square"></i> Tambah data</a>
+          <a href="<?php echo base_url(); ?>index.php/inventori/tambah" class="btn btn-primary"><i class="fa fa-plus-square"></i> Tambah data</a>
         </section>
         <!-- Main content -->
         <section class="content">
@@ -22,38 +22,32 @@
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
+                        <th>No.</th>
                         <th>Kode Unit</th>
                         <th>Nama Unit</th>
-                        <th>Kategori</th>
-                        <th>Divisi</th>
                         <th class="text-center">Aksi</th>
                       </tr>
                     </thead>
                     <tbody>
                     <?php 
-                    foreach ($unit as $unitdata) {
-
-                      list($kodekategori,$urutan) = explode('-', $unitdata['kode_kategori']);
-
-                      $divisi = $this->global_model->find_by('divisi',array('kode_divisi' => $kodekategori));
-                      $kategori = $this->global_model->find_by('kategori',array('kode_kategori' => $unitdata['kode_kategori']));
-                      ?>
-                      <tr>                        
-                        <td><?php echo $unitdata['kode_unit'];?></td>
-                        <td><?php echo $unitdata['nama_unit'];?></td>
-                        <td><?php echo $kategori['nama_kategori'];?></td>
-                        <td><?php echo $divisi['nama_divisi'];?></td>
-                        <td class="text-center"><a href="<?php echo base_url();?>index.php/unit/ubah/<?php echo $unitdata['kode_unit'];?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
-                        <a href="<?php echo base_url();?>index.php/unit/hapus/<?php echo $unitdata['kode_unit'];?>" onclick="return confirm_delete()" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a></td>
+                    $no = 0;
+                    foreach ($unit as $fetchdata) {
+                      $no++;
+                    ?>
+                      <tr>
+                        <td><?php echo $no; ?></td>
+                        <td><?php echo $fetchdata['kode_unit']; ?></td>
+                        <td><?php echo $fetchdata['nama_unit']; ?></td>
+                        <td class="text-center"><a href="<?php echo base_url();?>index.php/unit/ubah/<?php echo $fetchdata['kode_unit'];?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
+                            <a href="<?php echo base_url();?>index.php/unit/hapus/<?php echo $fetchdata['kode_unit'];?>" onclick="return confirm_delete()" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a></td>
                       </tr>
-                      <?php }?>
+                      <?php } ?>
                     </tbody>
                     <tfoot>
                       <tr>
+                        <th>No.</th>
                         <th>Kode Unit</th>
                         <th>Nama Unit</th>
-                        <th>Kategori</th>
-                        <th>Divisi</th>
                         <th class="text-center">Aksi</th>
                       </tr>
                     </tfoot>

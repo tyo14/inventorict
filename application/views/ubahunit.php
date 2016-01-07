@@ -9,7 +9,7 @@
             <a href="<?php echo base_url(); ?>index.php/dashboard/"><i class="fa fa-dashboard"></i> Dashboard</a> &nbsp;>  
             <a href="<?php echo base_url(); ?>index.php/unit/"> Unit</a> &nbsp;>
             <a> &nbsp;Ubah data</a> &nbsp;>
-            <a> <?php echo $unit['kode_unit']; ?></a>
+            <a> &nbsp;<?php echo $unit['kode_unit']; ?></a>
           </p>
         </section>
         <!-- Main content -->
@@ -25,17 +25,33 @@
               </div>
             </div><!-- /.box-header -->
             <div class="box-body">
-              
-              <!-- form start -->
-              <form method="POST" action="">
-                <div class="form-group">
-                    <label for="inputKodeUnit">Kode Unit</label>                          
-                    <input type="text" name="kode_unit" class="form-control" placeholder="Kode Unit" maxlength="3" style="text-transform:uppercase;" value="<?php echo $unit['kode_unit']; ?>" required>
-                </div>
-                <div class="form-group">
-                    <label for="inputNamaUnit">Nama Unit</label>
-                    <input type="text" name="nama_unit" class="form-control" placeholder="Nama Unit" value="<?php echo $unit['nama_unit']; ?>" required>
-                </div>
+              <form method="POST" action="" class="form-horizontal">
+              <div class="form-group">
+                  <label for="inputUnit" class="col-sm-3 control-label">Kategori</label>
+                  <div class="col-sm-8">
+                      <select class="form-control select2" style="width: 100%;" name="kode_kategori">
+                      <?php foreach ($kategori as $kategoridata) {
+
+                        list($kode,$digit) = explode('-', $kategoridata['kode_kategori']);
+                        $divisi = $this->global_model->find_by('divisi', array('kode_divisi' => $kode));
+                      ?>
+                        <option value="<?php echo $kategoridata['kode_kategori'];?>" <?php if($unit['kode_kategori'] == $kategoridata['kode_kategori']){ echo "selected"; }?> ><?php echo $kategoridata['nama_kategori'].' - '.$divisi['nama_divisi'];?></option>
+                      <?php } ?>
+                      </select>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label for="inputKodeBarang" class="col-sm-3 control-label">Kode Unit</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" maxlength="3" style="text-transform:uppercase;" name="kode_unit" value="<?php echo $unit['kode_unit'];?>" required />
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label for="inputKodeBarang" class="col-sm-3 control-label">Nama Unit</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" name="nama_unit" required value="<?php echo $unit['nama_unit'];?>"/>
+                  </div>
+              </div>
             </div><!-- /.box-body -->
             <div class="box-footer">
               <div class="pull-right">

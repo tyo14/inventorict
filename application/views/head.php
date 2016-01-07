@@ -3,7 +3,26 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>InventoryICT | Dashboard</title>
+    <title>InventoryICT | 
+    <?php 
+      if($this->uri->segment(1)=="dashboard"){ 
+        $txt = "Dashboard";
+      }else if($this->uri->segment(1)=="barang"){ 
+        $txt = "Barang";
+      }else if($this->uri->segment(1)=="unit"){ 
+        $txt = "Unit";
+      }else if($this->uri->segment(1)=="kategori"){ 
+        $txt = "Kategori";
+      }else if($this->uri->segment(1)=="devisi"){ 
+        $txt = "Divisi";
+      }else if($this->uri->segment(1)=="user"){ 
+        $txt = "User Profile";
+      }else if($this->uri->segment(1)=="inventori"){ 
+        $txt = "Inventori";
+      }
+      echo $txt;
+    ?>
+    </title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -113,17 +132,20 @@
           <ul class="sidebar-menu">
             <li class="header">Navigasi Utama</li>
             <li class="<?php if($this->uri->segment(1)=="dashboard"){echo "active";}?>"><a href="<?php echo base_url(); ?>index.php/dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-            <li class="<?php if($this->uri->segment(1)=="barang" || $this->uri->segment(1)=="unit" || $this->uri->segment(1)=="devisi" || $this->uri->segment(1)=="rakitan"){echo "active";}?> treeview">
+            <li class="<?php if($this->uri->segment(1)=="barang" || $this->uri->segment(1)=="unit" || $this->uri->segment(1)=="devisi" || $this->uri->segment(1)=="kategori"){echo "active";}?> treeview">
               <a href="#">
                 <i class="fa fa-book"></i> <span>Master</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="<?php if($this->uri->segment(1)=="barang"){echo "active";}?>"><a href="<?php echo base_url(); ?>index.php/barang"><i class="fa fa-circle-o"></i> Daftar Barang</a></li>
-                <li class="<?php if($this->uri->segment(1)=="unit"){echo "active";}?>"><a href="<?php echo base_url(); ?>index.php/unit"><i class="fa fa-circle-o"></i> Daftar Unit</a></li>
                 <li class="<?php if($this->uri->segment(1)=="devisi"){echo "active";}?>"><a href="<?php echo base_url(); ?>index.php/devisi"><i class="fa fa-circle-o"></i> Daftar Divisi</a></li>
-                <li class="<?php if($this->uri->segment(1)=="rakitan"){echo "active";}?>"><a href="<?php echo base_url(); ?>index.php/rakitan"><i class="fa fa-circle-o"></i> Daftar Rakitan</a></li>
+                <li class="<?php if($this->uri->segment(1)=="kategori"){echo "active";}?>"><a href="<?php echo base_url(); ?>index.php/kategori"><i class="fa fa-circle-o"></i> Daftar Kategori</a></li>
+                <li class="<?php if($this->uri->segment(1)=="unit"){echo "active";}?>"><a href="<?php echo base_url(); ?>index.php/unit"><i class="fa fa-circle-o"></i> Daftar Unit</a></li>
+                <li class="<?php if($this->uri->segment(1)=="barang"){echo "active";}?>"><a href="<?php echo base_url(); ?>index.php/barang"><i class="fa fa-circle-o"></i> Daftar Barang</a></li>
+                <li class="<?php if($this->uri->segment(1)=="app"){echo "active";}?>"><a href="<?php echo base_url(); ?>index.php/app"><i class="fa fa-circle-o"></i> Daftar App</a></li>
+                <li class="<?php if($this->uri->segment(1)=="rakitan"){echo "active";}?>"><a href="<?php echo base_url(); ?>index.php/rakitan"><i class="fa fa-circle-o"></i> Daftar Workgroup</a></li>
               </ul>
             </li>
+            <li class="<?php if($this->uri->segment(1)=="inventori"){echo "active";}?>"><a href="<?php echo base_url(); ?>index.php/inventori"><i class="fa fa-book"></i> <span>Inventori</span></a></li>
           </ul>
         </section>
         <!-- /.sidebar -->

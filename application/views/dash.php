@@ -19,7 +19,7 @@
               <!-- small box -->
               <div class="small-box bg-aqua">
                 <div class="inner">
-                  <h3><?php echo $barang;?></h3>
+                  <h3>0</h3>
                   <p>Data Barang</p>
                 </div>
                 <div class="icon">
@@ -32,7 +32,7 @@
               <!-- small box -->
               <div class="small-box bg-green">
                 <div class="inner">
-                  <h3><?php echo $rakitan;?></h3>
+                  <h3>0</h3>
                   <p>Data Rakitan</p>
                 </div>
                 <div class="icon">
@@ -45,7 +45,7 @@
               <!-- small box -->
               <div class="small-box bg-yellow">
                 <div class="inner">
-                  <h3><?php echo $unit;?></h3>
+                  <h3>0</h3>
                   <p>Data Unit</p>
                 </div>
                 <div class="icon">
@@ -58,7 +58,7 @@
               <!-- small box -->
               <div class="small-box bg-red">
                 <div class="inner">
-                  <h3><?php echo $divisi;?></h3>
+                  <h3>0</h3>
                   <p>Data Divisi</p>
                 </div>
                 <div class="icon">

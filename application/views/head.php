@@ -21,6 +21,10 @@
         $txt = "Inventori";
       }else if($this->uri->segment(1)=="lab"){ 
         $txt = "Workgroup";
+      }else if($this->uri->segment(1)=="kategoriapp"){ 
+        $txt = "Kategori App";
+      }else if($this->uri->segment(1)=="app"){ 
+        $txt = "App";
       }
 
       echo $txt;
@@ -135,7 +139,7 @@
           <ul class="sidebar-menu">
             <li class="header">Navigasi Utama</li>
             <li class="<?php if($this->uri->segment(1)=="dashboard"){echo "active";}?>"><a href="<?php echo base_url(); ?>index.php/dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-            <li class="<?php if($this->uri->segment(1)=="barang" || $this->uri->segment(1)=="unit" || $this->uri->segment(1)=="devisi" || $this->uri->segment(1)=="kategori" || $this->uri->segment(1)=="lab" ){echo "active";}?> treeview">
+            <li class="<?php if($this->uri->segment(1)=="barang" || $this->uri->segment(1)=="unit" || $this->uri->segment(1)=="devisi" || $this->uri->segment(1)=="kategori" || $this->uri->segment(1)=="lab" || $this->uri->segment(1)=="kategoriapp" || $this->uri->segment(1)=="app" ){echo "active";}?> treeview">
               <a href="#">
                 <i class="fa fa-book"></i> <span>Master</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
@@ -144,6 +148,7 @@
                 <li class="<?php if($this->uri->segment(1)=="kategori"){echo "active";}?>"><a href="<?php echo base_url(); ?>index.php/kategori"><i class="fa fa-circle-o"></i> Daftar Kategori</a></li>
                 <li class="<?php if($this->uri->segment(1)=="unit"){echo "active";}?>"><a href="<?php echo base_url(); ?>index.php/unit"><i class="fa fa-circle-o"></i> Daftar Unit</a></li>
                 <li class="<?php if($this->uri->segment(1)=="barang"){echo "active";}?>"><a href="<?php echo base_url(); ?>index.php/barang"><i class="fa fa-circle-o"></i> Daftar Barang</a></li>
+                <li class="<?php if($this->uri->segment(1)=="kategoriapp"){echo "active";}?>"><a href="<?php echo base_url(); ?>index.php/kategoriapp"><i class="fa fa-circle-o"></i> Daftar Kategori App</a></li>
                 <li class="<?php if($this->uri->segment(1)=="app"){echo "active";}?>"><a href="<?php echo base_url(); ?>index.php/app"><i class="fa fa-circle-o"></i> Daftar App</a></li>
                 <li class="<?php if($this->uri->segment(1)=="lab"){echo "active";}?>"><a href="<?php echo base_url(); ?>index.php/lab"><i class="fa fa-circle-o"></i> Daftar Workgroup</a></li>
               </ul>

@@ -83,7 +83,7 @@
                   <div class="form-group">
                     <label for="inputKodeBarang" class="col-sm-4 control-label">Kondisi Barang</label>
                     <div class="col-sm-6">
-                      <input type="number" class="form-control" max="100" min="0" step="1" name="kondisi_barang" required>
+                      <input type="number" class="form-control" name="kondisi_barang" onkeypress="return isNumberKey(event)" onkeyup="this.value = minmax(this.value, 0, 100)" required>
                       <small>* % Health</small>
                     </div>
                   </div>
@@ -168,4 +168,22 @@
         xhttp.send(null);
 
       }
+</script>
+<script>
+function isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+}    
+</script>
+<script type="text/javascript">
+function minmax(value, min, max) 
+{
+    if(parseInt(value) < min || isNaN(value)) 
+        return 0; 
+    else if(parseInt(value) > max) 
+        return 100; 
+    else return value;
+}
 </script>

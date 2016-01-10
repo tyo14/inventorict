@@ -24,6 +24,7 @@
                     <thead>
                       <tr>
                         <th>Kode Barang</th>
+                        <th>Nama Unit</th>
                         <th>Nama Barang</th>
                         <th class="text-center">UI / VO</th>
                         <th class="text-center">Kondisi</th>
@@ -39,9 +40,12 @@
 
                       $row = $this->global_model->find_by('status_barang', array('kode_barang' => $fetchdata['kode_barang']));
 
+                      $sql = $this->global_model->find_by('unit', array('kode_unit' => $fetchdata['kode_unit']));
+
                     ?>
                       <tr>
                         <td><?php echo $fetchdata['kode_barang']; ?></td>
+                        <td><?php echo $sql['nama_unit']; ?></td>
                         <td><?php echo $fetchdata['nama_barang']; ?></td>
                         <td class="text-center"><?php echo $fetchdata['tgl_beli']; ?></td>
                         <td class="text-center"><?php echo $fetchdata['kondisi_barang']." %";  ?></td>
@@ -54,6 +58,7 @@
                     <tfoot>
                       <tr>
                         <th>Kode Barang</th>
+                        <th>Nama Unit</th>
                         <th>Nama Barang</th>
                         <th class="text-center">UI / VO</th>
                         <th class="text-center">Kondisi</th>

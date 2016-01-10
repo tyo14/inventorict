@@ -164,6 +164,8 @@
  		$data['dataunit'] = $this->global_model->find_all('unit');
  		$data['barang'] = $this->global_model->find_by('barang', array('kode_barang' => $id));
  		$data['status'] = $this->global_model->find_by('status_barang', array('kode_barang' => $id));
+ 		$data['divisi'] = $this->global_model->find_all('divisi');
+
  		$this->load->view('head');
  		$this->load->view('ubahbarang',$data); //Contains
  		$this->load->view('footer');

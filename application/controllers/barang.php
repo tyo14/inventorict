@@ -132,12 +132,18 @@
 
  	public function ubah($id){
 
+ 		$getid = $id;
+
+
  		if($this->input->post('simpan')){
+
+ 			list($kodesunit,$digitis) = explode('-', $this->input->post('kode_barang'));
 
  			$inputbarang = array('kode_barang' => $this->input->post('kode_barang'),
  								 'tgl_beli' => $this->input->post('tgl_beli'),
  								 'nama_barang' => $this->input->post('nama_barang'),
- 								 'deskripsi' => $this->input->post('deskripsi'));
+ 								 'deskripsi' => $this->input->post('deskripsi'),
+ 								 'kode_unit' => $kodesunit);
 
 
  			$inputstatus = array('kondisi_barang' => $this->input->post('kondisi_barang'),
@@ -153,7 +159,14 @@
 	 			$this->global_model->update('barang',$inputbarang, array('kode_barang' => $id));
 	 			$this->global_model->update('status_barang',$inputstatus, array('kode_barang' => $id));
 
-	 			redirect(site_url('barang'));
+	 			//generate redirect
+	 			if($this->input->post('kode_barang') != $getid){
+	 				$url = 'barang/ubah/'.$this->input->post('kode_barang');
+	 			}else{
+	 				$url = 'barang/ubah/'.$getid;
+	 			}
+
+	 			redirect(site_url($url));
  		}
 
  		$kdbrg = $this->global_model->find_by('barang', array('kode_barang' => $id));
@@ -165,6 +178,15 @@
  		$data['barang'] = $this->global_model->find_by('barang', array('kode_barang' => $id));
  		$data['status'] = $this->global_model->find_by('status_barang', array('kode_barang' => $id));
  		$data['divisi'] = $this->global_model->find_all('divisi');
+
+ 		$checkbarang1 = $this->global_model->find_by('barang', array('kode_barang' => $id));
+
+ 		$checkunit = $this->global_model->find_by('unit', array('kode_unit' => $checkbarang1['kode_unit']));
+
+ 		list($alpabet,$angka) = explode('-', $checkunit['kode_kategori']);
+ 		$data['pushunit'] = $this->global_model->search('unit',array('kode_kategori' => $alpabet),null,null,null,0);
+
+ 		$data['selected'] = $this->global_model->find_by('divisi', array('kode_divisi' => $alpabet));
 
  		$this->load->view('head');
  		$this->load->view('ubahbarang',$data); //Contains

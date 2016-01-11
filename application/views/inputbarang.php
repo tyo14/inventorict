@@ -30,7 +30,7 @@
                       <div class="form-group">
                           <label for="inputUnit" class="col-sm-3 control-label">Divisi</label>
                           <div class="col-sm-8">
-                            <select class="form-control select2" style="width: 100%;" name="kode_unit" onChange="showOptionUnit(this.value)" required>
+                            <select class="form-control select2" style="width: 100%;" onChange="showOptionUnit(this.value)" required>
                             <option></option>
                               <?php foreach ($divisi as $divisidata) {
                               ?>

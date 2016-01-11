@@ -29,13 +29,26 @@
               <form class="form-horizontal" method="POST" action="">
                 <div class="col-md-7">
                       <div class="box-body">
+                      <div class="form-group">
+                          <label for="inputUnit" class="col-sm-3 control-label">Divisi</label>
+                          <div class="col-sm-8">
+                            <select class="form-control select2" style="width: 100%;" onChange="showOptionUnit(this.value)" required>
+                            <option></option>
+                              <?php foreach ($divisi as $divisidata) {
+                              ?>
+                              <option value="<?php echo $divisidata['kode_divisi'];?>" <?php if($selected['kode_divisi'] == $divisidata['kode_divisi']){ echo "selected"; } ?> ><?php echo $divisidata['nama_divisi'];?></option>
+                              <?php } ?>
+                            </select>
+                          </div>
+                        </div>
+
                         <div class="form-group">
                           <label for="inputUnit" class="col-sm-3 control-label">Unit</label>
                           <div class="col-sm-8">
-                            <select class="form-control select2" style="width: 100%;" onChange="showCustomer(this.value)">
-                              <?php foreach ($dataunit as $unit) {
+                            <select class="form-control select2" style="width: 100%;" name="kode_unit" onChange="showKodeBarang(this.value)" id="txtUnit" required > 
+                              <?php foreach ($pushunit as $unitdata) {
                               ?>
-                              <option value="<?php echo $unit['nama_unit'];?>" <?php if($nama['nama_unit'] == $unit['nama_unit']){ echo "selected"; }?> ><?php echo $unit['nama_unit'];?></option>
+                              <option value="<?php echo $unitdata['kode_unit'];?>" <?php if($barang['kode_unit'] == $unitdata['kode_unit']){ echo "selected"; } ?> ><?php echo $unitdata['nama_unit'];?></option>
                               <?php } ?>
                             </select>
                           </div>
@@ -120,7 +133,7 @@
         
 </div>
 <script type="text/javascript">
-      function showCustomer(str) {
+      function showKodeBarang(str) {
         var xhttp;    
         if (str == "") {
           document.getElementById("txtHint").innerHTML = "";
@@ -142,6 +155,37 @@
 
       }
 
+      function showOptionUnit(str) {
+        document.getElementById("txtHint").value = "";
+
+        var xhttp;    
+        if (str == "") {
+          document.getElementById("txtUnit").innerHTML = "";
+          return;
+        }
+        var url="http://localhost/inventorict/index.php/devisi/ajaxunit/"
+
+
+        url=url+str
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (xhttp.readyState == 4 && xhttp.status == 200) {
+            document.getElementById("txtUnit").innerHTML = xhttp.responseText
+            document.getElementById("txtUnit").value = xhttp.responseText
+          }
+        };
+        xhttp.open("GET",url, true);
+        xhttp.send(null);
+
+      }
+</script>
+<script>
+function isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+}    
 </script>
 <script type="text/javascript">
 function minmax(value, min, max) 

@@ -45,7 +45,7 @@
                         <div class="form-group">
                           <label for="inputUnit" class="col-sm-3 control-label">Unit</label>
                           <div class="col-sm-8">
-                            <select class="form-control select2" style="width: 100%;" name="kode_unit" onChange="showKodeBarang(this.value)" id="txtUnit" required > 
+                            <select class="form-control select2" style="width: 100%;" name="kode_unit" onChange="showKodeBarang(this.value)" id="txtUnit" required >                               
                               <?php foreach ($pushunit as $unitdata) {
                               ?>
                               <option value="<?php echo $unitdata['kode_unit'];?>" <?php if($barang['kode_unit'] == $unitdata['kode_unit']){ echo "selected"; } ?> ><?php echo $unitdata['nama_unit'];?></option>

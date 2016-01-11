@@ -151,6 +151,7 @@
 
  	public function ajaxunit($id){
 
+ 		echo "<option></option>";
  		foreach ($this->global_model->search('unit',array('kode_kategori' => $id),null,null,null,0) as $row) {
  			echo "<option value='".$row['kode_unit']."'>".$row['nama_unit']."</option>";
  		}

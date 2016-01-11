@@ -29,6 +29,7 @@
                   <label for="inputUnit" class="col-sm-3 control-label">Kategori</label>
                   <div class="col-sm-8">
                       <select class="form-control select2" style="width: 100%;" name="kode_kategori">
+                      <option></option>
                       <?php foreach ($kategori as $kategoridata) {
 
                         list($kode,$digit) = explode('-', $kategoridata['kode_kategori']);

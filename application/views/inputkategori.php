@@ -28,9 +28,10 @@
               <!-- form start -->
               <form method="POST" action="" class="form-horizontal">
               <div class="form-group">
-                  <label for="inputUnit" class="col-sm-3 control-label">Unit</label>
+                  <label for="inputUnit" class="col-sm-3 control-label">Divisi</label>
                   <div class="col-sm-8">
-                      <select class="form-control select2" style="width: 100%;" onChange="showKodeKategori(this.value)">
+                      <select class="form-control select2" style="width: 100%;" onChange="showKodeKategori(this.value)" name="kode_divisi">
+                      <option></option>
                       <?php foreach ($devisi as $divisi) {
                       ?>
                         <option value="<?php echo $divisi['kode_divisi'];?>"><?php echo $divisi['nama_divisi'];?></option>

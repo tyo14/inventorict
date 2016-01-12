@@ -193,5 +193,15 @@
  		$this->load->view('footer');
  	}
 
+ 	public function modal($id){
+ 		echo "<form class='form-horizontal'>";
+ 			echo "<div class='col-md-12'>";
+ 				echo "<div class='box-body'>";
+ 					
+ 				echo "</div>";
+ 			echo "</div>";
+ 		echo "</form>";
+ 	}
+
  	
  }

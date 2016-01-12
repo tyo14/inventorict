@@ -52,7 +52,7 @@
                         <td class="text-center"><?php echo $row['status_stok']; ?></td>
                         <td class="text-center"><a href="<?php echo base_url();?>index.php/barang/ubah/<?php echo $fetchdata['kode_barang'];?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a> 
                         <a href="<?php echo base_url();?>index.php/barang/hapus/<?php echo $fetchdata['kode_barang'];?>" onclick="return confirm_delete()" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a>
-                        <a onclick="open_container(<?php echo $fetchdata['kode_barang'];?>)" class="btn btn-success btn-xs"><i class="fa fa-book"></i></a>
+                        <a onclick="open_container()" class="btn btn-success btn-xs"><i class="fa fa-book"></i></a>
                         </td>
                       </tr>
                       <?php } ?>
@@ -80,7 +80,7 @@
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                         <h4 class="modal-title">Daftar Barang</h4>
                       </div>
-                      <div class="modal-body">
+                      <div class="modal-body" id="modalbodyku">
                       <div class="row">
                         <!-- form start -->
                         <form class="form-horizontal">
@@ -154,7 +154,7 @@ function confirm_delete() {
 </script>
 <script type="text/javascript">
 function open_container()
-        {
-            $('#myModal').modal('show');
-        }
+{
+  $('#myModal').modal('show');
+}
 </script>

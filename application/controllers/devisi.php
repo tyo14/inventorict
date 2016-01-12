@@ -32,31 +32,39 @@
 
  	public function simpan()
  	{
- 		if($this->input->post('savedevisi')){
+ 		$kodedivisi = $this->input->post('kode_divisi');
+ 		$namadivisi = $this->input->post('nama_divisi');
 
- 			$kodedivisi = $this->input->post('kode_divisi');
- 			$namadivisi = $this->input->post('nama_divisi');
+ 		$checkkode = count($this->global_model->find_by('divisi', array('kode_divisi' => $kodedivisi)));
 
- 			$sql = $this->global_model->find_by('divisi', array('kode_divisi' => $kodedivisi, 'nama_divisi' => $namadivisi));
+ 		$checknama = count($this->global_model->find_by('divisi', array('nama_divisi' => $namadivisi)));
 
- 			if($sql != null){
+ 		if($checknama > 1 && $checkkode > 1){
+ 			echo "<div class='alert alert-danger alert-dismissable'>";
+	           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
+	           echo "<label>Peringatan ! </label> Kode dan Nama divisi sudah ada";
+            echo "</div>";
+ 		}else if($checknama > 1){
+ 			echo "<div class='alert alert-danger alert-dismissable'>";
+	           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
+	           echo "<label>Peringatan ! </label> Nama divisi sudah ada";
+            echo "</div>";
+ 		}else if($checkkode > 1){
+ 			echo "<div class='alert alert-danger alert-dismissable'>";
+	           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
+	           echo "<label>Peringatan ! </label> Kode divisi sudah ada";
+            echo "</div>";
+ 		}else{
+	 		$data = $this->input->post();
+	 		$data['kode_divisi'] = strtoupper($data['kode_divisi']);
+		 	unset($data['savedevisi']);
 
- 				//alert message
+		 	$this->global_model->create('divisi',$data);
 
- 				redirect(site_url('devisi/tambah'));
-
- 			}else{
-
- 				$data = $this->input->post();
- 				$data['kode_divisi'] = strtoupper($data['kode_divisi']);
-	 			unset($data['savedevisi']);
-
-	 			$this->global_model->create('divisi',$data);
-
-	 			redirect(site_url('devisi/tambah'));
-
- 			}
-
+		 	echo "<div class='alert alert-success alert-dismissable'>";
+	           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
+	           echo "Data berhasil ditambahkan";
+            echo "</div>";
  		}
  	}
 
@@ -102,6 +110,7 @@
  		$this->load->view('ubahdivisi', $data); //Contains
  		$this->load->view('footer');
  	}
+
 
  	public function ajaxdevisi($id){
 

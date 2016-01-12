@@ -24,9 +24,9 @@
               </div>
             </div><!-- /.box-header -->
             <div class="box-body">
-              
+            <div id="message"></div>
               <!-- form start -->
-              <form method="POST" action="<?php echo base_url();?>index.php/devisi/simpan">
+              <form id="myform" method="post" action="<?php echo base_url();?>index.php/devisi/simpan">
                 <div class="form-group">
                     <label for="inputKodeDevisi">Kode divisi</label>                          
                     <input type="text" name="kode_divisi" class="form-control" placeholder="Kode Divisi" maxlength="3" style="text-transform:uppercase;" required>
@@ -35,14 +35,15 @@
                     <label for="inputNamaDevisi">Nama Divisi</label>
                     <input type="text" name="nama_divisi" class="form-control" placeholder="Nama Divisi" required>
                 </div>
+
             </div><!-- /.box-body -->
             <div class="box-footer">
               <div class="pull-right">
                 <div class="btn-group">
-                  <input type="reset" class="btn btn-default" value="Cancel" />
+                  <button type="reset" class="btn btn-default">Cancel</button>                  
                 </div>
                 <div class="btn-group">
-                  <input type="submit" class="btn btn-primary" value="Simpan" name="savedevisi" />
+                  <button id="submit" class="btn btn-primary">Simpan</button>
                 </div>
               </div>  
             </div>
@@ -53,3 +54,24 @@
         </section>  
         
 </div>        
+<script type="text/javascript">
+    $("#submit").click(function (){ 
+      $.post( $("#myform").attr("action"),
+        $("#myform :input").serializeArray(),
+        function(info){
+          $("#message").empty();
+          $("#message").html(info);
+            clear();
+        });
+
+      $("#myform").submit(function (){
+          return false;
+      });
+    });
+
+    function clear()  {
+      $("#myform :input").each(function (){
+        $(this).val("");
+      });
+    }
+</script>

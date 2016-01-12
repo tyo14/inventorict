@@ -44,14 +44,16 @@
 
                     ?>
                       <tr>
-                        <td><?php echo $fetchdata['kode_barang']; ?></td>
+                        <td name="id"><?php echo $fetchdata['kode_barang']; ?></td>
                         <td><?php echo $sql['nama_unit']; ?></td>
                         <td><?php echo $fetchdata['nama_barang']; ?></td>
                         <td class="text-center"><?php echo $fetchdata['tgl_beli']; ?></td>
                         <td class="text-center"><?php echo $fetchdata['kondisi_barang']." %";  ?></td>
                         <td class="text-center"><?php echo $row['status_stok']; ?></td>
                         <td class="text-center"><a href="<?php echo base_url();?>index.php/barang/ubah/<?php echo $fetchdata['kode_barang'];?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a> 
-                        <a href="<?php echo base_url();?>index.php/barang/hapus/<?php echo $fetchdata['kode_barang'];?>" onclick="return confirm_delete()" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a></td>
+                        <a href="<?php echo base_url();?>index.php/barang/hapus/<?php echo $fetchdata['kode_barang'];?>" onclick="return confirm_delete()" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a>
+                        <a onclick="open_container(<?php echo $fetchdata['kode_barang'];?>)" class="btn btn-success btn-xs"><i class="fa fa-book"></i></a>
+                        </td>
                       </tr>
                       <?php } ?>
                     </tbody>
@@ -70,6 +72,78 @@
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
             </div>
+          <!-- Modal form-->
+                <div class="modal fade modal-primary" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title">Daftar Barang</h4>
+                      </div>
+                      <div class="modal-body">
+                      <div class="row">
+                        <!-- form start -->
+                        <form class="form-horizontal">
+                          <div class="col-md-12">
+                                <div class="box-body">
+                                <div class="form-group">
+                                    <label for="inputUnit" class="col-sm-3 control-label">Divisi</label>
+                                    <div class="col-sm-8">
+                                      <input type="text" class="form-control" readonly=""/>
+                                    </div>
+                                  </div>
+
+                                  <div class="form-group">
+                                    <label for="inputUnit" class="col-sm-3 control-label">Unit</label>
+                                    <div class="col-sm-8">
+                                      <input type="text" class="form-control" readonly=""/>
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="inputKodeBarang" class="col-sm-3 control-label">Kode Barang</label>
+                                    <div class="col-sm-8">
+                                      <input type="text" class="form-control" readonly=""/>
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="inputNamaBarang" class="col-sm-3 control-label">Nama Barang</label>
+                                    <div class="col-sm-8">
+                                      <input type="text" class="form-control" readonly=""/>
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="inputTanggalBeli" class="col-sm-3 control-label">Tanggal beli</label>
+                                    <div class="col-sm-8">
+                                      <input type="text" class="form-control" readonly=""/>
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="inputDeskripsi" class="col-sm-3 control-label">Deskripsi</label>
+                                    <div class="col-sm-8">
+                                      <textarea class="form-control" rows="3" readonly=""></textarea>
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="inputTanggalBeli" class="col-sm-3 control-label">Kondisi barang</label>
+                                    <div class="col-sm-8">
+                                      <input type="text" class="form-control" readonly=""/>
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="inputTanggalBeli" class="col-sm-3 control-label">Status Stock</label>
+                                    <div class="col-sm-8">
+                                      <input type="text" class="form-control" readonly=""/>
+                                    </div>
+                                  </div>
+                                </div><!-- /.box-body -->              
+                          </div><!-- /.col -->
+                          </form>
+                      </div><!-- /.row -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- end of modal -->
           </div>
         </section>  
 </div>        
@@ -77,4 +151,10 @@
 function confirm_delete() {
   return confirm('apa anda yakin ingin menghapus ?');
 }
+</script>
+<script type="text/javascript">
+function open_container()
+        {
+            $('#myModal').modal('show');
+        }
 </script>

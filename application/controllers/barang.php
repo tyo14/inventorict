@@ -132,7 +132,7 @@
 
  	public function ubah($id){
 
- 		$getid = $id;
+ 		$data['getid'] = $id;
 
 
  		if($this->input->post('simpan')){

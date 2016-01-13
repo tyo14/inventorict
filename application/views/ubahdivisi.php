@@ -8,8 +8,7 @@
           <p>
             <a href="<?php echo base_url(); ?>index.php/dashboard/"><i class="fa fa-dashboard"></i> Dashboard</a> &nbsp;>  
             <a href="<?php echo base_url(); ?>index.php/devisi/"> Divisi</a> &nbsp;>
-            <a> &nbsp;Ubah data</a> &nbsp;>
-            <a> <?php echo $devisi['kode_divisi'];?></a>
+            <a> &nbsp;Ubah data</a>
 
           </p>
         </section>
@@ -26,9 +25,9 @@
               </div>
             </div><!-- /.box-header -->
             <div class="box-body">
-              
+              <div id="message"></div>
               <!-- form start -->
-              <form method="POST" action="">
+              <form id="myform" method="POST" action="<?php echo base_url(); ?>index.php/devisi/simpanubah/<?php echo $this->uri->segment(3);?>">
                 <div class="form-group">
                     <label for="inputKodeDevisi">Kode divisi</label>                          
                     <input type="text" name="kode_divisi" class="form-control" placeholder="Kode Divisi" maxlength="3" style="text-transform:uppercase;" value="<?php echo $devisi['kode_divisi']; ?>" required>
@@ -41,10 +40,10 @@
             <div class="box-footer">
               <div class="pull-right">
                 <div class="btn-group">
-                  <input type="reset" class="btn btn-default" value="Cancel" />
+                  <button type="reset" class="btn btn-default">Cancel</button>
                 </div>
                 <div class="btn-group">
-                  <input type="submit" class="btn btn-primary" value="Simpan" name="savedevisi" />
+                  <button type="submit" id="submit" class="btn btn-primary">Simpan</button>
                 </div>
               </div>  
             </div>
@@ -55,3 +54,23 @@
         </section>  
         
 </div>        
+<script type="text/javascript">
+    $("#submit").click(function (){ 
+      $.post( $("#myform").attr("action"),
+        $("#myform :input").serializeArray(),
+        function(info){
+          $("#message").empty();
+          $("#message").html(info);            
+        });
+
+      $("#myform").submit(function (){
+          return false;
+      });
+    });
+
+    function clear()  {
+      $("#myform :input").each(function (){
+        $(this).val("");
+      });
+    }
+</script>

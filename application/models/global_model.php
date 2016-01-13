@@ -257,8 +257,14 @@ class Global_model extends CI_Model{
 	 * @param str $key 
 	 * @return void
 	 */
-	function update($tbl, $data, $key="id") {
-		$this->db->where($key,$data[$key]);
+	function update($tbl, $data, $key=array()) {
+		if(!is_array($key)){
+			$id = $key;
+			$this->db->where('id', $id);
+		}else{
+			$this->db->where($key);
+		}
+		//$this->db->where($key,$data[$key]);
 		$this->db->update($tbl, $data);
 	}
 	

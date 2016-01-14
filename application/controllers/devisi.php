@@ -71,7 +71,10 @@
  	public function hapus($id)
  	{
  		$this->global_model->delete('divisi', array('kode_divisi' => $id));
- 		redirect(site_url('devisi'));
+ 		echo "<div class='alert alert-success alert-dismissable'>";
+	        echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
+	        echo "Data berhasil di hapus";
+        echo "</div>";
  	}
 
  	public function simpanubah($id){
@@ -133,60 +136,12 @@
 
 	 				echo "<div class='alert alert-success alert-dismissable'>";
 			           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-			           echo "<label>Informasi !</label>Data berhasil di ubah";
+			           echo "<label>Informasi !</label> Data berhasil di ubah";
 		            echo "</div>";
 
  				}
 
  			}
-	 		/*$checkkode = count($this->global_model->find_by('divisi', array('kode_divisi' => $kodedivisi)));
-
-	 		$checknama = count($this->global_model->find_by('divisi', array('nama_divisi' => $namadivisi)));
-
-	 		if($checknama > 1 && $checkkode > 1){
-	 			echo "<div class='alert alert-danger alert-dismissable'>";
-		           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-		           echo "<label>Peringatan ! </label> Kode dan Nama divisi sudah ada";
-	            echo "</div>";
-	 		}else if($checknama > 1){
-	 			echo "<div class='alert alert-danger alert-dismissable'>";
-		           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-		           echo "<label>Peringatan ! </label> Nama divisi sudah ada";
-	            echo "</div>";
-	 		}else if($checkkode > 1){
-	 			echo "<div class='alert alert-danger alert-dismissable'>";
-		           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-		           echo "<label>Peringatan ! </label> Kode divisi sudah ada";
-	            echo "</div>";
-	 		}else{
-
-	 		}
-
- 			$data = $this->input->post();
- 			$data['kode_divisi'] = strtoupper($data['kode_divisi']);
- 			$get = $data['kode_divisi'];
- 			$idlama = $id;
- 			unset($data['savedevisi']);
-
- 			$this->global_model->update('divisi',$data, array('kode_divisi' => $id));
-
- 			if($data['kode_divisi'] != $id){
- 				$url = 'devisi/ubah/'.$data['kode_divisi'];
-
- 				foreach ($this->global_model->search('kategori',array('kode_kategori' => $id),null,null,null,0) as $row) {
- 					list($kodes,$digits) = explode('-', $row['kode_kategori']);
- 					$ubah = array(
- 						'kode_kategori' => $get.'-'.$digits,
- 						'nama_kategori' => $row['nama_kategori']);
-
- 					$this->global_model->update('kategori',$ubah,array('kode_kategori' => $row['kode_kategori']));
- 				}
-
- 			}else{
- 				$url = 'devisi/ubah/'.$id;
- 			}
-
- 			redirect(site_url($url));*/
 
  	}
 

@@ -22,8 +22,7 @@
                 <div id="message"></div>
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
-                      <tr>
-                        <th>No.</th>
+                      <tr>                        
                         <th>Kode Divisi</th>
                         <th>Nama Divisi</th>
                         <th class="text-center">Aksi</th>
@@ -36,17 +35,16 @@
                       $no++;
                     ?>
                       <tr class="btnDelete" data-id="<?php echo $fetchdata['kode_divisi'];?>">
-                        <td><?php echo $no; ?></td>
                         <td><?php echo $fetchdata['kode_divisi']; ?></td>
                         <td><?php echo $fetchdata['nama_divisi']; ?></td>
-                        <td class="text-center"><a href="<?php echo base_url();?>index.php/devisi/ubah/<?php echo $fetchdata['kode_divisi'];?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
-                        <button class="btnDelete" href="">delete</button></td>                        
+                        <td class="text-center">
+                        <a class="btn btn-primary btn-xs" href="<?php echo base_url();?>index.php/devisi/ubah/<?php echo $fetchdata['kode_divisi'];?>" data-placement="top" data-toggle="tooltip" title="Ubah"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <button class="btnDelete btn btn-danger btn-xs" href="" data-placement="top" data-toggle="tooltip" title="Hapus"><span class="glyphicon glyphicon-trash"></span></button></td>                        
                       </tr>
                       <?php } ?>
                     </tbody>
                     <tfoot>
                       <tr>
-                        <th>No.</th>
                         <th>Kode Divisi</th>
                         <th>Nama Divisi</th>
                         <th class="text-center">Aksi</th>
@@ -58,22 +56,20 @@
 
               <!--/table-collapse -->
               <!-- start: Delete Coupon Modal -->
-              <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal modal-primary fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                   <div class="modal-dialog">
                       <div class="modal-content">
                           <div class="modal-header">
                               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                               <h3 class="modal-title" id="myModalLabel">Perhatian !</h3>
-
+                               <h3 class="modal-title" id="myModalLabel">Konfirmasi Hapus</h3>
                           </div>
-                          <div class="modal-body">
-                               <h4> Apa kamu yakin ingin menghapus ?</h4>
-
+                          <div class="modal-body">                               
+                               <h4><span class="glyphicon glyphicon-warning-sign">&nbsp;</span> Apakah anda yakin ingin menghapus data tersebut ?</h4>
                           </div>
                           <!--/modal-body-collapse -->
                           <div class="modal-footer">
-                              <button type="button" class="btn btn-danger" id="btnDelteYes" href="#">Yes</button>
-                              <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                              <button type="button" class="btn btn-outline" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+                              <button type="button" class="btn btn-outline" id="btnDelteYes" href="#"><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
                           </div>
                           <!--/modal-footer-collapse -->
                       </div>
@@ -91,7 +87,9 @@
 $('button.btnDelete').on('click', function (e) {
     e.preventDefault();
     var id = $(this).closest('tr').data('id');
+    //$('#validasi').html(id);
     $('#myModal').data('id', id).modal('show');
+
 });
 
 $('#btnDelteYes').click(function () {

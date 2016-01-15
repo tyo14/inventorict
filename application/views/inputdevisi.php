@@ -40,7 +40,7 @@
             <div class="box-footer">
               <div class="pull-right">
                 <div class="btn-group">
-                  <button type="reset" class="btn btn-default">Cancel</button>                  
+                  <button type="reset" class="btn btn-default">Cancel</button>
                 </div>
                 <div class="btn-group">
                   <button id="submit" class="btn btn-primary">Simpan</button>

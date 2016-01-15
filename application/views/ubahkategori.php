@@ -8,8 +8,7 @@
           <p>
             <a href="<?php echo base_url(); ?>index.php/dashboard/"><i class="fa fa-dashboard"></i> Dashboard</a> &nbsp;>  
             <a href="<?php echo base_url(); ?>index.php/kategori/"> Kategori</a> &nbsp;>
-            <a> &nbsp;Ubah data</a> &nbsp;>
-            <a> &nbsp;<?php echo $kategori['kode_kategori'];?></a>
+            <a> &nbsp;Ubah data</a>
           </p>
         </section>
         <!-- Main content -->
@@ -25,13 +24,13 @@
               </div>
             </div><!-- /.box-header -->
             <div class="box-body">
-              
+              <div id="message"></div>
               <!-- form start -->
-              <form method="POST" action="" class="form-horizontal">
+              <form id="myform" method="POST" action="<?php echo base_url();?>index.php/kategori/simpanubah/<?php echo $kategori['kode_kategori'];?>" class="form-horizontal">
               <div class="form-group">
                   <label for="inputUnit" class="col-sm-3 control-label">Unit</label>
                   <div class="col-sm-8">
-                      <select class="form-control select2" style="width: 100%;" onChange="showKodeKategori(this.value)">
+                      <select class="form-control select2" style="width: 100%;" onChange="showKodeKategori(this.value)" name="kode_divisi">
                       <?php foreach ($devisi as $divisi) {
                       ?>
                         <option value="<?php echo $divisi['kode_divisi'];?>" <?php if($kategoridivisi == $divisi['kode_divisi']){ echo "selected"; }?> ><?php echo $divisi['nama_divisi'];?></option>
@@ -55,10 +54,10 @@
             <div class="box-footer">
               <div class="pull-right">
                 <div class="btn-group">
-                  <input type="reset" class="btn btn-default" value="Cancel" />
+                  <button type="reset" class="btn btn-default">Cancel</button>
                 </div>
                 <div class="btn-group">
-                  <input type="submit" class="btn btn-primary" value="Simpan" name="savekategori" />
+                  <button id="submit" class="btn btn-primary">Simpan</button>
                 </div>
               </div>  
             </div>
@@ -68,6 +67,28 @@
           </div><!-- /.row -->
         </section>        
 </div>  
+<script type="text/javascript">
+    $("#submit").click(function (){ 
+      $.post( $("#myform").attr("action"),
+        $("#myform :input").serializeArray(),
+        function(info){
+          $("#message").empty();
+          $("#message").html(info);
+            //clear();
+        });
+
+      $("#myform").submit(function (){
+          return false;
+      });
+    });
+
+    function clear()  {
+      $("#myform :input").each(function (){
+        $(this).val("");
+      });
+    }
+</script>
+
 <script type="text/javascript">
       function showKodeKategori(str) {
         var xhttp;    

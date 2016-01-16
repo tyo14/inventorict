@@ -25,16 +25,6 @@
 
  	public function tambah()
  	{
- 		if($this->input->post('savekategori')){
-
- 			$data = $this->input->post();
-	 		unset($data['savekategori']);
-
-	 		$this->global_model->create('kategori',$data);
-
-	 		redirect(site_url('kategori/tambah'));
- 		}
-
  		$data['devisi'] = $this->global_model->find_all('divisi');
  		$this->load->view('head');
  		$this->load->view('inputkategori',$data); //Contains
@@ -56,24 +46,23 @@
 	           echo "<label>Peringatan ! </label> Data tidak boleh kosong";
             echo "</div>";
  		}else{
- 			if($checknama > 1 && $checkkode > 1){
+ 			if($checknama > 0 && $checkkode > 0){
 	 			echo "<div class='alert alert-danger alert-dismissable'>";
 		           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
 		           echo "<label>Peringatan ! </label> Kode dan Nama kategori sudah ada";
 	            echo "</div>";
-	 		}else if($checknama > 1){
+	 		}else if($checknama > 0){
 	 			echo "<div class='alert alert-danger alert-dismissable'>";
 		           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
 		           echo "<label>Peringatan ! </label> Nama kategori sudah ada";
 	            echo "</div>";
-	 		}else if($checkkode > 1){
+	 		}else if($checkkode > 0){
 	 			echo "<div class='alert alert-danger alert-dismissable'>";
 		           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
 		           echo "<label>Peringatan ! </label> Kode kategori sudah ada";
 	            echo "</div>";
 	 		}else{
 	 			$data = $this->input->post();
-			 	//unset($data['savekategori']);
 
 			 	$this->global_model->create('kategori',$data);
 
@@ -118,24 +107,23 @@
 
  			}else{
 
- 				if($checknama > 1 && $checkkode > 1 && $kodekategori != $sql['kode_kategori'] && $namakategori != $sql['nama_kategori']){
+ 				if($checknama > 0 && $checkkode > 0 && $kodekategori != $sql['kode_kategori'] && $namakategori != $sql['nama_kategori']){
 		 			echo "<div class='alert alert-danger alert-dismissable'>";
 			           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
 			           echo "<label>Peringatan ! </label> Kode dan Nama kategori sudah ada";
 		            echo "</div>";
-	 			}else if($checkkode > 1 && $kodekategori != $sql['kode_kategori']){
+	 			}else if($checkkode > 0 && $kodekategori != $sql['kode_kategori']){
 	 				echo "<div class='alert alert-danger alert-dismissable'>";
 			           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
 			           echo "<label>Peringatan ! </label> Kode kategori sudah ada";
 		            echo "</div>";	
- 				}else if($checknama > 1 && $namakategori != $sql['nama_kategori']){
+ 				}else if($checknama > 0 && $namakategori != $sql['nama_kategori']){
 	 				echo "<div class='alert alert-danger alert-dismissable'>";
 			           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
 			           echo "<label>Peringatan ! </label> Nama kategori sudah ada";
 		            echo "</div>";	
  				}else{
  					$data = $this->input->post();
-			 		//unset($data['savekategori']);
 
 			 		$this->global_model->update('kategori',$data, array('kode_kategori' => $id));
 

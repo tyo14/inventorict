@@ -33,7 +33,7 @@
 
  	public function simpan(){
  		$kodekategori = $this->input->post('kode_kategori');
- 		$kodeunit = $this->input->post('kode_unit');
+ 		$kodeunit = strtoupper($this->input->post('kode_unit'));
  		$namaunit = $this->input->post('nama_unit');
 
  		$checkkode = count($this->global_model->find_by('unit', array('kode_unit' => $kodeunit)));

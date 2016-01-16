@@ -18,8 +18,8 @@
           <div class="row">
             <div class="col-xs-12">
               <div class="box box-primary">
-                
                 <div class="box-body">
+                <div id="message"></div>
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
@@ -43,15 +43,16 @@
                       $sql = $this->global_model->find_by('unit', array('kode_unit' => $fetchdata['kode_unit']));
 
                     ?>
-                      <tr>
+                      <tr class="btnDelete" data-id="<?php echo $fetchdata['kode_barang'];?>">
                         <td name="id"><?php echo $fetchdata['kode_barang']; ?></td>
                         <td><?php echo $sql['nama_unit']; ?></td>
                         <td><?php echo $fetchdata['nama_barang']; ?></td>
                         <td class="text-center"><?php echo $fetchdata['tgl_beli']; ?></td>
                         <td class="text-center"><?php echo $fetchdata['kondisi_barang']." %";  ?></td>
                         <td class="text-center"><?php echo $row['status_stok']; ?></td>
-                        <td class="text-center"><a href="<?php echo base_url();?>index.php/barang/ubah/<?php echo $fetchdata['kode_barang'];?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a> 
-                        <a href="<?php echo base_url();?>index.php/barang/hapus/<?php echo $fetchdata['kode_barang'];?>" onclick="return confirm_delete()" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a>
+                        <td class="text-center">
+                        <a class="btn btn-primary btn-xs" href="<?php echo base_url();?>index.php/barang/ubah/<?php echo $fetchdata['kode_barang'];?>" data-placement="top" data-toggle="tooltip" title="Ubah"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <button class="btnDelete btn btn-danger btn-xs" href="" data-placement="top" data-toggle="tooltip" title="Hapus"><span class="glyphicon glyphicon-trash"></span></button>
                         <a onclick="open_container()" class="btn btn-success btn-xs"><i class="fa fa-book"></i></a>
                         </td>
                       </tr>
@@ -72,6 +73,31 @@
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
             </div>
+            <!--/table-collapse -->
+              <!-- start: Delete Coupon Modal -->
+              <div class="modal modal-primary fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                               <h3 class="modal-title" id="myModalLabel">Konfirmasi Hapus</h3>
+                          </div>
+                          <div class="modal-body">                               
+                               <h4><span class="glyphicon glyphicon-warning-sign">&nbsp;</span> Apakah anda yakin ingin menghapus data tersebut ?</h4>
+                          </div>
+                          <!--/modal-body-collapse -->
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-outline" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+                              <button type="button" class="btn btn-outline" id="btnDelteYes" href="#"><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
+                          </div>
+                          <!--/modal-footer-collapse -->
+                      </div>
+                      <!-- /.modal-content -->
+                  </div>
+                  <!-- /.modal-dialog -->
+              </div>
+              <!-- /.modal -->
+
           <!-- Modal form-->
                 <div class="modal fade modal-primary" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                   <div class="modal-dialog">
@@ -148,10 +174,27 @@
         </section>  
 </div>        
 <script type="text/javascript">
-function confirm_delete() {
-  return confirm('apa anda yakin ingin menghapus ?');
-}
+$('button.btnDelete').on('click', function (e) {
+    e.preventDefault();
+    var id = $(this).closest('tr').data('id');
+    //$('#validasi').html(id);
+    $('#deleteModal').data('id', id).modal('show');
+
+});
+
+$('#btnDelteYes').click(function () {
+    var id = $('#deleteModal').data('id');
+    $.ajax({
+      type: 'GET',
+      url: '<?php echo base_url();?>index.php/barang/hapus/'+id
+    }).done(function(data){
+      $('#message').html(data);
+    });
+    $('[data-id=' + id + ']').remove();
+    $('#deleteModal').modal('hide');
+});
 </script>
+
 <script type="text/javascript">
 function open_container()
 {

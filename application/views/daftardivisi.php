@@ -39,7 +39,8 @@
                         <td><?php echo $fetchdata['nama_divisi']; ?></td>
                         <td class="text-center">
                         <a class="btn btn-primary btn-xs" href="<?php echo base_url();?>index.php/devisi/ubah/<?php echo $fetchdata['kode_divisi'];?>" data-placement="top" data-toggle="tooltip" title="Ubah"><span class="glyphicon glyphicon-pencil"></span></a>
-                        <button class="btnDelete btn btn-danger btn-xs" href="" data-placement="top" data-toggle="tooltip" title="Hapus"><span class="glyphicon glyphicon-trash"></span></button></td>                        
+                        <button class="btnDelete btn btn-danger btn-xs" href="" data-placement="top" data-toggle="tooltip" title="Hapus"><span class="glyphicon glyphicon-trash"></span></button>
+                        </td>                        
                       </tr>
                       <?php } ?>
                     </tbody>

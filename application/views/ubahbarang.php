@@ -9,8 +9,6 @@
             <li><a href="<?php echo base_url(); ?>index.php/dashboard/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
             <li><a href="<?php echo base_url(); ?>index.php/barang/">Barang</a></li>
             <li class="active">Ubah data</li>
-            <li class="active"><?php echo $barang['kode_barang'];?></li>
-
           </ol>
         </section>
         <!-- Main content -->
@@ -24,9 +22,10 @@
               </div>
             </div><!-- /.box-header -->
             <div class="box-body">
+            <div id="message"></div>
               <div class="row">
               <!-- form start -->
-              <form class="form-horizontal" method="POST" action="">
+              <form id="myform" class="form-horizontal" method="POST" action="<?php echo base_url(); ?>index.php/barang/simpanubah/<?php echo $all['kode_barang']; ?>">
                 <div class="col-md-7">
                       <div class="box-body">
                       <div class="form-group">
@@ -36,7 +35,7 @@
                             <option></option>
                               <?php foreach ($divisi as $divisidata) {
                               ?>
-                              <option value="<?php echo $divisidata['kode_divisi'];?>" <?php if($selected['kode_divisi'] == $divisidata['kode_divisi']){ echo "selected"; } ?> ><?php echo $divisidata['nama_divisi'];?></option>
+                              <option value="<?php echo $divisidata['kode_divisi'];?>" <?php if($all['kode_divisi'] == $divisidata['kode_divisi']){ echo "selected"; } ?> ><?php echo $divisidata['nama_divisi'];?></option>
                               <?php } ?>
                             </select>
                           </div>
@@ -46,9 +45,9 @@
                           <label for="inputUnit" class="col-sm-3 control-label">Unit</label>
                           <div class="col-sm-8">
                             <select class="form-control select2" style="width: 100%;" name="kode_unit" onChange="showKodeBarang(this.value)" id="txtUnit" required >                               
-                              <?php foreach ($pushunit as $unitdata) {
+                              <?php foreach ($dataunit as $unitdata) {
                               ?>
-                              <option value="<?php echo $unitdata['kode_unit'];?>" <?php if($barang['kode_unit'] == $unitdata['kode_unit']){ echo "selected"; } ?> ><?php echo $unitdata['nama_unit'];?></option>
+                              <option value="<?php echo $unitdata['kode_unit'];?>" <?php if($all['kode_unit'] == $unitdata['kode_unit']){ echo "selected"; } ?> ><?php echo $unitdata['nama_unit'];?></option>
                               <?php } ?>
                             </select>
                           </div>
@@ -56,7 +55,7 @@
                         <div class="form-group">
                           <label for="inputKodeBarang" class="col-sm-3 control-label">Kode Barang</label>
                           <div class="col-sm-8">
-                            <input type="text" class="form-control" id="txtHint" readonly="" name="kode_barang" value="<?php echo $barang['kode_barang']; ?>" required />
+                            <input type="text" class="form-control" id="txtHint" readonly="" name="kode_barang" value="<?php echo $all['kode_barang']; ?>" required />
                           </div>
                         </div>
                         <div class="form-group">
@@ -68,9 +67,9 @@
                               </div>
                               <input type="text" class="form-control" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask name="tgl_beli"
                                value="<?php
-                               list($tahun,$bulan,$tanggal) = explode('-', $barang['tgl_beli']);
-                               $barang['tgl_beli'] = $bulan.'/'.$tanggal.'/'.$tahun;
-                               echo $barang['tgl_beli'];
+                               list($tahun,$bulan,$tanggal) = explode('-', $all['tgl_beli']);
+                               $all['tgl_beli'] = $bulan.'/'.$tanggal.'/'.$tahun;
+                               echo $all['tgl_beli'];
                                 ?>" required>
                             </div><!-- /.input group -->
                           </div>
@@ -78,13 +77,13 @@
                         <div class="form-group">
                           <label for="inputNamaBarang" class="col-sm-3 control-label">Nama Barang</label>
                           <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="Nama Barang" name="nama_barang" value="<?php echo $barang['nama_barang']; ?>" required>
+                            <input type="text" class="form-control" placeholder="Nama Barang" name="nama_barang" value="<?php echo $all['nama_barang']; ?>" required>
                           </div>
                         </div>
                         <div class="form-group">
                           <label for="inputDeskripsi" class="col-sm-3 control-label">Deskripsi</label>
                           <div class="col-sm-8">
-                            <textarea class="form-control" rows="3" placeholder="Deskripsi barang" name="deskripsi"><?php echo $barang['deskripsi']; ?></textarea>
+                            <textarea class="form-control" rows="3" placeholder="Deskripsi barang" name="deskripsi"><?php echo $all['deskripsi']; ?></textarea>
                           </div>
                         </div>
                       </div><!-- /.box-body -->              
@@ -93,7 +92,7 @@
                   <div class="form-group">
                     <label for="inputKodeBarang" class="col-sm-4 control-label">Kondisi Barang</label>
                     <div class="col-sm-6">
-                      <input type="number" class="form-control" name="kondisi_barang" value="<?php echo $status['kondisi_barang']; ?>" onkeyup="this.value = minmax(this.value, 0, 100)" required>
+                      <input type="number" class="form-control" name="kondisi_barang" value="<?php echo $all['kondisi_barang']; ?>" onkeyup="this.value = minmax(this.value, 0, 100)" required>
                       <small>* % Health</small>
                     </div>
                   </div>
@@ -102,13 +101,13 @@
                     <div class="col-sm-6">
                       <div class="radio">
                         <label>
-                          <input name="status_stok" id="optionsRadios1" value="used" <?php if($status['status_stok'] == "used") { echo "checked"; }  ?> type="radio">
+                          <input name="status_stok" id="optionsRadios1" value="used" <?php if($all['status_stok'] == "used") { echo "checked"; }  ?> type="radio">
                           Used
                         </label>
                       </div>
                       <div class="radio">
                         <label>
-                          <input name="status_stok" id="optionsRadios1" value="not used" <?php if($status['status_stok'] == "not used") { echo "checked"; }  ?> type="radio">
+                          <input name="status_stok" id="optionsRadios1" value="not used" <?php if($all['status_stok'] == "not used") { echo "checked"; }  ?> type="radio">
                           Not used
                         </label>
                       </div>
@@ -120,10 +119,10 @@
             <div class="box-footer">
               <div class="pull-right">
                 <div class="btn-group">
-                  <input type="reset" class="btn btn-default" value="Cancel" />
+                  <button type="reset" class="btn btn-default">Cancel</button>
                 </div>
                 <div class="btn-group">
-                  <input type="submit" class="btn btn-primary" value="Simpan" name="simpan" />
+                  <button type="submit" id="submit" class="btn btn-primary">Simpan</button>
                 </div>
               </div>  
             </div>
@@ -132,6 +131,26 @@
         </section>  
         
 </div>
+<script type="text/javascript">
+    $("#submit").click(function (){ 
+      $.post( $("#myform").attr("action"),
+        $("#myform :input").serializeArray(),
+        function(info){
+          $("#message").empty();
+          $("#message").html(info);            
+        });
+
+      $("#myform").submit(function (){
+          return false;
+      });
+    });
+
+    function clear()  {
+      $("#myform :input").each(function (){
+        $(this).val("");
+      });
+    }
+</script>
 <script type="text/javascript">
       function showKodeBarang(str) {
         var xhttp;    

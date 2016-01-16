@@ -32,7 +32,7 @@
 
  	public function simpan()
  	{
- 		$kodedivisi = $this->input->post('kode_divisi');
+ 		$kodedivisi = strtoupper($this->input->post('kode_divisi'));
  		$namadivisi = $this->input->post('nama_divisi');
 
  		$checkkode = count($this->global_model->find_by('divisi', array('kode_divisi' => $kodedivisi)));
@@ -45,17 +45,17 @@
 	           echo "<label>Peringatan ! </label> Data tidak boleh kosong";
             echo "</div>";
  		}else{
-	 		if($checknama > 1 && $checkkode > 1){
+	 		if($checknama > 0 && $checkkode > 0){
 	 			echo "<div class='alert alert-danger alert-dismissable'>";
 		           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
 		           echo "<label>Peringatan ! </label> Kode dan Nama divisi sudah ada";
 	            echo "</div>";
-	 		}else if($checknama > 1){
+	 		}else if($checknama > 0){
 	 			echo "<div class='alert alert-danger alert-dismissable'>";
 		           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
 		           echo "<label>Peringatan ! </label> Nama divisi sudah ada";
 	            echo "</div>";
-	 		}else if($checkkode > 1){
+	 		}else if($checkkode > 0){
 	 			echo "<div class='alert alert-danger alert-dismissable'>";
 		           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
 		           echo "<label>Peringatan ! </label> Kode divisi sudah ada";
@@ -63,7 +63,6 @@
 	 		}else{
 		 		$data = $this->input->post();
 		 		$data['kode_divisi'] = strtoupper($data['kode_divisi']);
-			 	//unset($data['savedevisi']);
 
 			 	$this->global_model->create('divisi',$data);
 
@@ -86,7 +85,7 @@
  	}
 
  	public function simpanubah($id){
- 			$kodedivisi = $this->input->post('kode_divisi');
+ 			$kodedivisi = strtoupper($this->input->post('kode_divisi'));
 	 		$namadivisi = $this->input->post('nama_divisi');
 
 	 		$checkkode = count($this->global_model->find_by('divisi', array('kode_divisi' => $kodedivisi)));
@@ -104,17 +103,17 @@
 
  			}else{
 
- 				if($checknama > 1 && $checkkode > 1 && $kodedivisi != $sql['kode_divisi'] && $namadivisi != $sql['nama_divisi']){
+ 				if($checknama > 0 && $checkkode > 0 && $kodedivisi != $sql['kode_divisi'] && $namadivisi != $sql['nama_divisi']){
 		 			echo "<div class='alert alert-danger alert-dismissable'>";
 			           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
 			           echo "<label>Peringatan ! </label> Kode dan Nama divisi sudah ada";
 		            echo "</div>";
-	 			}else if($checkkode > 1 && $kodedivisi != $sql['kode_divisi']){
+	 			}else if($checkkode > 0 && $kodedivisi != $sql['kode_divisi']){
 	 				echo "<div class='alert alert-danger alert-dismissable'>";
 			           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
 			           echo "<label>Peringatan ! </label> Kode divisi sudah ada";
 		            echo "</div>";	
- 				}else if($checknama > 1 && $namadivisi != $sql['nama_divisi']){
+ 				}else if($checknama > 0 && $namadivisi != $sql['nama_divisi']){
 	 				echo "<div class='alert alert-danger alert-dismissable'>";
 			           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
 			           echo "<label>Peringatan ! </label> Nama divisi sudah ada";
@@ -133,7 +132,7 @@
 		 					list($kodes,$digits) = explode('-', $row['kode_kategori']);
 		 					$ubah = array(
 		 						'kode_kategori' => $get.'-'.$digits,
-		 						'nama_kategori' => $row['nama_kategori']);
+		 						'kode_divisi' => $get);
 
 		 					$sip = $row['kode_kategori'];
 

@@ -78,7 +78,7 @@
 
  	public function ubah($id)
  	{
- 		if($this->input->post('saveunit')){
+ 		/*(if($this->input->post('saveunit')){
 
  			$data = $this->input->post();
  			$data['kode_unit'] = strtoupper($data['kode_unit']);
@@ -108,7 +108,7 @@
 
  			redirect(site_url($url));
 
- 		}
+ 		}*/
 
  		$data['unit'] = $this->global_model->find_by('unit', array('kode_unit' => $id));
  		$data['kategori'] = $this->global_model->find_all('kategori');
@@ -119,7 +119,7 @@
 
  	public function simpanubah($id){
  		$kodekategori = $this->input->post('kode_kategori');
- 		$kodeunit = $this->input->post('kode_unit');
+ 		$kodeunit = strtoupper($this->input->post('kode_unit'));
  		$namaunit = $this->input->post('nama_unit');
 
  		$checkkode = count($this->global_model->find_by('unit', array('kode_unit' => $kodeunit)));
@@ -158,17 +158,17 @@
 
 		 			$this->global_model->update('unit',$data, array('kode_unit' => $id));
 
-		 			if($data['kode_unit'] != $id){
+		 			if($data['kode_unit'] != $sql['kode_unit']){
 
-		 				foreach ($this->global_model->search('barang',array('kode_barang' => $id),null,null,null,0) as $row) {
+		 				foreach ($this->global_model->search('barang',array('kode_barang' => $sql['kode_unit']),null,null,null,0) as $row) {
 		 					list($kodes,$digits) = explode('-', $row['kode_barang']);
 		 					$ubah = array(
 		 						'kode_barang' => $get.'-'.$digits,
-		 						'kode_unit' => $row['kode_unit']);
+		 						'kode_unit' => $get);
 
-		 					$sip = $row['kode_unit'];
+		 					$sip = $row['kode_barang'];
 
-		 					$this->global_model->update('barang',$ubah,array('kode_unit' => $sip));
+		 					$this->global_model->update('barang',$ubah,array('kode_barang' => $sip));
 		 				}
 
 		 			}

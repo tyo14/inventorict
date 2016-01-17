@@ -24,9 +24,9 @@
               </div>
             </div><!-- /.box-header -->
             <div class="box-body">
-              
+              <div id="message"></div>
               <!-- form start -->
-              <form method="POST" action="">
+              <form id="myform" method="POST" action="<?php echo base_url();?>index.php/kategoriapp/simpan">
                 <div class="form-group">
                     <label for="inputKodeDevisi">Kode Kategori</label>                          
                     <input type="text" name="kode_kategoriapp" class="form-control" placeholder="Kode Kategori App" maxlength="3" style="text-transform:uppercase;" required>
@@ -39,10 +39,10 @@
             <div class="box-footer">
               <div class="pull-right">
                 <div class="btn-group">
-                  <input type="reset" class="btn btn-default" value="Cancel" />
+                  <button type="reset" class="btn btn-default">Cancel</button>
                 </div>
                 <div class="btn-group">
-                  <input type="submit" class="btn btn-primary" value="Simpan" name="savekategori" />
+                  <button id="submit" class="btn btn-primary">Simpan</button>
                 </div>
               </div>  
             </div>
@@ -53,3 +53,24 @@
         </section>  
         
 </div>       
+<script type="text/javascript">
+    $("#submit").click(function (){ 
+      $.post( $("#myform").attr("action"),
+        $("#myform :input").serializeArray(),
+        function(info){
+          $("#message").empty();
+          $("#message").html(info);
+            clear();
+        });
+
+      $("#myform").submit(function (){
+          return false;
+      });
+    });
+
+    function clear()  {
+      $("#myform :input").each(function (){
+        $(this).val("");
+      });
+    }
+</script>

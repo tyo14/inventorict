@@ -30,9 +30,7 @@
                     </thead>
                     <tbody>
                     <?php 
-                    $no = 0;
                     foreach ($devisi as $fetchdata) {
-                      $no++;
                     ?>
                       <tr class="btnDelete" data-id="<?php echo $fetchdata['kode_divisi'];?>">
                         <td><?php echo $fetchdata['kode_divisi']; ?></td>

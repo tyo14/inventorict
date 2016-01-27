@@ -19,7 +19,16 @@
             <div class="col-xs-12">
               <div class="box box-primary">
                 <div class="box-body">
-                <div id="message"></div>
+                <div id="message">
+                  <?php 
+                    if($this->session->flashdata('messagemode','messagetext','messageactive') && $this->session->flashdata('messageactive') == "indexkategori"){
+                      echo "<div class='alert alert-".$this->session->flashdata('messagemode')." alert-dismissable'>";
+                       echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";             
+                       echo "<label>Informasi ! </label> ".$this->session->flashdata('messagetext');
+                      echo "</div>";
+                    }
+                  ?>
+                </div>
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
@@ -102,14 +111,7 @@ $('button.btnDelete').on('click', function (e) {
 
 $('#btnDelteYes').click(function () {
     var id = $('#myModal').data('id');
-    $.ajax({
-      type: 'GET',
-      url: '<?php echo base_url();?>index.php/kategori/hapus/'+id
-    }).done(function(data){
-      $('#message').html(data);
-    });
-    $('[data-id=' + id + ']').remove();
-    $('#myModal').modal('hide');
+    window.location.href = '<?php echo base_url();?>index.php/kategori/hapus/'+id;
 });
 
 </script>

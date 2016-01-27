@@ -25,9 +25,18 @@
               </div>
             </div><!-- /.box-header -->
             <div class="box-body">
-              <div id="message"></div>
+              <div id="message">
+                <?php 
+                    if($this->session->flashdata('messagemode','messagetext','messageactive') && $this->session->flashdata('messageactive') == "ubahdevisi"){
+                      echo "<div class='alert alert-".$this->session->flashdata('messagemode')." alert-dismissable'>";
+                       echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";             
+                       echo "<label>Informasi ! </label> ".$this->session->flashdata('messagetext');
+                      echo "</div>";
+                    }
+                  ?>
+              </div>
               <!-- form start -->
-              <form id="myform" method="POST" action="<?php echo base_url(); ?>index.php/devisi/simpanubah/<?php echo $this->uri->segment(3);?>">
+              <form method="POST" action="">
                 <div class="form-group">
                     <label for="inputKodeDevisi">Kode divisi</label>                          
                     <input type="text" name="kode_divisi" class="form-control" placeholder="Kode Divisi" maxlength="3" style="text-transform:uppercase;" value="<?php echo $devisi['kode_divisi']; ?>" required>
@@ -40,12 +49,12 @@
             <div class="box-footer">
               <div class="pull-right">
                 <div class="btn-group">
-                  <button type="reset" class="btn btn-default">Cancel</button>
+                  <input type="reset" class="btn btn-default" value="Cancel"/>
                 </div>
                 <div class="btn-group">
-                  <button type="submit" id="submit" class="btn btn-primary">Simpan</button>
+                  <input type="submit" class="btn btn-primary" name="savedivisi" value="Simpan" />
                 </div>
-              </div>  
+              </div>   
             </div>
             </form>
             </div><!-- /.box -->
@@ -53,24 +62,4 @@
           </div><!-- /.row -->
         </section>  
         
-</div>        
-<script type="text/javascript">
-    $("#submit").click(function (){ 
-      $.post( $("#myform").attr("action"),
-        $("#myform :input").serializeArray(),
-        function(info){
-          $("#message").empty();
-          $("#message").html(info);            
-        });
-
-      $("#myform").submit(function (){
-          return false;
-      });
-    });
-
-    function clear()  {
-      $("#myform :input").each(function (){
-        $(this).val("");
-      });
-    }
-</script>
+</div>

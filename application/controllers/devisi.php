@@ -15,6 +15,17 @@
         }
  	}
 
+ 	public function message($mode,$text,$active)
+ 	{
+ 		//generate message
+ 		$messagesession = array(
+ 			'messagemode' => $mode,
+ 			'messagetext' => $text,
+ 			'messageactive' => $active);
+
+ 		$this->session->set_flashdata($messagesession);
+ 	}
+
  	public function index()
  	{
  		$data['devisi'] = $this->global_model->find_all('divisi');
@@ -25,66 +36,53 @@
 
  	public function tambah()
  	{
+ 		if($this->input->post('savedivisi')){
+	 		$kodedivisi = strtoupper($this->input->post('kode_divisi'));
+	 		$namadivisi = $this->input->post('nama_divisi');
+
+	 		$checkkode = count($this->global_model->find_by('divisi', array('kode_divisi' => $kodedivisi)));
+
+	 		$checknama = count($this->global_model->find_by('divisi', array('nama_divisi' => $namadivisi)));
+
+	 		if($kodedivisi == "" || $namadivisi == ""){
+
+	 			$this->message('danger','Data tidak boleh kosong','tambahdevisi');
+	 		}else{
+		 		if($checknama > 0 && $checkkode > 0){
+		 			$this->message('danger','Kode dan Nama divisi sudah ada','tambahdevisi');
+		 		}else if($checknama > 0){
+		 			$this->message('danger','Nama divisi sudah ada','tambahdevisi');
+		 		}else if($checkkode > 0){
+		 			$this->message('danger','Kode divisi sudah ada','tambahdevisi');
+		 		}else{
+			 		$data = $this->input->post();
+			 		$data['kode_divisi'] = strtoupper($data['kode_divisi']);
+			 		unset($data['savedivisi']);
+
+				 	$this->global_model->create('divisi',$data);
+				 	
+				 	$this->message('success','Data berhasil ditambahkan','tambahdevisi');
+		 		}
+	 		}
+
+	 		redirect(site_url('devisi/tambah'));
+ 		}
  		$this->load->view('head');
  		$this->load->view('inputdevisi'); //Contains
  		$this->load->view('footer');	
  	}
 
- 	public function simpan()
- 	{
- 		$kodedivisi = strtoupper($this->input->post('kode_divisi'));
- 		$namadivisi = $this->input->post('nama_divisi');
-
- 		$checkkode = count($this->global_model->find_by('divisi', array('kode_divisi' => $kodedivisi)));
-
- 		$checknama = count($this->global_model->find_by('divisi', array('nama_divisi' => $namadivisi)));
-
- 		if($kodedivisi == "" || $namadivisi == ""){
- 			echo "<div class='alert alert-danger alert-dismissable'>";
-	           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-	           echo "<label>Peringatan ! </label> Data tidak boleh kosong";
-            echo "</div>";
- 		}else{
-	 		if($checknama > 0 && $checkkode > 0){
-	 			echo "<div class='alert alert-danger alert-dismissable'>";
-		           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-		           echo "<label>Peringatan ! </label> Kode dan Nama divisi sudah ada";
-	            echo "</div>";
-	 		}else if($checknama > 0){
-	 			echo "<div class='alert alert-danger alert-dismissable'>";
-		           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-		           echo "<label>Peringatan ! </label> Nama divisi sudah ada";
-	            echo "</div>";
-	 		}else if($checkkode > 0){
-	 			echo "<div class='alert alert-danger alert-dismissable'>";
-		           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-		           echo "<label>Peringatan ! </label> Kode divisi sudah ada";
-	            echo "</div>";
-	 		}else{
-		 		$data = $this->input->post();
-		 		$data['kode_divisi'] = strtoupper($data['kode_divisi']);
-
-			 	$this->global_model->create('divisi',$data);
-
-			 	echo "<div class='alert alert-success alert-dismissable'>";
-		           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-		           echo "Data berhasil ditambahkan";
-	            echo "</div>";
-	 		}
- 		}
-
- 	}
-
  	public function hapus($id)
  	{
  		$this->global_model->delete('divisi', array('kode_divisi' => $id));
- 		echo "<div class='alert alert-success alert-dismissable'>";
-	        echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-	        echo "Data berhasil di hapus";
-        echo "</div>";
+
+ 		$this->message('success','Data berhasil di hapus','indexdevisi');
+
+ 		redirect(site_url('devisi'));
  	}
 
- 	public function simpanubah($id){
+ 	public function ubah($id){
+ 		if($this->input->post('savedivisi')){
  			$kodedivisi = strtoupper($this->input->post('kode_divisi'));
 	 		$namadivisi = $this->input->post('nama_divisi');
 
@@ -95,33 +93,25 @@
  			$sql = $this->global_model->find_by('divisi', array('kode_divisi' => $id));
 
  			if($kodedivisi == $sql['kode_divisi'] && $namadivisi == $sql['nama_divisi']){
- 				
- 				echo "<div class='alert alert-info alert-dismissable'>";
-		           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-		           echo "<label>Informasi !</label> Tidak ada perubahan";
-	            echo "</div>";
-
+ 				$this->message('info','Tidak ada perubahan','ubahdevisi');
+ 				redirect(site_url('devisi/ubah/'.$id));
  			}else{
 
  				if($checknama > 0 && $checkkode > 0 && $kodedivisi != $sql['kode_divisi'] && $namadivisi != $sql['nama_divisi']){
-		 			echo "<div class='alert alert-danger alert-dismissable'>";
-			           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-			           echo "<label>Peringatan ! </label> Kode dan Nama divisi sudah ada";
-		            echo "</div>";
+ 					$this->message('danger','Kode dan Nama divisi sudah ada','ubahdevisi');
+
+ 					redirect(site_url('devisi/ubah/'.$id));
 	 			}else if($checkkode > 0 && $kodedivisi != $sql['kode_divisi']){
-	 				echo "<div class='alert alert-danger alert-dismissable'>";
-			           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-			           echo "<label>Peringatan ! </label> Kode divisi sudah ada";
-		            echo "</div>";	
+	 				$this->message('danger','Kode divisi sudah ada','ubahdevisi');
+	 				redirect(site_url('devisi/ubah/'.$id));
  				}else if($checknama > 0 && $namadivisi != $sql['nama_divisi']){
-	 				echo "<div class='alert alert-danger alert-dismissable'>";
-			           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-			           echo "<label>Peringatan ! </label> Nama divisi sudah ada";
-		            echo "</div>";	
+ 					$this->message('danger','Nama divisi sudah ada','ubahdevisi');
+ 					redirect(site_url('devisi/ubah/'.$id));
  				}else{
  					//selain itu
 	 				$data = $this->input->post();
 		 			$data['kode_divisi'] = strtoupper($data['kode_divisi']);
+		 			unset($data['savedivisi']);
 		 			$get = $data['kode_divisi'];
 
 		 			$this->global_model->update('divisi',$data, array('kode_divisi' => $id));
@@ -141,18 +131,14 @@
 
 		 			}
 
-	 				echo "<div class='alert alert-success alert-dismissable'>";
-			           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-			           echo "<label>Informasi !</label> Data berhasil di ubah";
-		            echo "</div>";
+		 			$this->message('success','Data berhasil di ubah','ubahdevisi');
+		 			redirect(site_url('devisi/ubah/'.$get));
 
  				}
 
  			}
 
- 	}
-
- 	public function ubah($id){
+ 		}
  		$data['devisi'] = $this->global_model->find_by('divisi', array('kode_divisi' => $id));
  		$this->load->view('head');
  		$this->load->view('ubahdivisi', $data); //Contains

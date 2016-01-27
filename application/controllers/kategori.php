@@ -15,6 +15,17 @@
         }
  	}
 
+ 	public function message($mode,$text,$active)
+ 	{
+ 		//generate message
+ 		$messagesession = array(
+ 			'messagemode' => $mode,
+ 			'messagetext' => $text,
+ 			'messageactive' => $active);
+
+ 		$this->session->set_flashdata($messagesession);
+ 	}
+
  	public function index()
  	{
  		$data['kategori'] = $this->global_model->find_all('kategori');
@@ -25,57 +36,80 @@
 
  	public function tambah()
  	{
+ 		if($this->input->post('savekategori')){
+	 		$kodedivisi = $this->input->post('kode_divisi');
+	 		$kodekategori = $this->input->post('kode_kategori');
+	 		$namakategori = $this->input->post('nama_kategori');
+
+	 		$checkkode = count($this->global_model->find_by('kategori', array('kode_kategori' => $kodekategori)));
+
+	 		$checknama = count($this->global_model->find_by('kategori', array('nama_kategori' => $namakategori)));
+
+	 		if($kodedivisi == "" || $kodekategori == "" || $namakategori == ""){
+	 			$this->message('danger','Data tidak boleh kosong','tambahkategori');
+	 		}else{
+	 			if($checknama > 0 && $checkkode > 0){
+	 				$this->message('danger','Kode dan Nama kategori sudah ada','tambahkategori');
+		 		}else if($checknama > 0){
+		 			$this->message('danger','Nama kategori sudah ada','tambahkategori');
+		 		}else if($checkkode > 0){
+		 			$this->message('danger','Kode kategori sudah ada','tambahkategori');
+		 		}else{
+
+		 			$data = $this->input->post();
+		 			unset($data['savekategori']);
+
+				 	$this->global_model->create('kategori',$data);
+
+				 	$this->message('success','Data berhasil ditambahkan','tambahkategori');
+		 		}
+	 		}
+
+	 		redirect(site_url('kategori/tambah'));
+ 		}
  		$data['devisi'] = $this->global_model->find_all('divisi');
  		$this->load->view('head');
  		$this->load->view('inputkategori',$data); //Contains
  		$this->load->view('footer');
  	}
 
- 	public function simpan(){
- 		$kodedivisi = $this->input->post('kode_divisi');
- 		$kodekategori = $this->input->post('kode_kategori');
- 		$namakategori = $this->input->post('nama_kategori');
-
- 		$checkkode = count($this->global_model->find_by('kategori', array('kode_kategori' => $kodekategori)));
-
- 		$checknama = count($this->global_model->find_by('kategori', array('nama_kategori' => $namakategori)));
-
- 		if($kodedivisi == "" || $kodekategori == "" || $namakategori == ""){
- 			echo "<div class='alert alert-danger alert-dismissable'>";
-	           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-	           echo "<label>Peringatan ! </label> Data tidak boleh kosong";
-            echo "</div>";
- 		}else{
- 			if($checknama > 0 && $checkkode > 0){
-	 			echo "<div class='alert alert-danger alert-dismissable'>";
-		           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-		           echo "<label>Peringatan ! </label> Kode dan Nama kategori sudah ada";
-	            echo "</div>";
-	 		}else if($checknama > 0){
-	 			echo "<div class='alert alert-danger alert-dismissable'>";
-		           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-		           echo "<label>Peringatan ! </label> Nama kategori sudah ada";
-	            echo "</div>";
-	 		}else if($checkkode > 0){
-	 			echo "<div class='alert alert-danger alert-dismissable'>";
-		           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-		           echo "<label>Peringatan ! </label> Kode kategori sudah ada";
-	            echo "</div>";
-	 		}else{
-	 			$data = $this->input->post();
-
-			 	$this->global_model->create('kategori',$data);
-
-			 	echo "<div class='alert alert-success alert-dismissable'>";
-		           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-		           echo "Data berhasil ditambahkan";
-	            echo "</div>";
-	 		}
- 		}
- 	}
-
  	public function ubah($id)
  	{
+ 		if($this->input->post('savekategori')){
+	 		$kodedivisi = $this->input->post('kode_divisi');
+	 		$kodekategori = $this->input->post('kode_kategori');
+	 		$namakategori = $this->input->post('nama_kategori');
+
+	 		$checkkode = count($this->global_model->find_by('kategori', array('kode_kategori' => $kodekategori)));
+
+	 		$checknama = count($this->global_model->find_by('kategori', array('nama_kategori' => $namakategori)));
+
+	 		$sql = $this->global_model->find_by('kategori', array('kode_kategori' => $id));
+ 			if($kodekategori == $sql['kode_kategori'] && $namakategori == $sql['nama_kategori']){
+ 				$this->message('info','Tidak ada perubahan','ubahkategori');
+ 				redirect(site_url('kategori/ubah/'.$id));
+ 			}else{
+
+ 				if($checknama > 0 && $checkkode > 0 && $kodekategori != $sql['kode_kategori'] && $namakategori != $sql['nama_kategori']){
+		 			$this->message('danger','Kode dan Nama kategori sudah ada','ubahkategori');
+		 			redirect(site_url('kategori/ubah/'.$id));
+	 			}else if($checkkode > 0 && $kodekategori != $sql['kode_kategori']){
+	 				$this->message('danger','Kode kategori sudah ada','ubahkategori');
+	 				redirect(site_url('kategori/ubah/'.$id));
+ 				}else if($checknama > 0 && $namakategori != $sql['nama_kategori']){
+ 					$this->message('danger','Nama kategori sudah ada','ubahkategori');
+ 					redirect(site_url('kategori/ubah/'.$id));
+ 				}else{
+ 					$data = $this->input->post();
+ 					unset($data['savekategori']);
+			 		$this->global_model->update('kategori',$data, array('kode_kategori' => $id));
+
+			 		$this->message('success','Data berhasil di ubah','ubahkategori');
+			 		redirect(site_url('kategori/ubah/'.$kodekategori));
+ 				}
+
+ 			}
+ 		}
 
  		$data['devisi'] = $this->global_model->find_all('divisi');
  		$check = $this->global_model->find_by('kategori', array('kode_kategori' => $id));
@@ -88,62 +122,11 @@
  		$this->load->view('footer');
  	}
 
- 	public function simpanubah($id){
- 		$kodedivisi = $this->input->post('kode_divisi');
- 		$kodekategori = $this->input->post('kode_kategori');
- 		$namakategori = $this->input->post('nama_kategori');
-
- 		$checkkode = count($this->global_model->find_by('kategori', array('kode_kategori' => $kodekategori)));
-
- 		$checknama = count($this->global_model->find_by('kategori', array('nama_kategori' => $namakategori)));
-
- 		$sql = $this->global_model->find_by('kategori', array('kode_kategori' => $id));
- 			if($kodekategori == $sql['kode_kategori'] && $namakategori == $sql['nama_kategori']){
- 				
- 				echo "<div class='alert alert-info alert-dismissable'>";
-		           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-		           echo "<label>Informasi !</label> Tidak ada perubahan";
-	            echo "</div>";
-
- 			}else{
-
- 				if($checknama > 0 && $checkkode > 0 && $kodekategori != $sql['kode_kategori'] && $namakategori != $sql['nama_kategori']){
-		 			echo "<div class='alert alert-danger alert-dismissable'>";
-			           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-			           echo "<label>Peringatan ! </label> Kode dan Nama kategori sudah ada";
-		            echo "</div>";
-	 			}else if($checkkode > 0 && $kodekategori != $sql['kode_kategori']){
-	 				echo "<div class='alert alert-danger alert-dismissable'>";
-			           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-			           echo "<label>Peringatan ! </label> Kode kategori sudah ada";
-		            echo "</div>";	
- 				}else if($checknama > 0 && $namakategori != $sql['nama_kategori']){
-	 				echo "<div class='alert alert-danger alert-dismissable'>";
-			           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-			           echo "<label>Peringatan ! </label> Nama kategori sudah ada";
-		            echo "</div>";	
- 				}else{
- 					$data = $this->input->post();
-
-			 		$this->global_model->update('kategori',$data, array('kode_kategori' => $id));
-
-	 				echo "<div class='alert alert-success alert-dismissable'>";
-			           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-			           echo "<label>Informasi !</label> Data berhasil di ubah";
-		            echo "</div>";
-
- 				}
-
- 			}
-
- 	}
-
  	public function hapus($id){
  		$this->global_model->delete('kategori',array('kode_kategori' => $id));
- 		echo "<div class='alert alert-success alert-dismissable'>";
-	        echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-	        echo "Data berhasil di hapus";
-        echo "</div>";
+ 		$this->message('success','Data berhasil di hapus','indexkategori');
+
+ 		redirect(site_url('kategori'));
  	}
 
 

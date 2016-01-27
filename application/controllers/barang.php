@@ -15,6 +15,17 @@
         }
  	}
 
+ 	public function message($mode,$text,$active)
+ 	{
+ 		//generate message
+ 		$messagesession = array(
+ 			'messagemode' => $mode,
+ 			'messagetext' => $text,
+ 			'messageactive' => $active);
+
+ 		$this->session->set_flashdata($messagesession);
+ 	}
+
  	public function index()
  	{
  		$data['barang'] = $this->global_model->query('select * from barang inner join status_barang on barang.kode_barang = status_barang.kode_barang');
@@ -25,58 +36,50 @@
 
  	public function tambah()
  	{
+ 		if($this->input->post('savebarang')){
+
+	 		$kodebarang = $this->input->post('kode_barang');
+	 		$checkkode = count($this->global_model->find_by('barang', array('kode_barang' => $kodebarang)));
+
+	 		$check = $this->input->post();
+
+	 		if($check == ""){
+	 			$this->message('danger','Data tidak boleh kosong','tambahbarang');
+	 		}else{
+	 			if($checkkode > 0){
+	 				$this->message('danger','Kode barang sudah ada','tambahbarang');
+		 		}else{
+			 		$inputbarang = array('kode_barang' => $this->input->post('kode_barang'),
+	 								 'tgl_beli' => $this->input->post('tgl_beli'),
+	 								 'nama_barang' => $this->input->post('nama_barang'),
+	 								 'deskripsi' => $this->input->post('deskripsi'),
+	 								 'kode_unit' => $this->input->post('kode_unit'));
+
+
+		 			$inputstatus = array('kondisi_barang' => $this->input->post('kondisi_barang'),
+		 								 'status_stok' => $this->input->post('status_stok'),
+		 								 'kode_barang' => $this->input->post('kode_barang'));
+
+		 			//unset($data['simpan']);
+
+		 			list($bulan,$tanggal,$tahun) = explode('/', $this->input->post('tgl_beli'));
+
+		 			$inputbarang['tgl_beli'] = $tahun."-".$bulan."-".$tanggal;
+
+			 		$this->global_model->create('barang',$inputbarang);
+			 		$this->global_model->create('status_barang',$inputstatus);
+
+			 		$this->message('success','Data berhasil ditambahkan','tambahbarang');
+		 		}
+	 		}
+
+	 		redirect(site_url('barang/tambah'));
+ 		}
+
  		$data['divisi'] = $this->global_model->find_all('divisi');
  		$this->load->view('head');
  		$this->load->view('inputbarang',$data); //Contains
  		$this->load->view('footer');		
-
- 	}
-
- 	public function simpan()
- 	{
- 		$kodebarang = $this->input->post('kode_barang');
- 		$checkkode = count($this->global_model->find_by('barang', array('kode_barang' => $kodebarang)));
-
- 		$check = $this->input->post();
-
- 		if($check == ""){
- 			echo "<div class='alert alert-danger alert-dismissable'>";
-	           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-	           echo "<label>Peringatan ! </label> Data tidak boleh kosong";
-            echo "</div>";
- 		}else{
- 			if($checkkode > 0){
-	 			echo "<div class='alert alert-danger alert-dismissable'>";
-		           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-		           echo "<label>Peringatan ! </label> Kode barang sudah ada";
-	            echo "</div>";
-	 		}else{
-		 		$inputbarang = array('kode_barang' => $this->input->post('kode_barang'),
- 								 'tgl_beli' => $this->input->post('tgl_beli'),
- 								 'nama_barang' => $this->input->post('nama_barang'),
- 								 'deskripsi' => $this->input->post('deskripsi'),
- 								 'kode_unit' => $this->input->post('kode_unit'));
-
-
-	 			$inputstatus = array('kondisi_barang' => $this->input->post('kondisi_barang'),
-	 								 'status_stok' => $this->input->post('status_stok'),
-	 								 'kode_barang' => $this->input->post('kode_barang'));
-
-	 			//unset($data['simpan']);
-
-	 			list($bulan,$tanggal,$tahun) = explode('/', $this->input->post('tgl_beli'));
-
-	 			$inputbarang['tgl_beli'] = $tahun."-".$bulan."-".$tanggal;
-
-		 		$this->global_model->create('barang',$inputbarang);
-		 		$this->global_model->create('status_barang',$inputstatus);
-
-			 	echo "<div class='alert alert-success alert-dismissable'>";
-		           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-		           echo "<label>Informasi !</label> Data berhasil ditambahkan";
-	            echo "</div>";
-	 		}
- 		}
 
  	}
 
@@ -129,13 +132,67 @@
 
  	public function hapus($id){
  		$this->global_model->delete('barang', array('kode_barang' => $id));
- 		echo "<div class='alert alert-success alert-dismissable'>";
-	        echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-	        echo "<label>Informasi !</label> Data berhasil di hapus";
-        echo "</div>";
+
+ 		$this->message('success','Data berhasil di hapus','indexbarang');
+
+ 		redirect(site_url('barang'));
  	}
 
  	public function ubah($id){
+
+ 		if($this->input->post('savebarang')){
+ 			//barang
+ 			$kodeunit = $this->input->post('kode_unit');
+ 			$kodebarang = $this->input->post('kode_barang');
+ 			list($bulan,$tanggal,$tahun) = explode('/', $this->input->post('tgl_beli'));
+ 			$tanggalbeli = $tahun."-".$bulan."-".$tanggal;
+ 			$namabarang = $this->input->post('nama_barang');
+ 			$deskripsi = $this->input->post('deskripsi');
+
+ 			//status barang
+ 			$kondisibarang = $this->input->post('kondisi_barang');
+ 			$status_stok = $this->input->post('status_stok');
+
+ 			//validasi
+ 			$sql = $this->global_model->find_by('barang', array('kode_barang' => $id));
+ 			$sql2 = $this->global_model->find_by('status_barang', array('kode_barang' => $id));
+
+ 			$checkkode = count($this->global_model->find_by('barang', array('kode_barang' => $kodebarang)));
+
+ 			if($kodeunit==$sql['kode_unit']&&$kodebarang==$sql['kode_barang']&&$tanggalbeli==$sql['tgl_beli']
+ 				&&$tanggalbeli==$sql['tgl_beli']&&$namabarang==$sql['nama_barang']&&$deskripsi==$sql['deskripsi']
+ 				&&$kondisibarang==$sql2['kondisi_barang']&&$status_stok==$sql2['status_stok']){
+ 				
+ 				$this->message('info','Tidak ada perubahan','ubahbarang');
+ 				redirect(site_url('barang/ubah/'.$id));
+
+ 			}else{
+
+ 				if($checkkode > 0 && $kodebarang != $sql['kode_barang']){
+ 					$this->message('danger','Kode barang sudah ada','ubahbarang');
+ 					redirect(site_url('barang/ubah/'.$id));
+		 		}else{
+
+		 			$inputbarang = array('kode_barang' => $kodebarang,
+		 								 'tgl_beli' => $tanggalbeli,
+		 								 'nama_barang' => $namabarang,
+		 								 'deskripsi' => $deskripsi,
+		 								 'kode_unit' => $kodeunit);
+
+
+		 			$inputstatus = array('kondisi_barang' => $kondisibarang,
+		 								 'status_stok' => $status_stok,
+		 								 'kode_barang' => $kodebarang);
+
+			 		$this->global_model->update('barang',$inputbarang, array('kode_barang' => $id));
+			 		$this->global_model->update('status_barang',$inputstatus, array('kode_barang' => $id));
+
+			 		$this->message('success','Data berhasil diubah','ubahbarang');
+ 					redirect(site_url('barang/ubah/'.$kodebarang));
+
+		 		}
+ 			}
+ 		}
 
  		$sql = "select *from barang inner join status_barang on barang.kode_barang = status_barang.kode_barang 
  		inner join unit on barang.kode_unit = unit.kode_unit inner join kategori on unit.kode_kategori = kategori.kode_kategori
@@ -161,66 +218,5 @@
  		$this->load->view('ubahbarang',$data); //Contains
  		$this->load->view('footer');
  	}
-
- 	public function simpanubah($id){
- 			//barang
- 			$kodeunit = $this->input->post('kode_unit');
- 			$kodebarang = $this->input->post('kode_barang');
- 			list($bulan,$tanggal,$tahun) = explode('/', $this->input->post('tgl_beli'));
- 			$tanggalbeli = $tahun."-".$bulan."-".$tanggal;
- 			$namabarang = $this->input->post('nama_barang');
- 			$deskripsi = $this->input->post('deskripsi');
-
- 			//status barang
- 			$kondisibarang = $this->input->post('kondisi_barang');
- 			$status_stok = $this->input->post('status_stok');
-
- 			//validasi
- 			$sql = $this->global_model->find_by('barang', array('kode_barang' => $id));
- 			$sql2 = $this->global_model->find_by('status_barang', array('kode_barang' => $id));
-
- 			$checkkode = count($this->global_model->find_by('barang', array('kode_barang' => $kodebarang)));
-
- 			if($kodeunit==$sql['kode_unit']&&$kodebarang==$sql['kode_barang']&&$tanggalbeli==$sql['tgl_beli']
- 				&&$tanggalbeli==$sql['tgl_beli']&&$namabarang==$sql['nama_barang']&&$deskripsi==$sql['deskripsi']
- 				&&$kondisibarang==$sql2['kondisi_barang']&&$status_stok==$sql2['status_stok']){
- 				
- 				echo "<div class='alert alert-info alert-dismissable'>";
-		           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";
-		           echo "<label>Informasi !</label> Tidak ada perubahan";
-	            echo "</div>";
-
- 			}else{
-
- 				if($checkkode > 0 && $kodebarang != $sql['kode_barang']){
-		 			echo "<div class='alert alert-danger alert-dismissable'>";
-			           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-			           echo "<label>Peringatan ! </label> Kode barang sudah ada";
-		            echo "</div>";
-		 		}else{
-
-		 			$inputbarang = array('kode_barang' => $kodebarang,
-		 								 'tgl_beli' => $tanggalbeli,
-		 								 'nama_barang' => $namabarang,
-		 								 'deskripsi' => $deskripsi,
-		 								 'kode_unit' => $kodeunit);
-
-
-		 			$inputstatus = array('kondisi_barang' => $kondisibarang,
-		 								 'status_stok' => $status_stok,
-		 								 'kode_barang' => $kodebarang);
-
-			 		$this->global_model->update('barang',$inputbarang, array('kode_barang' => $id));
-			 		$this->global_model->update('status_barang',$inputstatus, array('kode_barang' => $id));
-
-				 	echo "<div class='alert alert-success alert-dismissable'>";
-			           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-			           echo "<label>Informasi !</label> Data berhasil diubah";
-		            echo "</div>";
-		 		}
-
- 			}
- 	}
-
  	
  }

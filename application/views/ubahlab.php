@@ -25,9 +25,9 @@
               </div>
             </div><!-- /.box-header -->
             <div class="box-body">
-              
+              <div id="message"></div>
               <!-- form start -->
-              <form method="POST" action="">
+              <form id="myform" method="POST" action="<?php echo base_url(); ?>index.php/lab/simpanubah/<?php echo $lab['kode_lab'];?>">
                 <div class="form-group">
                     <label for="inputKodeDevisi">Kode Workgroup</label>                          
                     <input type="text" name="kode_lab" class="form-control" id="kode" placeholder="Kode Workgroup" maxlength="10" 
@@ -42,12 +42,12 @@
             <div class="box-footer">
               <div class="pull-right">
                 <div class="btn-group">
-                  <input type="reset" class="btn btn-default" value="Cancel" />
+                  <button type="reset" class="btn btn-default">Cancel</button>
                 </div>
                 <div class="btn-group">
-                  <input type="submit" class="btn btn-primary" value="Simpan" name="savelab" />
+                  <button type="submit" id="submit" class="btn btn-primary">Simpan</button>
                 </div>
-              </div>  
+              </div>    
             </div>
             </form>
             </div><!-- /.box -->
@@ -63,4 +63,24 @@ function isNumberKey(evt){
         return false;
     return true;
 }    
+</script>
+<script type="text/javascript">
+    $("#submit").click(function (){ 
+      $.post( $("#myform").attr("action"),
+        $("#myform :input").serializeArray(),
+        function(info){
+          $("#message").empty();
+          $("#message").html(info);            
+        });
+
+      $("#myform").submit(function (){
+          return false;
+      });
+    });
+
+    function clear()  {
+      $("#myform :input").each(function (){
+        $(this).val("");
+      });
+    }
 </script>

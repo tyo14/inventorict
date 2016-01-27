@@ -24,9 +24,9 @@
               </div>
             </div><!-- /.box-header -->
             <div class="box-body">
-              
+              <div id="message"></div>
               <!-- form start -->
-              <form method="POST" action="" class="form-horizontal">
+              <form id="myform" method="POST" action="<?php echo base_url();?>index.php/app/simpan" class="form-horizontal" >
               <div class="form-group">
                   <label for="inputUnit" class="col-sm-3 control-label">Kategori App</label>
                   <div class="col-sm-8">
@@ -66,12 +66,12 @@
             <div class="box-footer">
               <div class="pull-right">
                 <div class="btn-group">
-                  <input type="reset" class="btn btn-default" value="Cancel" />
+                  <button type="reset" class="btn btn-default">Cancel</button>
                 </div>
                 <div class="btn-group">
-                  <input type="submit" class="btn btn-primary" value="Simpan" name="saveapp" />
+                  <button id="submit" class="btn btn-primary">Simpan</button>
                 </div>
-              </div>  
+              </div> 
             </div>
             </form>
             </div><!-- /.box -->
@@ -102,4 +102,26 @@
 
       }
 
+</script>
+
+<script type="text/javascript">
+    $("#submit").click(function (){ 
+      $.post( $("#myform").attr("action"),
+        $("#myform :input").serializeArray(),
+        function(info){
+          $("#message").empty();
+          $("#message").html(info);
+            clear();
+        });
+
+      $("#myform").submit(function (){
+          return false;
+      });
+    });
+
+    function clear()  {
+      $("#myform :input").each(function (){
+        $(this).val("");
+      });
+    }
 </script>

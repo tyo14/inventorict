@@ -24,8 +24,17 @@
               </div>
             </div><!-- /.box-header -->
             <div class="box-body">
-            <div id="message"></div>
-              <form id="myform" method="POST" action="<?php echo base_url();?>index.php/unit/simpanubah/<?php echo $unit['kode_unit'];?>" class="form-horizontal">
+            <div id="message">
+              <?php 
+                    if($this->session->flashdata('messagemode','messagetext','messageactive') && $this->session->flashdata('messageactive') == "ubahunit"){
+                      echo "<div class='alert alert-".$this->session->flashdata('messagemode')." alert-dismissable'>";
+                       echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";             
+                       echo "<label>Informasi ! </label> ".$this->session->flashdata('messagetext');
+                      echo "</div>";
+                    }
+                ?>
+            </div>
+              <form method="POST" action="" class="form-horizontal">
               <div class="form-group">
                   <label for="inputUnit" class="col-sm-3 control-label">Kategori</label>
                   <div class="col-sm-8">
@@ -56,10 +65,10 @@
             <div class="box-footer">
               <div class="pull-right">
                 <div class="btn-group">
-                  <button type="reset" class="btn btn-default">Cancel</button>
+                  <input type="reset" class="btn btn-default" value="Cancel"/>
                 </div>
                 <div class="btn-group">
-                  <button id="submit" class="btn btn-primary">Simpan</button>
+                  <input type="submit" class="btn btn-primary" name="saveunit" value="Simpan" />
                 </div>
               </div>  
             </div>
@@ -69,24 +78,4 @@
           </div><!-- /.row -->
         </section>  
         
-</div>        
-<script type="text/javascript">
-    $("#submit").click(function (){ 
-      $.post( $("#myform").attr("action"),
-        $("#myform :input").serializeArray(),
-        function(info){
-          $("#message").empty();
-          $("#message").html(info);
-        });
-
-      $("#myform").submit(function (){
-          return false;
-      });
-    });
-
-    function clear()  {
-      $("#myform :input").each(function (){
-        $(this).val("");
-      });
-    }
-</script>
+</div>

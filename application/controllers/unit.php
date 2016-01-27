@@ -15,6 +15,17 @@
         }
  	}
 
+ 	public function message($mode,$text,$active)
+ 	{
+ 		//generate message
+ 		$messagesession = array(
+ 			'messagemode' => $mode,
+ 			'messagetext' => $text,
+ 			'messageactive' => $active);
+
+ 		$this->session->set_flashdata($messagesession);
+ 	}
+
  	public function index()
  	{
  		$data['unit'] = $this->global_model->find_all('unit');
@@ -25,104 +36,73 @@
 
  	public function tambah()
  	{
+ 		if($this->input->post('saveunit')){
+	 		$kodekategori = $this->input->post('kode_kategori');
+	 		$kodeunit = strtoupper($this->input->post('kode_unit'));
+	 		$namaunit = $this->input->post('nama_unit');
+
+	 		$checkkode = count($this->global_model->find_by('unit', array('kode_unit' => $kodeunit)));
+
+	 		$checknama = count($this->global_model->find_by('unit', array('nama_unit' => $namaunit)));
+
+	 		if($kodekategori == "" || $kodeunit == "" || $namaunit == ""){
+	 			$this->message('danger','Data tidak boleh kosong','tambahunit');
+	 		}else{
+	 			if($checknama > 0 && $checkkode > 0){
+	 				$this->message('danger','Kode dan Nama unit sudah ada','tambahunit');
+		 		}else if($checknama > 0){
+		 			$this->message('danger','Nama unit sudah ada','tambahunit');
+		 		}else if($checkkode > 0){
+		 			$this->message('danger','Kode unit sudah ada','tambahunit');
+		 		}else{
+		 			$data = $this->input->post();
+		 			$data['kode_unit'] = strtoupper($data['kode_unit']);
+			 		unset($data['saveunit']);
+
+			 		$this->global_model->create('unit',$data);
+
+			 		$this->message('success','Data berhasil ditambahkan','tambahunit');
+		 		}
+	 		}	
+
+	 		redirect(site_url('unit/tambah'));
+ 		}
  		$data['kategori'] = $this->global_model->find_all('kategori');
  		$this->load->view('head');
  		$this->load->view('inputunit',$data); //Contains
  		$this->load->view('footer');	
  	}
 
- 	public function simpan(){
- 		$kodekategori = $this->input->post('kode_kategori');
- 		$kodeunit = strtoupper($this->input->post('kode_unit'));
- 		$namaunit = $this->input->post('nama_unit');
-
- 		$checkkode = count($this->global_model->find_by('unit', array('kode_unit' => $kodeunit)));
-
- 		$checknama = count($this->global_model->find_by('unit', array('nama_unit' => $namaunit)));
-
- 		if($kodekategori == "" || $kodeunit == "" || $namaunit == ""){
- 			echo "<div class='alert alert-danger alert-dismissable'>";
-	           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-	           echo "<label>Peringatan ! </label> Data tidak boleh kosong";
-            echo "</div>";
- 		}else{
- 			if($checknama > 0 && $checkkode > 0){
-	 			echo "<div class='alert alert-danger alert-dismissable'>";
-		           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-		           echo "<label>Peringatan ! </label> Kode dan Nama unit sudah ada";
-	            echo "</div>";
-	 		}else if($checknama > 0){
-	 			echo "<div class='alert alert-danger alert-dismissable'>";
-		           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-		           echo "<label>Peringatan ! </label> Nama unit sudah ada";
-	            echo "</div>";
-	 		}else if($checkkode > 0){
-	 			echo "<div class='alert alert-danger alert-dismissable'>";
-		           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-		           echo "<label>Peringatan ! </label> Kode unit sudah ada";
-	            echo "</div>";
-	 		}else{
-	 			$data = $this->input->post();
-	 			$data['kode_unit'] = strtoupper($data['kode_unit']);
-		 		//unset($data['saveunit']);
-
-		 		$this->global_model->create('unit',$data);
-
-			 	echo "<div class='alert alert-success alert-dismissable'>";
-		           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-		           echo "Data berhasil ditambahkan";
-	            echo "</div>";
-	 		}
- 		}
- 	}
-
  	public function ubah($id)
  	{
- 		$data['unit'] = $this->global_model->find_by('unit', array('kode_unit' => $id));
- 		$data['kategori'] = $this->global_model->find_all('kategori');
- 		$this->load->view('head');
- 		$this->load->view('ubahunit', $data); //Contains
- 		$this->load->view('footer');
- 	}
+ 		if($this->input->post('saveunit')){
+	 		$kodekategori = $this->input->post('kode_kategori');
+	 		$kodeunit = strtoupper($this->input->post('kode_unit'));
+	 		$namaunit = $this->input->post('nama_unit');
 
- 	public function simpanubah($id){
- 		$kodekategori = $this->input->post('kode_kategori');
- 		$kodeunit = strtoupper($this->input->post('kode_unit'));
- 		$namaunit = $this->input->post('nama_unit');
+	 		$checkkode = count($this->global_model->find_by('unit', array('kode_unit' => $kodeunit)));
 
- 		$checkkode = count($this->global_model->find_by('unit', array('kode_unit' => $kodeunit)));
+	 		$checknama = count($this->global_model->find_by('unit', array('nama_unit' => $namaunit)));
 
- 		$checknama = count($this->global_model->find_by('unit', array('nama_unit' => $namaunit)));
-
- 		$sql = $this->global_model->find_by('unit', array('kode_unit' => $id));
+	 		$sql = $this->global_model->find_by('unit', array('kode_unit' => $id));
  			if($kodeunit == $sql['kode_unit'] && $namaunit == $sql['nama_unit']){
- 				
- 				echo "<div class='alert alert-info alert-dismissable'>";
-		           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-		           echo "<label>Informasi !</label> Tidak ada perubahan";
-	            echo "</div>";
-
+ 				$this->message('info','Tidak ada perubahan','ubahunit');
+ 				redirect(site_url('unit/ubah/'.$id));
  			}else{
-
  				if($checknama > 0 && $checkkode > 0 && $kodeunit != $sql['kode_unit'] && $namaunit != $sql['nama_unit']){
-		 			echo "<div class='alert alert-danger alert-dismissable'>";
-			           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-			           echo "<label>Peringatan ! </label> Kode dan Nama unit sudah ada";
-		            echo "</div>";
+		 			$this->message('danger','Kode dan Nama unit sudah ada','ubahunit');
+		 			redirect(site_url('unit/ubah/'.$id));
 	 			}else if($checkkode > 0 && $kodeunit != $sql['kode_unit']){
-	 				echo "<div class='alert alert-danger alert-dismissable'>";
-			           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-			           echo "<label>Peringatan ! </label> Kode unit sudah ada";
-		            echo "</div>";	
+	 				$this->message('danger','Kode unit sudah ada','ubahunit');
+	 				redirect(site_url('unit/ubah/'.$id));
  				}else if($checknama > 0 && $namaunit != $sql['nama_unit']){
-	 				echo "<div class='alert alert-danger alert-dismissable'>";
-			           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-			           echo "<label>Peringatan ! </label> Nama unit sudah ada";
-		            echo "</div>";	
+ 					$this->message('danger','Nama unit sudah ada','ubahunit');
+ 					redirect(site_url('unit/ubah/'.$id));
  				}else{
  					$data = $this->input->post();
 		 			$data['kode_unit'] = strtoupper($data['kode_unit']);
 		 			$get = $data['kode_unit'];
+		 			unset($data['saveunit']);
 
 		 			$this->global_model->update('unit',$data, array('kode_unit' => $id));
 
@@ -141,23 +121,26 @@
 
 		 			}
 
-	 				echo "<div class='alert alert-success alert-dismissable'>";
-			           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-			           echo "<label>Informasi !</label> Data berhasil di ubah";
-		            echo "</div>";
-
+		 			$this->message('success','Data berhasil di ubah','ubahunit');
+		 			redirect(site_url('unit/ubah/'.$get));
  				}
 
- 			}
+ 			}	
+ 		}
+ 		$data['unit'] = $this->global_model->find_by('unit', array('kode_unit' => $id));
+ 		$data['kategori'] = $this->global_model->find_all('kategori');
+ 		$this->load->view('head');
+ 		$this->load->view('ubahunit', $data); //Contains
+ 		$this->load->view('footer');
  	}
 
  	public function hapus($id)
  	{
  		$this->global_model->delete('unit', array('kode_unit' => $id));
- 		echo "<div class='alert alert-success alert-dismissable'>";
-	        echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-	        echo "Data berhasil di hapus";
-        echo "</div>";
+
+ 		$this->message('success','Data berhasil di hapus','indexunit');
+
+ 		redirect(site_url('unit'));
  	}
 
 

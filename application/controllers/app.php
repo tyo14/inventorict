@@ -15,6 +15,17 @@
         }
  	}
 
+ 	public function message($mode,$text,$active)
+ 	{
+ 		//generate message
+ 		$messagesession = array(
+ 			'messagemode' => $mode,
+ 			'messagetext' => $text,
+ 			'messageactive' => $active);
+
+ 		$this->session->set_flashdata($messagesession);
+ 	}
+
  	public function index()
  	{
  		$data['app'] = $this->global_model->find_all('app');
@@ -25,6 +36,35 @@
 
  	public function tambah()
  	{
+ 		if($this->input->post('saveapp')){
+	 		$kodeapp = $this->input->post('kode_app');
+	 		$namaapp = $this->input->post('nama_app');
+	 		$bitapp = $this->input->post('bit');
+	 		$kategoriapp = $this->input->post('kode_kategoriapp');
+
+	 		$checkkode = count($this->global_model->find_by('app', array('kode_app' => $kodeapp)));
+
+	 		$checknama = count($this->global_model->find_by('app', array('nama_app' => $namaapp)));
+
+	 		if($kodeapp == "" || $namaapp == "" || $bitapp == "" || $kategoriapp == ""){
+	 			$this->message('danger','Data tidak boleh kosong','tambahapp');
+	 		}else{
+	 			if($checkkode > 0 && $kodeapp != $sql['kode_app']){
+	 				$this->message('danger','Kode app sudah ada','tambahapp');
+	 			}else{
+
+			 		$data = $this->input->post();
+		 			unset($data['saveapp']);
+
+		 			$this->global_model->create('app', $data);
+
+		 			$this->message('success','Data berhasil ditambahkan','tambahapp');
+		        }
+	 		}
+
+	 		redirect(site_url('app/tambah'));
+ 		}
+
  		$data['kategoriapp'] = $this->global_model->find_all('kategoriapp');
  		$this->load->view('head');
  		$this->load->view('inputapp',$data); //Contains
@@ -32,69 +72,56 @@
 
  	}
 
- 	public function simpan(){
- 		$kodeapp = $this->input->post('kode_app');
- 		$namaapp = $this->input->post('nama_app');
- 		$bitapp = $this->input->post('bit');
- 		$kategoriapp = $this->input->post('kode_kategoriapp');
-
- 		$checkkode = count($this->global_model->find_by('app', array('kode_app' => $kodeapp)));
-
- 		$checknama = count($this->global_model->find_by('app', array('nama_app' => $namaapp)));
-
- 		if($kodeapp == "" || $namaapp == "" || $bitapp == "" || $kategoriapp == ""){
- 			echo "<div class='alert alert-danger alert-dismissable'>";
-	           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-	           echo "<label>Peringatan ! </label> Data tidak boleh kosong";
-            echo "</div>";
- 		}else{
- 			if($checkkode > 0 && $kodeapp != $sql['kode_app']){
-	 				echo "<div class='alert alert-danger alert-dismissable'>";
-			           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-			           echo "<label>Peringatan ! </label> Kode app sudah ada";
-		            echo "</div>";	
- 			}else{
-
-		 		$data = $this->input->post();
-	 			//unset($data['saveapp']);
-
-	 			$this->global_model->create('app', $data);
-
-			 	echo "<div class='alert alert-success alert-dismissable'>";
-		           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-		           echo "<label>Informasi ! </label> Data berhasil ditambahkan";
-	            echo "</div>";	 		
-	        }
- 		}
- 	}
-
  	public function hapus($id)
  	{
  		$this->global_model->delete('app', array('kode_app' => $id));
- 		echo "<div class='alert alert-success alert-dismissable'>";
-	        echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-	        echo "<label>Informasi !</label> Data berhasil di hapus";
-        echo "</div>";
+
+ 		$this->message('success','Data berhasil di hapus','indexapp');
+ 		
+ 		redirect(site_url('app'));
  	}
 
  	public function ubah($id)
  	{
  		if($this->input->post('saveapp'))
  		{
- 			$getid = $id;
- 			$data = $this->input->post();
+ 			$kodeapp = $this->input->post('kode_app');
+	 		$namaapp = $this->input->post('nama_app');
+	 		$bitapp = $this->input->post('bit');
+	 		$deskripsiapp = $this->input->post('deskripsi');
+	 		$kategoriapp = $this->input->post('kode_kategoriapp');
 
- 			unset($data['saveapp']);
+	 		$checkkode = count($this->global_model->find_by('app', array('kode_app' => $kodeapp)));
 
- 			$this->global_model->update('app',$data,array('kode_app' => $id));
+	 		$checknama = count($this->global_model->find_by('app', array('nama_app' => $namaapp)));
 
- 			if($data['kode_app'] != $id){
- 				$url = 'app/ubah/'.$data['kode_app'];
+	 		//validasi
+	 		$sql = $this->global_model->find_by('app', array('kode_app' => $id));
+
+	 		if($kodeapp == $sql['kode_app'] && $namaapp == $sql['nama_app'] && $bitapp == $sql['bit'] && $deskripsiapp == $sql['deskripsi'] && $kategoriapp == $sql['kode_kategoriapp']){
+ 				$this->message('info','Tidak ada perubahan','ubahapp');
+ 				redirect(site_url('app/ubah/'.$id));
  			}else{
- 				$url = 'app/ubah/'.$id;
- 			}
 
- 			redirect(site_url($url));
+ 				if($checkkode > 0 && $kodeapp != $sql['kode_app']){
+ 					$this->message('danger','Kode app sudah ada','ubahapp');
+ 					redirect(site_url('app/ubah/'.$id));
+ 				}else if($kodeapp == "" || $namaapp == "" || $bitapp == "" || $kategoriapp == ""){
+ 					$this->message('danger','Data tidak boleh kosong','ubahapp');
+ 					redirect(site_url('app/ubah/'.$id));
+ 				}else{ 					
+ 					$getid = $id;
+		 			$data = $this->input->post();
+		 			$get = $data['kode_app'];
+		 			unset($data['saveapp']);
+
+		 			$this->global_model->update('app',$data,array('kode_app' => $id));
+
+		 			$this->message('success','Data berhasil di ubah','ubahapp');
+ 					redirect(site_url('app/ubah/'.$get));
+ 				}
+
+ 			}
 
  		}
 
@@ -105,54 +132,4 @@
  		$this->load->view('footer');
 
  	}
-
- 	public function simpanubah($id){
- 		$kodeapp = $this->input->post('kode_app');
- 		$namaapp = $this->input->post('nama_app');
- 		$bitapp = $this->input->post('bit');
- 		$deskripsiapp = $this->input->post('deskripsi');
- 		$kategoriapp = $this->input->post('kode_kategoriapp');
-
- 		$checkkode = count($this->global_model->find_by('app', array('kode_app' => $kodeapp)));
-
- 		$checknama = count($this->global_model->find_by('app', array('nama_app' => $namaapp)));
-
- 		//validasi
- 		$sql = $this->global_model->find_by('app', array('kode_app' => $id));
-
- 		if($kodeapp == $sql['kode_app'] && $namaapp == $sql['nama_app'] && $bitapp == $sql['bit'] && $deskripsiapp == $sql['deskripsi'] && $kategoriapp == $sql['kode_kategoriapp']){
- 				echo "<div class='alert alert-info alert-dismissable'>";
-		           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-		           echo "<label>Informasi !</label> Tidak ada perubahan";
-	            echo "</div>";
-
- 			}else{
-
- 				if($checkkode > 0 && $kodeapp != $sql['kode_app']){
-	 				echo "<div class='alert alert-danger alert-dismissable'>";
-			           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-			           echo "<label>Peringatan ! </label> Kode app sudah ada";
-		            echo "</div>";	
- 				}else if($kodeapp == "" || $namaapp == "" || $bitapp == "" || $kategoriapp == ""){
-	 				echo "<div class='alert alert-danger alert-dismissable'>";
-			           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-			           echo "<label>Peringatan ! </label> Data tidak boleh kosong";
-		            echo "</div>";
- 				}else{ 					
- 					$getid = $id;
-		 			$data = $this->input->post();
-
-		 			$this->global_model->update('app',$data,array('kode_app' => $id));
-
-	 				echo "<div class='alert alert-success alert-dismissable'>";
-			           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-			           echo "<label>Informasi !</label> Data berhasil di ubah";
-		            echo "</div>";
-
- 				}
-
- 			}
-
- 	}
-
 }

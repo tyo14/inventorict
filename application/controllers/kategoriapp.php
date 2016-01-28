@@ -15,6 +15,17 @@
         }
  	}
 
+ 	public function message($mode,$text,$active)
+ 	{
+ 		//generate message
+ 		$messagesession = array(
+ 			'messagemode' => $mode,
+ 			'messagetext' => $text,
+ 			'messageactive' => $active);
+
+ 		$this->session->set_flashdata($messagesession);
+ 	}
+
  	public function index()
  	{
  		$data['kategoriapp'] = $this->global_model->find_all('kategoriapp');
@@ -25,13 +36,35 @@
 
  	public function tambah()
  	{
- 		if($this->input->post('savekategori')){
+ 		if($this->input->post('savekategoriapp')){
+	 		$kodekategoriapp = strtoupper($this->input->post('kode_kategoriapp'));
+	 		$namakategoriapp = $this->input->post('nama_kategoriapp');
 
- 			$data = $this->input->post();
- 			$data['kode_kategoriapp'] = strtoupper($data['kode_kategoriapp']);
- 			unset($data['savekategori']);
+	 		$checkkode = count($this->global_model->find_by('kategoriapp', array('kode_kategoriapp' => $kodekategoriapp)));
 
- 			$this->global_model->create('kategoriapp',$data);
+	 		$checknama = count($this->global_model->find_by('kategoriapp', array('nama_kategoriapp' => $namakategoriapp)));
+
+	 		if($kodekategoriapp == "" || $namakategoriapp == ""){
+	 			$this->message('danger','Data tidak boleh kosong','tambahkategoriapp');
+	 		}else{
+		 		if($checknama > 0 && $checkkode > 0){
+		 			$this->message('danger','Kode dan Nama kategori app sudah ada','tambahkategoriapp');
+		 		}else if($checknama > 0){
+		 			$this->message('danger','Nama kategori app sudah ada','tambahkategoriapp');
+		 		}else if($checkkode > 0){
+		 			$this->message('danger','Kode kategori app sudah ada','tambahkategoriapp');
+		 		}else{
+			 		$data = $this->input->post();
+			 		$data['kode_kategoriapp'] = strtoupper($data['kode_kategoriapp']);
+			 		unset($data['savekategoriapp']);
+
+				 	$this->global_model->create('kategoriapp',$data);
+
+				 	$this->message('success','Data berhasil ditambahkan','tambahkategoriapp');
+		 		}
+	 		}
+
+	 		redirect(site_url('kategoriapp/tambah'));
 
  		}
 
@@ -40,99 +73,38 @@
  		$this->load->view('footer');
  	}
 
- 	public function simpan()
- 	{
- 		$kodekategoriapp = strtoupper($this->input->post('kode_kategoriapp'));
- 		$namakategoriapp = $this->input->post('nama_kategoriapp');
-
- 		$checkkode = count($this->global_model->find_by('kategoriapp', array('kode_kategoriapp' => $kodekategoriapp)));
-
- 		$checknama = count($this->global_model->find_by('kategoriapp', array('nama_kategoriapp' => $namakategoriapp)));
-
- 		if($kodekategoriapp == "" || $namakategoriapp == ""){
- 			echo "<div class='alert alert-danger alert-dismissable'>";
-	           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-	           echo "<label>Peringatan ! </label> Data tidak boleh kosong";
-            echo "</div>";
- 		}else{
-	 		if($checknama > 0 && $checkkode > 0){
-	 			echo "<div class='alert alert-danger alert-dismissable'>";
-		           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-		           echo "<label>Peringatan ! </label> Kode dan Nama kategori app sudah ada";
-	            echo "</div>";
-	 		}else if($checknama > 0){
-	 			echo "<div class='alert alert-danger alert-dismissable'>";
-		           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-		           echo "<label>Peringatan ! </label> Nama kategori app sudah ada";
-	            echo "</div>";
-	 		}else if($checkkode > 0){
-	 			echo "<div class='alert alert-danger alert-dismissable'>";
-		           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-		           echo "<label>Peringatan ! </label> Kode kategori app sudah ada";
-	            echo "</div>";
-	 		}else{
-		 		$data = $this->input->post();
-		 		$data['kode_kategoriapp'] = strtoupper($data['kode_kategoriapp']);
-
-			 	$this->global_model->create('kategoriapp',$data);
-
-			 	echo "<div class='alert alert-success alert-dismissable'>";
-		           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-		           echo "<label>Informasi ! </label> Data berhasil ditambahkan";
-	            echo "</div>";
-	 		}
- 		}
- 	}
-
  	public function ubah($id)
- 	{ 		
- 		$data['kategoriapp'] = $this->global_model->find_by('kategoriapp', array('kode_kategoriapp' => $id));
- 		$this->load->view('head');
- 		$this->load->view('ubahkategoriapp',$data); //Contains
- 		$this->load->view('footer');
- 	}
-
- 	public function simpanubah($id)
  	{
- 		$kodekategoriapp = strtoupper($this->input->post('kode_kategoriapp'));
- 		$namakategoriapp = $this->input->post('nama_kategoriapp');
+ 		if($this->input->post('savekategoriapp')){
+	 		$kodekategoriapp = strtoupper($this->input->post('kode_kategoriapp'));
+	 		$namakategoriapp = $this->input->post('nama_kategoriapp');
 
- 		$checkkode = count($this->global_model->find_by('kategoriapp', array('kode_kategoriapp' => $kodekategoriapp)));
+	 		$checkkode = count($this->global_model->find_by('kategoriapp', array('kode_kategoriapp' => $kodekategoriapp)));
 
- 		$checknama = count($this->global_model->find_by('kategoriapp', array('nama_kategoriapp' => $namakategoriapp)));
+	 		$checknama = count($this->global_model->find_by('kategoriapp', array('nama_kategoriapp' => $namakategoriapp)));
 
- 		//validasi
- 		$sql = $this->global_model->find_by('kategoriapp', array('kode_kategoriapp' => $id));
+	 		//validasi
+	 		$sql = $this->global_model->find_by('kategoriapp', array('kode_kategoriapp' => $id));
 
- 		if($kodekategoriapp == $sql['kode_kategoriapp'] && $namakategoriapp == $sql['nama_kategoriapp']){
- 				
- 				echo "<div class='alert alert-info alert-dismissable'>";
-		           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-		           echo "<label>Informasi !</label> Tidak ada perubahan";
-	            echo "</div>";
-
+	 		if($kodekategoriapp == $sql['kode_kategoriapp'] && $namakategoriapp == $sql['nama_kategoriapp']){
+ 				$this->message('info','Tidak ada perubahan','ubahkategoriapp');
+ 				redirect(site_url('kategoriapp/ubah/'.$id));
  			}else{
-
  				if($checknama > 0 && $checkkode > 0 && $kodekategoriapp != $sql['kode_kategoriapp'] && $namakategoriapp != $sql['nama_kategoriapp']){
-		 			echo "<div class='alert alert-danger alert-dismissable'>";
-			           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-			           echo "<label>Peringatan ! </label> Kode dan Nama kategori app sudah ada";
-		            echo "</div>";
+ 					$this->message('danger','Kode dan Nama kategori app sudah ada','ubahkategoriapp');
+ 					redirect(site_url('kategoriapp/ubah/'.$id));
 	 			}else if($checkkode > 0 && $kodekategoriapp != $sql['kode_kategoriapp']){
-	 				echo "<div class='alert alert-danger alert-dismissable'>";
-			           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-			           echo "<label>Peringatan ! </label> Kode kategori app sudah ada";
-		            echo "</div>";	
+	 				$this->message('danger','Kode kategori app sudah ada','ubahkategoriapp');
+ 					redirect(site_url('kategoriapp/ubah/'.$id));
  				}else if($checknama > 0 && $namakategoriapp != $sql['nama_kategoriapp']){
-	 				echo "<div class='alert alert-danger alert-dismissable'>";
-			           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-			           echo "<label>Peringatan ! </label> Nama kategori app sudah ada";
-		            echo "</div>";	
+ 					$this->message('danger','Nama kategori app sudah ada','ubahkategoriapp');
+ 					redirect(site_url('kategoriapp/ubah/'.$id));
  				}else{
  					//selain itu
 	 				$data = $this->input->post();
 		 			$data['kode_kategoriapp'] = strtoupper($data['kode_kategoriapp']);
 		 			$get = $data['kode_kategoriapp'];
+		 			unset($data['savekategoriapp']);
 
 		 			$this->global_model->update('kategoriapp',$data, array('kode_kategoriapp' => $id));
 
@@ -151,24 +123,25 @@
 
 		 			}
 
-	 				echo "<div class='alert alert-success alert-dismissable'>";
-			           echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-			           echo "<label>Informasi !</label> Data berhasil di ubah";
-		            echo "</div>";
-
+		 			$this->message('success','Data berhasil di ubah','ubahkategoriapp');
+ 					redirect(site_url('kategoriapp/ubah/'.$get));
  				}
 
  			}
-
+ 		}
+ 		$data['kategoriapp'] = $this->global_model->find_by('kategoriapp', array('kode_kategoriapp' => $id));
+ 		$this->load->view('head');
+ 		$this->load->view('ubahkategoriapp',$data); //Contains
+ 		$this->load->view('footer');
  	}
 
  	public function hapus($id)
  	{
  		$this->global_model->delete('kategoriapp', array('kode_kategoriapp' => $id));
- 		echo "<div class='alert alert-success alert-dismissable'>";
-	        echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";	           
-	        echo "<label>Informasi !</label> Data berhasil di hapus";
-        echo "</div>";
+
+ 		$this->message('success','Data berhasil di hapus','indexkategoriapp');
+
+ 		redirect(site_url('kategoriapp'));
  	}
 
  	public function ajaxkategoriapp($id){

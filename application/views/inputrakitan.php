@@ -32,7 +32,7 @@
                 <div class="col-md-12">
                 <h4>1. Personal Data</h4>
                 <hr />
-                      <div class="box-body col-md-7">
+                      <div class="col-md-7">
                         <div class="form-group">
                           <label for="inputNamaBarang" class="col-sm-3 control-label">Pengguna</label>
                           <div class="col-sm-8">
@@ -63,12 +63,11 @@
                 <div class="col-md-12">
                 <h4>2. Specification of computer equipment</h4>
                 <hr />
-                <div class="box-body">
                   <div class="btn-group">
-                    <button type="button" class="btn btn-primary" onclick="addRow('dataTable');"><span class="glyphicon glyphicon-plus"></span> Tambah item</button>
+                    <button type="button" class="btn btn-primary btn-sm" onclick="addRow('dataTable');"><span class="glyphicon glyphicon-plus"></span></button>
                   </div>
                   <div class="btn-group">
-                    <button type="button" class="btn btn-danger" onclick="deleteRow('dataTable');"><span class="glyphicon glyphicon-trash"></span> Hapus item</button>
+                    <button type="button" class="btn btn-danger btn-sm" onclick="deleteRow('dataTable');"><span class="glyphicon glyphicon-trash"></span></button>
                   </div>
                   <br /><br />
                   <table id="dataTable" class="table table-bordered">
@@ -100,18 +99,104 @@
                       </tr>
                   </table>
                 </div>
-                </div>
                 <div class="col-md-12">
                   <div class="row">
                     <div class="col-md-6">
                       <h4>3. Network Configuration</h4>
                       <hr />
+                      <div class="form-group">
+                          <label for="inputNamaBarang" class="col-sm-3 control-label">IP Address</label>
+                          <div class="col-sm-8">
+                            <input type="text" class="form-control" placeholder="IP Address" name="ip_address" required>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label for="inputNamaBarang" class="col-sm-3 control-label">Workgroup</label>
+                          <div class="col-sm-8">
+                            <input type="text" class="form-control" placeholder="Workgroup" name="workgroup" required>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label for="inputNamaBarang" class="col-sm-3 control-label">Computer Name</label>
+                          <div class="col-sm-8">
+                            <input type="text" class="form-control" placeholder="Computer Name" name="computer_name" required>
+                          </div>
+                      </div><br />
+                      <h4>5. Operating System</h4>
+                      <hr />
+                      <label class="checkbox-inline">
+                        <input type="checkbox" id="inlineCheckbox1" value="option1"> Mozilla firefox
+                      </label>
+                      <label class="checkbox-inline">
+                        <input type="checkbox" id="inlineCheckbox1" value="option1"> Google Chrome
+                      </label>
+                      <label class="checkbox-inline">
+                        <input type="checkbox" id="inlineCheckbox1" value="option1"> Opera Mini
+                      </label>
+                      <label class="checkbox-inline">
+                        <input type="checkbox" id="inlineCheckbox1" value="option1"> Safari
+                      </label>
+                      <label class="checkbox-inline">
+                        <input type="checkbox" id="inlineCheckbox1" value="option1"> Minori
+                      </label>
+                      <label class="checkbox-inline">
+                        <input type="checkbox" id="inlineCheckbox1" value="option1"> Mozilla firefox
+                      </label>
+                      <label class="checkbox-inline">
+                        <input type="checkbox" id="inlineCheckbox1" value="option1"> Google Chrome
+                      </label>
+                      <label class="checkbox-inline">
+                        <input type="checkbox" id="inlineCheckbox1" value="option1"> Opera Mini
+                      </label>
+                      <label class="checkbox-inline">
+                        <input type="checkbox" id="inlineCheckbox1" value="option1"> Safari
+                      </label>
+                      <label class="checkbox-inline">
+                        <input type="checkbox" id="inlineCheckbox1" value="option1"> Minori
+                      </label>
                     </div>
                     <div class="col-md-6">
                       <h4>4. Support Device</h4>
                       <hr />
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-primary btn-sm" onclick="addRow('dataTableSupport');"><span class="glyphicon glyphicon-plus"></span></button>
+                        </div>
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-danger btn-sm" onclick="deleteRow('dataTableSupport');"><span class="glyphicon glyphicon-trash"></span></button>
+                        </div>
+                        <br /><br />
+                        <table id="dataTableSupport" class="table table-bordered">
+                          <tr>
+                            <th>#</th>
+                            <th>Unit</th>
+                            <th>Merek / Type</th>
+                          </tr>
+                            <tr>
+                                <td><input type="checkbox" value="0" name="validasi[]"/></td>
+                                <td>
+                                    <select class="form-control" style="width: 100%;" name="kode_barang[]">
+                                      <?php foreach ($databarang as $barang) {
+                                      ?>
+                                      <option value="<?php echo $barang['kode_barang'];?>"><?php echo $barang['kode_barang'];?> - <?php echo $barang['nama_barang'];?></option>
+                                      <?php } ?>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="form-control" style="width: 100%;" name="kode_barang[]">
+                                      <?php foreach ($databarang as $barang) {
+                                      ?>
+                                      <option value="<?php echo $barang['kode_barang'];?>"><?php echo $barang['kode_barang'];?> - <?php echo $barang['nama_barang'];?></option>
+                                      <?php } ?>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                   </div>
+                </div>
+                <div class="col-md-12">
+                  <h4>6. Installed Application</h4>
+                  <hr />
                 </div>
 
               </div><!-- /.row -->

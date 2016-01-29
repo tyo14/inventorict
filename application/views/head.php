@@ -17,8 +17,8 @@
         $txt = "Divisi";
       }else if($this->uri->segment(1)=="user"){ 
         $txt = "User Profile";
-      }else if($this->uri->segment(1)=="inventori"){ 
-        $txt = "Inventori";
+      }else if($this->uri->segment(1)=="rakitan"){ 
+        $txt = "Rakitan";
       }else if($this->uri->segment(1)=="lab"){ 
         $txt = "Workgroup";
       }else if($this->uri->segment(1)=="kategoriapp"){ 
@@ -153,7 +153,7 @@
                 <li class="<?php if($this->uri->segment(1)=="lab"){echo "active";}?>"><a href="<?php echo base_url(); ?>index.php/lab"><i class="fa fa-circle-o"></i> Daftar Workgroup</a></li>
               </ul>
             </li>
-            <li class="<?php if($this->uri->segment(1)=="inventori"){echo "active";}?>"><a href="<?php echo base_url(); ?>index.php/inventori"><i class="fa fa-book"></i> <span>Inventori</span></a></li>
+            <li class="<?php if($this->uri->segment(1)=="rakitan"){echo "active";}?>"><a href="<?php echo base_url(); ?>index.php/rakitan"><i class="fa fa-book"></i> <span>Rakitan</span></a></li>
           </ul>
         </section>
         <!-- /.sidebar -->

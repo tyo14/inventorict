@@ -15,9 +15,20 @@
         }
  	}
 
+ 	public function message($mode,$text,$active)
+ 	{
+ 		//generate message
+ 		$messagesession = array(
+ 			'messagemode' => $mode,
+ 			'messagetext' => $text,
+ 			'messageactive' => $active);
+
+ 		$this->session->set_flashdata($messagesession);
+ 	}
+
  	public function index()
  	{
- 		$data['rakitan'] = $this->global_model->find_all('rakitan_header');
+ 		$data['rakitan'] = $this->global_model->find_all('rakitan');
  		$this->load->view('head');
  		$this->load->view('daftarrakitan',$data);
  		$this->load->view('footer');
@@ -25,7 +36,6 @@
 
  	public function tambah()
  	{
- 		$data['datadivisi'] = $this->global_model->find_all('divisi');
  		$data['databarang'] = $this->global_model->find_all('barang');
  		$this->load->view('head');
  		$this->load->view('inputrakitan', $data);
@@ -109,7 +119,7 @@
 
  			if(is_array($validasi)){
 				 for($i = 0; $i < count($validasi); $i++){
-					$number[$i] = (int) $validasi[$i] - 1;
+					$number[$i] = (int) $validasi[$i];
 					
 				 }
 				 foreach($number as $nilai => $hasil){
@@ -133,6 +143,9 @@
 
  	public function hapus($id){
  		$this->global_model->delete('rakitan_header', array('kode_rakit' => $id));
+
+ 		$this->message('success','Data berhasil di hapus','indexrakitan');
+
  		redirect(site_url('rakitan'));
  	}
 

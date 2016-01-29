@@ -15,33 +15,28 @@
         <section class="content">
           <!-- select2 EXAMPLE -->
           <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Input Data Rakitan</h3>
-              <div class="box-tools pull-right">
-                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-              </div>
-            </div><!-- /.box-header -->
             <div class="box-body">
+            <div id="message">
+                <?php 
+                    if($this->session->flashdata('messagemode','messagetext','messageactive') && $this->session->flashdata('messageactive') == "tambahrakitan"){
+                      echo "<div class='alert alert-".$this->session->flashdata('messagemode')." alert-dismissable'>";
+                       echo"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";             
+                       echo "<label>Informasi ! </label> ".$this->session->flashdata('messagetext');
+                      echo "</div>";
+                    }
+                  ?>
+              </div>
               <div class="row">
               <!-- form start -->
-              <form class="form-horizontal" method="POST" action="<?php echo base_url();?>index.php/rakitan/simpan">
-                <div class="col-md-7">
-                      <div class="box-body">
+              <form class="form-horizontal" method="POST" action="">
+                <div class="col-md-12">
+                <h4>1. Personal Data</h4>
+                <hr />
+                      <div class="box-body col-md-7">
                         <div class="form-group">
-                          <label for="inputUnit" class="col-sm-3 control-label">Divisi</label>
+                          <label for="inputNamaBarang" class="col-sm-3 control-label">Pengguna</label>
                           <div class="col-sm-8">
-                            <select class="form-control select2" style="width: 100%;" onChange="showKodeRakit(this.value)">
-                              <?php foreach ($datadivisi as $divisi) {
-                              ?>
-                              <option value="<?php echo $divisi['nama_divisi'];?>"><?php echo $divisi['nama_divisi'];?></option>
-                              <?php } ?>
-                            </select>
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label for="inputKodeBarang" class="col-sm-3 control-label">Kode Rakit</label>
-                          <div class="col-sm-8">
-                            <input type="text" class="form-control" id="txtHint" readonly="" name="kode_rakit" required />
+                            <input type="text" class="form-control" placeholder="Pengguna" name="pengguna" required>
                           </div>
                         </div>
                         <div class="form-group">
@@ -56,12 +51,6 @@
                           </div>
                         </div>
                         <div class="form-group">
-                          <label for="inputNamaBarang" class="col-sm-3 control-label">Pengguna</label>
-                          <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="Pengguna" name="pengguna" required>
-                          </div>
-                        </div>
-                        <div class="form-group">
                           <label for="inputKodeBarang" class="col-sm-3 control-label">Unit Health</label>
                           <div class="col-sm-8">
                             <input type="number" class="form-control" max="100" min="0" step="1" name="unit_health" required>
@@ -72,28 +61,57 @@
                 </div><!-- /.col -->
 
                 <div class="col-md-12">
-                <div class="btn-group">
-                  <input type="button" class="btn btn-default" onclick="addRow('dataTable');" value="Add Konfigurasi" />
-                </div>
-                <div class="btn-group">
-                  <input type="button" class="btn btn-default" onclick="deleteRow('dataTable');" value="Hapus Konfigurasi" />
-                </div>
-                <br /><br />
-                <p> Note : jika ingin menyimpan detail rakitan, silahkan di checklist data yang ingin disimpan </p>
-                <table id="dataTable" class="table table-hovered table-striped">
+                <h4>2. Specification of computer equipment</h4>
+                <hr />
+                <div class="box-body">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-primary" onclick="addRow('dataTable');"><span class="glyphicon glyphicon-plus"></span> Tambah item</button>
+                  </div>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-danger" onclick="deleteRow('dataTable');"><span class="glyphicon glyphicon-trash"></span> Hapus item</button>
+                  </div>
+                  <br /><br />
+                  <table id="dataTable" class="table table-bordered">
                     <tr>
-                        <td><input type="checkbox" value="1" name="validasi[]"/></td>
-                        <td><input type="text" class="form-control" name="konfigurasi[]" placeholder="Konfigurasi"/></td>
-                        <td>
-                            <select class="form-control" style="width: 100%;" name="kode_barang[]">
-                              <?php foreach ($databarang as $barang) {
-                              ?>
-                              <option value="<?php echo $barang['kode_barang'];?>"><?php echo $barang['kode_barang'];?> - <?php echo $barang['nama_barang'];?></option>
-                              <?php } ?>
-                            </select>
-                        </td>
+                      <th>#</th>
+                      <th>Unit</th>
+                      <th>Merek / Type</th>
+                      <th>Spesifikasi</th>
                     </tr>
-                </table>
+                      <tr>
+                          <td><input type="checkbox" value="0" name="validasi[]"/></td>
+                          <td>
+                              <select class="form-control" style="width: 100%;" name="kode_barang[]">
+                                <?php foreach ($databarang as $barang) {
+                                ?>
+                                <option value="<?php echo $barang['kode_barang'];?>"><?php echo $barang['kode_barang'];?> - <?php echo $barang['nama_barang'];?></option>
+                                <?php } ?>
+                              </select>
+                          </td>
+                          <td>
+                              <select class="form-control" style="width: 100%;" name="kode_barang[]">
+                                <?php foreach ($databarang as $barang) {
+                                ?>
+                                <option value="<?php echo $barang['kode_barang'];?>"><?php echo $barang['kode_barang'];?> - <?php echo $barang['nama_barang'];?></option>
+                                <?php } ?>
+                              </select>
+                          </td>
+                          <td><input type="text" class="form-control" name="konfigurasi[]" placeholder="Deskripsi" disabled="" /></td>
+                      </tr>
+                  </table>
+                </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h4>3. Network Configuration</h4>
+                      <hr />
+                    </div>
+                    <div class="col-md-6">
+                      <h4>4. Support Device</h4>
+                      <hr />
+                    </div>
+                  </div>
                 </div>
 
               </div><!-- /.row -->
@@ -145,13 +163,13 @@
             var rowCount = table.rows.length;
             var row = table.insertRow(rowCount);
  
-            var colCount = table.rows[0].cells.length;
+            var colCount = table.rows[1].cells.length;
  
             for(var i=0; i<colCount; i++) {
  
                 var newcell = row.insertCell(i);
  
-                newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+                newcell.innerHTML = table.rows[1].cells[i].innerHTML;
                 //alert(newcell.childNodes);
                 switch(newcell.childNodes[0].type) {
                     case "text":
@@ -159,19 +177,13 @@
                             break;
                     case "checkbox":
                             newcell.childNodes[0].checked = false;
-                            newcell.childNodes[0].value = rowCount+1;
+                            newcell.childNodes[0].value = rowCount-1;
                             break;
                     case "select-one":
                             newcell.childNodes[0].selectedIndex = 0;
                             break;
                 }
             }
-
-            /*for(var a = 1; a < colCount; a++){
-              var baris = table.rows[a];
-              baris.cells[0].childNodes[0].value = a;
-            }*/
-
 
         }
  
@@ -180,12 +192,12 @@
             var table = document.getElementById(tableID);
             var rowCount = table.rows.length;
  
-            for(var i=0; i<rowCount; i++) {
+            for(var i=1; i<rowCount; i++) {
                 var row = table.rows[i];
                 var chkbox = row.cells[0].childNodes[0];
-                row.cells[0].childNodes[0].value = i+1;
+                row.cells[0].childNodes[0].value = i-1;
                 if(null != chkbox && true == chkbox.checked) {
-                    if(rowCount <= 1) {
+                    if(rowCount <= 2) {
                         alert("Cannot delete all the rows.");
                         break;
                     }

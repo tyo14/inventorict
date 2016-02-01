@@ -36,6 +36,8 @@
 
  	public function tambah()
  	{
+ 		$data['unit'] = $this->global_model->query("select *from unit inner join kategori on unit.kode_kategori = kategori.kode_kategori inner join divisi on kategori.kode_divisi = divisi.kode_divisi where divisi.kode_divisi like 'HWR%'");
+ 		$data['lab'] = $this->global_model->find_all('laboratorium');
  		$data['databarang'] = $this->global_model->find_all('barang');
  		$this->load->view('head');
  		$this->load->view('inputrakitan', $data);
@@ -266,5 +268,19 @@
  		$this->global_model->delete('rakitan_detail', array('id' => $id));
  		redirect(site_url('rakitan/ubah/'.$getid));	
  	}
+
+ 	public function ajaxmerek($id){
+ 		echo "<option></option>";
+ 		foreach ($this->global_model->search('barang',array('kode_barang' => $id),null,null,null,0) as $row) {
+ 			echo "<option value='".$row['kode_barang']."'>".$row['nama_barang']."</option>";
+ 		}
+ 	}
+
+ 	public function ajaxspek($id){
+ 		$get = $this->global_model->find_by('barang', array('kode_barang' => $id));
+
+ 		echo $get['deskripsi'];
+ 	} 	
+
 
  }

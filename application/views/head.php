@@ -153,7 +153,15 @@
                 <li class="<?php if($this->uri->segment(1)=="lab"){echo "active";}?>"><a href="<?php echo base_url(); ?>index.php/lab"><i class="fa fa-circle-o"></i> Daftar Workgroup</a></li>
               </ul>
             </li>
-            <li class="<?php if($this->uri->segment(1)=="rakitan"){echo "active";}?>"><a href="<?php echo base_url(); ?>index.php/rakitan"><i class="fa fa-book"></i> <span>Rakitan</span></a></li>
+            <li class="<?php if($this->uri->segment(1)=="rakitan") { echo "active";} ?> treeview">
+              <a href="#">
+                <i class="fa fa-book"></i> <span>Rakitan</span> <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li class="<?php if($this->uri->segment(1)=="rakitan"){echo "active";}?>"><a href="<?php echo base_url(); ?>index.php/rakitan"><i class="fa fa-book"></i> <span>Input data</span></a></li>
+                <li class="<?php if($this->uri->segment(1)=="rakitanset"){echo "active";}?>"><a href="<?php echo base_url(); ?>index.php/rakitanset"><i class="fa fa-book"></i> <span>Setting</span></a></li>
+              </ul>
+            </li>
           </ul>
         </section>
         <!-- /.sidebar -->

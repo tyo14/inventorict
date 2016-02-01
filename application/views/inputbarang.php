@@ -60,7 +60,7 @@
                         <div class="form-group">
                           <label for="inputKodeBarang" class="col-sm-3 control-label">Kode Barang</label>
                           <div class="col-sm-8">
-                            <input type="text" class="form-control" id="txtHint" disabled="" name="kode_barang" required />
+                            <input type="text" class="form-control" id="txtHint" readonly="" name="kode_barang" required />
                           </div>
                         </div>
                         <div class="form-group">

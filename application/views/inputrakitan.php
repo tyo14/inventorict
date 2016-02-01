@@ -30,9 +30,9 @@
               <!-- form start -->
               <form class="form-horizontal" method="POST" action="">
                 <div class="col-md-12">
-                <h4>1. Personal Data</h4>
-                <hr />
-                      <div class="col-md-7">
+                      <div class="col-md-6">
+                      <h4>1. Personal Data</h4>
+                      <hr />
                         <div class="form-group">
                           <label for="inputNamaBarang" class="col-sm-3 control-label">Pengguna</label>
                           <div class="col-sm-8">
@@ -53,24 +53,88 @@
                         <div class="form-group">
                           <label for="inputKodeBarang" class="col-sm-3 control-label">Unit Health</label>
                           <div class="col-sm-8">
-                            <input type="number" class="form-control" max="100" min="0" step="1" name="unit_health" required>
+                            <input type="number" class="form-control" name="unit_health" onkeypress="return isNumberKey(event)" onkeyup="this.value = minmax(this.value, 0, 100)" required>
                             <small>* % Health</small>
                           </div>
                         </div>
-                      </div><!-- /.box-body -->              
+                      </div><!-- /.box-body --> 
+                      <div class="col-md-6">
+                      <h4>2. Network Configuration </h4>
+                      <hr />
+                        <div class="form-group">
+                          <label for="inputNamaBarang" class="col-sm-3 control-label">IP Address</label>
+                          <div class="col-sm-8">
+                            <input type="text" class="form-control" placeholder="IP Address" name="ip_address" required>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="inputNamaBarang" class="col-sm-3 control-label">Workgroup</label>
+                          <div class="col-sm-8">
+                            <select class="form-control" style="width: 100%;" name="kode_barang[]">
+                              <?php foreach ($lab as $datalab) {
+                              ?>
+                              <option value="<?php echo $datalab['kode_lab'];?>"><?php echo $datalab['kode_lab'];?> (<?php echo $datalab['nama_lab'];?>)</option>
+                              <?php } ?>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="inputNamaBarang" class="col-sm-3 control-label">Computer Name</label>
+                          <div class="col-sm-8">
+                            <input type="text" class="form-control" placeholder="Computer Name" name="computer_name" required>
+                          </div>
+                        </div>
+                      </div>
                 </div><!-- /.col -->
 
                 <div class="col-md-12">
-                <h4>2. Specification of computer equipment</h4>
+                <h4>3. Specification of computer equipment</h4>
                 <hr />
                   <div class="btn-group">
-                    <button type="button" class="btn btn-primary btn-sm" onclick="addRow('dataTable');"><span class="glyphicon glyphicon-plus"></span></button>
+                    <button type="button" class="btn btn-primary btn-sm" onclick="addRow('dataTableSpek');"><span class="glyphicon glyphicon-plus"></span></button>
                   </div>
                   <div class="btn-group">
-                    <button type="button" class="btn btn-danger btn-sm" onclick="deleteRow('dataTable');"><span class="glyphicon glyphicon-trash"></span></button>
+                    <button type="button" class="btn btn-danger btn-sm" onclick="deleteRow('dataTableSpek');"><span class="glyphicon glyphicon-trash"></span></button>
                   </div>
                   <br /><br />
-                  <table id="dataTable" class="table table-bordered">
+                  <table id="dataTableSpek" class="table table-bordered">
+                    <tr>
+                      <th>#</th>
+                      <th>Unit</th>
+                      <th>Merek / Type</th>
+                      <th>Spesifikasi</th>
+                    </tr>
+                      <tr>
+                          <td><input type="checkbox" value="0" name="validasi[]"/></td>
+                          <td>
+                              <select class="form-control" style="width: 100%;" name="kode_barang[]" onChange="showMerekspek(this.value)">
+                              <option></option>
+                                <?php foreach ($unit as $dataunit) {
+                                ?>
+                                <option value="<?php echo $dataunit['kode_unit'];?>"><?php echo $dataunit['nama_unit'];?></option>
+                                <?php } ?>
+                              </select>
+                          </td>
+                          <td>
+                            <select class="form-control" style="width: 100%;" name="kode_unit" onChange="showSpesifkasi(this.value)" required > 
+                            </select>
+                          </td>
+                          <td><input type="text" class="form-control" name="konfigurasi[]" placeholder="Deskripsi" readonly="" id="txtspek" /></td>
+                      </tr>
+                  </table>
+                </div>
+
+                <div class="col-md-12">
+                <h4>4. Support Device</h4>
+                <hr />
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-primary btn-sm" onclick="addRow('dataTableSupport');"><span class="glyphicon glyphicon-plus"></span></button>
+                  </div>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-danger btn-sm" onclick="deleteRow('dataTableSupport');"><span class="glyphicon glyphicon-trash"></span></button>
+                  </div>
+                  <br /><br />
+                  <table id="dataTableSupport" class="table table-bordered">
                     <tr>
                       <th>#</th>
                       <th>Unit</th>
@@ -81,9 +145,9 @@
                           <td><input type="checkbox" value="0" name="validasi[]"/></td>
                           <td>
                               <select class="form-control" style="width: 100%;" name="kode_barang[]">
-                                <?php foreach ($databarang as $barang) {
+                                <?php foreach ($unit as $dataunit) {
                                 ?>
-                                <option value="<?php echo $barang['kode_barang'];?>"><?php echo $barang['kode_barang'];?> - <?php echo $barang['nama_barang'];?></option>
+                                <option value="<?php echo $dataunit['kode_unit'];?>"><?php echo $dataunit['nama_unit'];?></option>
                                 <?php } ?>
                               </select>
                           </td>
@@ -95,110 +159,90 @@
                                 <?php } ?>
                               </select>
                           </td>
-                          <td><input type="text" class="form-control" name="konfigurasi[]" placeholder="Deskripsi" disabled="" /></td>
+                          <td><input type="text" class="form-control" name="konfigurasi[]" placeholder="Deskripsi" readonly="" /></td>
                       </tr>
                   </table>
                 </div>
+
                 <div class="col-md-12">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <h4>3. Network Configuration</h4>
-                      <hr />
-                      <div class="form-group">
-                          <label for="inputNamaBarang" class="col-sm-3 control-label">IP Address</label>
-                          <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="IP Address" name="ip_address" required>
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          <label for="inputNamaBarang" class="col-sm-3 control-label">Workgroup</label>
-                          <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="Workgroup" name="workgroup" required>
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          <label for="inputNamaBarang" class="col-sm-3 control-label">Computer Name</label>
-                          <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="Computer Name" name="computer_name" required>
-                          </div>
-                      </div><br />
-                      <h4>5. Operating System</h4>
-                      <hr />
-                      <label class="checkbox-inline">
-                        <input type="checkbox" id="inlineCheckbox1" value="option1"> Mozilla firefox
-                      </label>
-                      <label class="checkbox-inline">
-                        <input type="checkbox" id="inlineCheckbox1" value="option1"> Google Chrome
-                      </label>
-                      <label class="checkbox-inline">
-                        <input type="checkbox" id="inlineCheckbox1" value="option1"> Opera Mini
-                      </label>
-                      <label class="checkbox-inline">
-                        <input type="checkbox" id="inlineCheckbox1" value="option1"> Safari
-                      </label>
-                      <label class="checkbox-inline">
-                        <input type="checkbox" id="inlineCheckbox1" value="option1"> Minori
-                      </label>
-                      <label class="checkbox-inline">
-                        <input type="checkbox" id="inlineCheckbox1" value="option1"> Mozilla firefox
-                      </label>
-                      <label class="checkbox-inline">
-                        <input type="checkbox" id="inlineCheckbox1" value="option1"> Google Chrome
-                      </label>
-                      <label class="checkbox-inline">
-                        <input type="checkbox" id="inlineCheckbox1" value="option1"> Opera Mini
-                      </label>
-                      <label class="checkbox-inline">
-                        <input type="checkbox" id="inlineCheckbox1" value="option1"> Safari
-                      </label>
-                      <label class="checkbox-inline">
-                        <input type="checkbox" id="inlineCheckbox1" value="option1"> Minori
-                      </label>
-                    </div>
-                    <div class="col-md-6">
-                      <h4>4. Support Device</h4>
-                      <hr />
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-primary btn-sm" onclick="addRow('dataTableSupport');"><span class="glyphicon glyphicon-plus"></span></button>
-                        </div>
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-danger btn-sm" onclick="deleteRow('dataTableSupport');"><span class="glyphicon glyphicon-trash"></span></button>
-                        </div>
-                        <br /><br />
-                        <table id="dataTableSupport" class="table table-bordered">
-                          <tr>
-                            <th>#</th>
-                            <th>Unit</th>
-                            <th>Merek / Type</th>
-                          </tr>
-                            <tr>
-                                <td><input type="checkbox" value="0" name="validasi[]"/></td>
-                                <td>
-                                    <select class="form-control" style="width: 100%;" name="kode_barang[]">
-                                      <?php foreach ($databarang as $barang) {
-                                      ?>
-                                      <option value="<?php echo $barang['kode_barang'];?>"><?php echo $barang['kode_barang'];?> - <?php echo $barang['nama_barang'];?></option>
-                                      <?php } ?>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select class="form-control" style="width: 100%;" name="kode_barang[]">
-                                      <?php foreach ($databarang as $barang) {
-                                      ?>
-                                      <option value="<?php echo $barang['kode_barang'];?>"><?php echo $barang['kode_barang'];?> - <?php echo $barang['nama_barang'];?></option>
-                                      <?php } ?>
-                                    </select>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
+                <h4>5. Operating System</h4>
+                <hr />
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-primary btn-sm" onclick="addRow('dataTableOS');"><span class="glyphicon glyphicon-plus"></span></button>
                   </div>
-                </div>
-                <div class="col-md-12">
-                  <h4>6. Installed Application</h4>
-                  <hr />
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-danger btn-sm" onclick="deleteRow('dataTableOS');"><span class="glyphicon glyphicon-trash"></span></button>
+                  </div>
+                  <br /><br />
+                  <table id="dataTableOS" class="table table-bordered">
+                    <tr>
+                      <th>#</th>
+                      <th>Unit</th>
+                      <th>Merek / Type</th>
+                      <th>Spesifikasi</th>
+                    </tr>
+                      <tr>
+                          <td><input type="checkbox" value="0" name="validasi[]"/></td>
+                          <td>
+                              <select class="form-control" style="width: 100%;" name="kode_barang[]">
+                                <?php foreach ($unit as $dataunit) {
+                                ?>
+                                <option value="<?php echo $dataunit['kode_unit'];?>"><?php echo $dataunit['nama_unit'];?></option>
+                                <?php } ?>
+                              </select>
+                          </td>
+                          <td>
+                              <select class="form-control" style="width: 100%;" name="kode_barang[]">
+                                <?php foreach ($databarang as $barang) {
+                                ?>
+                                <option value="<?php echo $barang['kode_barang'];?>"><?php echo $barang['kode_barang'];?> - <?php echo $barang['nama_barang'];?></option>
+                                <?php } ?>
+                              </select>
+                          </td>
+                          <td><input type="text" class="form-control" name="konfigurasi[]" placeholder="Deskripsi" readonly="" /></td>
+                      </tr>
+                  </table>
                 </div>
 
+                <div class="col-md-12">
+                <h4>6. Installed Application</h4>
+                <hr />
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-primary btn-sm" onclick="addRow('dataTableInstalled');"><span class="glyphicon glyphicon-plus"></span></button>
+                  </div>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-danger btn-sm" onclick="deleteRow('dataTableInstalled');"><span class="glyphicon glyphicon-trash"></span></button>
+                  </div>
+                  <br /><br />
+                  <table id="dataTableInstalled" class="table table-bordered">
+                    <tr>
+                      <th>#</th>
+                      <th>Unit</th>
+                      <th>Merek / Type</th>
+                      <th>Spesifikasi</th>
+                    </tr>
+                      <tr>
+                          <td><input type="checkbox" value="0" name="validasi[]"/></td>
+                          <td>
+                              <select class="form-control" style="width: 100%;" name="kode_barang[]">
+                                <?php foreach ($unit as $dataunit) {
+                                ?>
+                                <option value="<?php echo $dataunit['kode_unit'];?>"><?php echo $dataunit['nama_unit'];?></option>
+                                <?php } ?>
+                              </select>
+                          </td>
+                          <td>
+                              <select class="form-control" style="width: 100%;" name="kode_barang[]">
+                                <?php foreach ($databarang as $barang) {
+                                ?>
+                                <option value="<?php echo $barang['kode_barang'];?>"><?php echo $barang['kode_barang'];?> - <?php echo $barang['nama_barang'];?></option>
+                                <?php } ?>
+                              </select>
+                          </td>
+                          <td><input type="text" class="form-control" name="konfigurasi[]" placeholder="Deskripsi" readonly="" /></td>
+                      </tr>
+                  </table>
+                </div>
               </div><!-- /.row -->
             </div><!-- /.box-body -->
             <div class="box-footer">
@@ -216,6 +260,25 @@
         </section>  
         
 </div>
+<script>
+function isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+}    
+</script>
+<script type="text/javascript">
+function minmax(value, min, max) 
+{
+    if(parseInt(value) < min || isNaN(value)) 
+        return 0; 
+    else if(parseInt(value) > max) 
+        return 100; 
+    else return value;
+}
+</script>
+
 <script type="text/javascript">
       function showKodeRakit(str) {
         var xhttp;    
@@ -232,6 +295,51 @@
           if (xhttp.readyState == 4 && xhttp.status == 200) {
             document.getElementById("txtHint").innerHTML = xhttp.responseText
             document.getElementById("txtHint").value = xhttp.responseText
+          }
+        };
+        xhttp.open("GET",url, true);
+        xhttp.send(null);
+
+      }
+
+      function showMerekspek(str) {
+        document.getElementById("txtspek").value = "";
+        var xhttp;    
+        if (str == "") {
+          document.getElementById("txtMerek").innerHTML = "";
+          return;
+        }
+        var url="http://localhost/inventorict/index.php/rakitan/ajaxmerek/"
+
+
+        url=url+str
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (xhttp.readyState == 4 && xhttp.status == 200) {
+            document.getElementById("txtMerek").innerHTML = xhttp.responseText
+            document.getElementById("txtMerek").value = xhttp.responseText
+          }
+        };
+        xhttp.open("GET",url, true);
+        xhttp.send(null);
+
+      }
+
+      function showSpesifkasi(str) {
+        var xhttp;    
+        if (str == "") {
+          document.getElementById("txtspek").innerHTML = "";
+          return;
+        }
+        var url="http://localhost/inventorict/index.php/rakitan/ajaxspek/"
+
+
+        url=url+str
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (xhttp.readyState == 4 && xhttp.status == 200) {
+            document.getElementById("txtspek").innerHTML = xhttp.responseText
+            document.getElementById("txtspek").value = xhttp.responseText
           }
         };
         xhttp.open("GET",url, true);

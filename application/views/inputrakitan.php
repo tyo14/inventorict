@@ -90,158 +90,205 @@
                 <div class="col-md-12">
                 <h4>3. Specification of computer equipment</h4>
                 <hr />
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-primary btn-sm" onclick="addRow('dataTableSpek');"><span class="glyphicon glyphicon-plus"></span></button>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="inputNamaBarang" class="col-sm-3 control-label">Nama unit</label>
+                    <div class="col-sm-8">
+                      <select class="form-control" style="width: 100%;" name="kode_barang[]">
+                        <?php foreach ($lab as $datalab) {
+                        ?>
+                        <option value="<?php echo $datalab['kode_lab'];?>"><?php echo $datalab['kode_lab'];?> (<?php echo $datalab['nama_lab'];?>)</option>
+                      <?php } ?>
+                      </select>
+                    </div>
                   </div>
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-danger btn-sm" onclick="deleteRow('dataTableSpek');"><span class="glyphicon glyphicon-trash"></span></button>
+                  <div class="form-group">
+                    <label for="inputNamaBarang" class="col-sm-3 control-label">Merek / Type</label>
+                    <div class="col-sm-8">
+                      <select class="form-control" style="width: 100%;" name="kode_barang[]">
+                        <?php foreach ($lab as $datalab) {
+                        ?>
+                        <option value="<?php echo $datalab['kode_lab'];?>"><?php echo $datalab['kode_lab'];?> (<?php echo $datalab['nama_lab'];?>)</option>
+                      <?php } ?>
+                      </select>
+                    </div>
                   </div>
-                  <br /><br />
-                  <table id="dataTableSpek" class="table table-bordered">
-                    <tr>
-                      <th>#</th>
-                      <th>Unit</th>
-                      <th>Merek / Type</th>
-                      <th>Spesifikasi</th>
-                    </tr>
-                      <tr>
-                          <td><input type="checkbox" value="0" name="validasi[]"/></td>
-                          <td>
-                              <select class="form-control" style="width: 100%;" name="kode_barang[]" onChange="showMerekspek(this.value)">
-                              <option></option>
-                                <?php foreach ($unit as $dataunit) {
-                                ?>
-                                <option value="<?php echo $dataunit['kode_unit'];?>"><?php echo $dataunit['nama_unit'];?></option>
-                                <?php } ?>
-                              </select>
-                          </td>
-                          <td>
-                            <select class="form-control" style="width: 100%;" name="kode_unit" onChange="showSpesifkasi(this.value)" required > 
-                            </select>
-                          </td>
-                          <td><input type="text" class="form-control" name="konfigurasi[]" placeholder="Deskripsi" readonly="" id="txtspek" /></td>
-                      </tr>
-                  </table>
+                  <div class="form-group">
+                    <label for="inputNamaBarang" class="col-sm-3 control-label">Spesifikasi</label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" placeholder="Spesifikasi" name="spesifikasi" readonly="" required>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-8">
+                      <div class="btn-group pull-right">
+                      <button type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span> Tambah item</button>
+                      </div>
+                    </div>
+                  </div><br/>
+                </div>
+                <table class="table table-bordered">
+                  <tr>
+                    <th>Nama Unit</th>
+                    <th>Merek/Type</th>
+                    <th>Spesifikasi</th>
+                    <th>Option</th>
+                  </tr>
+                </table>
                 </div>
 
                 <div class="col-md-12">
                 <h4>4. Support Device</h4>
                 <hr />
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-primary btn-sm" onclick="addRow('dataTableSupport');"><span class="glyphicon glyphicon-plus"></span></button>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="inputNamaBarang" class="col-sm-3 control-label">Nama unit</label>
+                    <div class="col-sm-8">
+                      <select class="form-control" style="width: 100%;" name="kode_barang[]">
+                        <?php foreach ($lab as $datalab) {
+                        ?>
+                        <option value="<?php echo $datalab['kode_lab'];?>"><?php echo $datalab['kode_lab'];?> (<?php echo $datalab['nama_lab'];?>)</option>
+                      <?php } ?>
+                      </select>
+                    </div>
                   </div>
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-danger btn-sm" onclick="deleteRow('dataTableSupport');"><span class="glyphicon glyphicon-trash"></span></button>
+                  <div class="form-group">
+                    <label for="inputNamaBarang" class="col-sm-3 control-label">Merek / Type</label>
+                    <div class="col-sm-8">
+                      <select class="form-control" style="width: 100%;" name="kode_barang[]">
+                        <?php foreach ($lab as $datalab) {
+                        ?>
+                        <option value="<?php echo $datalab['kode_lab'];?>"><?php echo $datalab['kode_lab'];?> (<?php echo $datalab['nama_lab'];?>)</option>
+                      <?php } ?>
+                      </select>
+                    </div>
                   </div>
-                  <br /><br />
-                  <table id="dataTableSupport" class="table table-bordered">
-                    <tr>
-                      <th>#</th>
-                      <th>Unit</th>
-                      <th>Merek / Type</th>
-                      <th>Spesifikasi</th>
-                    </tr>
-                      <tr>
-                          <td><input type="checkbox" value="0" name="validasi[]"/></td>
-                          <td>
-                              <select class="form-control" style="width: 100%;" name="kode_barang[]">
-                                <?php foreach ($unit as $dataunit) {
-                                ?>
-                                <option value="<?php echo $dataunit['kode_unit'];?>"><?php echo $dataunit['nama_unit'];?></option>
-                                <?php } ?>
-                              </select>
-                          </td>
-                          <td>
-                              <select class="form-control" style="width: 100%;" name="kode_barang[]">
-                                <?php foreach ($databarang as $barang) {
-                                ?>
-                                <option value="<?php echo $barang['kode_barang'];?>"><?php echo $barang['kode_barang'];?> - <?php echo $barang['nama_barang'];?></option>
-                                <?php } ?>
-                              </select>
-                          </td>
-                          <td><input type="text" class="form-control" name="konfigurasi[]" placeholder="Deskripsi" readonly="" /></td>
-                      </tr>
-                  </table>
+                  <div class="form-group">
+                    <label for="inputNamaBarang" class="col-sm-3 control-label">Spesifikasi</label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" placeholder="Spesifikasi" name="spesifikasi" readonly="" required>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-8">
+                      <div class="btn-group pull-right">
+                      <button type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span> Tambah item</button>
+                      </div>
+                    </div>
+                  </div><br/>
+                </div>
+                <table class="table table-bordered">
+                  <tr>
+                    <th>Nama Unit</th>
+                    <th>Merek/Type</th>
+                    <th>Spesifikasi</th>
+                    <th>Option</th>
+                  </tr>
+                </table>
                 </div>
 
                 <div class="col-md-12">
                 <h4>5. Operating System</h4>
                 <hr />
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-primary btn-sm" onclick="addRow('dataTableOS');"><span class="glyphicon glyphicon-plus"></span></button>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="inputNamaBarang" class="col-sm-3 control-label">Nama unit</label>
+                    <div class="col-sm-8">
+                      <select class="form-control" style="width: 100%;" name="kode_barang[]">
+                        <?php foreach ($lab as $datalab) {
+                        ?>
+                        <option value="<?php echo $datalab['kode_lab'];?>"><?php echo $datalab['kode_lab'];?> (<?php echo $datalab['nama_lab'];?>)</option>
+                      <?php } ?>
+                      </select>
+                    </div>
                   </div>
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-danger btn-sm" onclick="deleteRow('dataTableOS');"><span class="glyphicon glyphicon-trash"></span></button>
+                  <div class="form-group">
+                    <label for="inputNamaBarang" class="col-sm-3 control-label">Merek / Type</label>
+                    <div class="col-sm-8">
+                      <select class="form-control" style="width: 100%;" name="kode_barang[]">
+                        <?php foreach ($lab as $datalab) {
+                        ?>
+                        <option value="<?php echo $datalab['kode_lab'];?>"><?php echo $datalab['kode_lab'];?> (<?php echo $datalab['nama_lab'];?>)</option>
+                      <?php } ?>
+                      </select>
+                    </div>
                   </div>
-                  <br /><br />
-                  <table id="dataTableOS" class="table table-bordered">
-                    <tr>
-                      <th>#</th>
-                      <th>Unit</th>
-                      <th>Merek / Type</th>
-                      <th>Spesifikasi</th>
-                    </tr>
-                      <tr>
-                          <td><input type="checkbox" value="0" name="validasi[]"/></td>
-                          <td>
-                              <select class="form-control" style="width: 100%;" name="kode_barang[]">
-                                <?php foreach ($unit as $dataunit) {
-                                ?>
-                                <option value="<?php echo $dataunit['kode_unit'];?>"><?php echo $dataunit['nama_unit'];?></option>
-                                <?php } ?>
-                              </select>
-                          </td>
-                          <td>
-                              <select class="form-control" style="width: 100%;" name="kode_barang[]">
-                                <?php foreach ($databarang as $barang) {
-                                ?>
-                                <option value="<?php echo $barang['kode_barang'];?>"><?php echo $barang['kode_barang'];?> - <?php echo $barang['nama_barang'];?></option>
-                                <?php } ?>
-                              </select>
-                          </td>
-                          <td><input type="text" class="form-control" name="konfigurasi[]" placeholder="Deskripsi" readonly="" /></td>
-                      </tr>
-                  </table>
+                  <div class="form-group">
+                    <label for="inputNamaBarang" class="col-sm-3 control-label">Spesifikasi</label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" placeholder="Spesifikasi" name="spesifikasi" readonly="" required>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-8">
+                      <div class="btn-group pull-right">
+                      <button type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span> Tambah item</button>
+                      </div>
+                    </div>
+                  </div><br/>
+                </div>
+                <table class="table table-bordered">
+                  <tr>
+                    <th>Nama Unit</th>
+                    <th>Merek/Type</th>
+                    <th>Spesifikasi</th>
+                    <th>Option</th>
+                  </tr>
+                </table>
                 </div>
 
                 <div class="col-md-12">
                 <h4>6. Installed Application</h4>
                 <hr />
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-primary btn-sm" onclick="addRow('dataTableInstalled');"><span class="glyphicon glyphicon-plus"></span></button>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="inputNamaBarang" class="col-sm-3 control-label">Nama unit</label>
+                    <div class="col-sm-8">
+                      <select class="form-control" style="width: 100%;" name="kode_barang[]">
+                        <?php foreach ($lab as $datalab) {
+                        ?>
+                        <option value="<?php echo $datalab['kode_lab'];?>"><?php echo $datalab['kode_lab'];?> (<?php echo $datalab['nama_lab'];?>)</option>
+                      <?php } ?>
+                      </select>
+                    </div>
                   </div>
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-danger btn-sm" onclick="deleteRow('dataTableInstalled');"><span class="glyphicon glyphicon-trash"></span></button>
+                  <div class="form-group">
+                    <label for="inputNamaBarang" class="col-sm-3 control-label">Merek / Type</label>
+                    <div class="col-sm-8">
+                      <select class="form-control" style="width: 100%;" name="kode_barang[]">
+                        <?php foreach ($lab as $datalab) {
+                        ?>
+                        <option value="<?php echo $datalab['kode_lab'];?>"><?php echo $datalab['kode_lab'];?> (<?php echo $datalab['nama_lab'];?>)</option>
+                      <?php } ?>
+                      </select>
+                    </div>
                   </div>
-                  <br /><br />
-                  <table id="dataTableInstalled" class="table table-bordered">
-                    <tr>
-                      <th>#</th>
-                      <th>Unit</th>
-                      <th>Merek / Type</th>
-                      <th>Spesifikasi</th>
-                    </tr>
-                      <tr>
-                          <td><input type="checkbox" value="0" name="validasi[]"/></td>
-                          <td>
-                              <select class="form-control" style="width: 100%;" name="kode_barang[]">
-                                <?php foreach ($unit as $dataunit) {
-                                ?>
-                                <option value="<?php echo $dataunit['kode_unit'];?>"><?php echo $dataunit['nama_unit'];?></option>
-                                <?php } ?>
-                              </select>
-                          </td>
-                          <td>
-                              <select class="form-control" style="width: 100%;" name="kode_barang[]">
-                                <?php foreach ($databarang as $barang) {
-                                ?>
-                                <option value="<?php echo $barang['kode_barang'];?>"><?php echo $barang['kode_barang'];?> - <?php echo $barang['nama_barang'];?></option>
-                                <?php } ?>
-                              </select>
-                          </td>
-                          <td><input type="text" class="form-control" name="konfigurasi[]" placeholder="Deskripsi" readonly="" /></td>
-                      </tr>
-                  </table>
+                  <div class="form-group">
+                    <label for="inputNamaBarang" class="col-sm-3 control-label">Spesifikasi</label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" placeholder="Spesifikasi" name="spesifikasi" readonly="" required>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-8">
+                      <div class="btn-group pull-right">
+                      <button type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span> Tambah item</button>
+                      </div>
+                    </div>
+                  </div><br/>
+                </div>
+                <table class="table table-bordered">
+                  <tr>
+                    <th>Nama Unit</th>
+                    <th>Merek/Type</th>
+                    <th>Spesifikasi</th>
+                    <th>Option</th>
+                  </tr>
+                </table>
                 </div>
               </div><!-- /.row -->
             </div><!-- /.box-body -->

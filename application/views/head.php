@@ -19,6 +19,8 @@
         $txt = "User Profile";
       }else if($this->uri->segment(1)=="rakitan"){ 
         $txt = "Rakitan";
+      }else if($this->uri->segment(1)=="rakitanset"){ 
+        $txt = "Setting Rakitan";
       }else if($this->uri->segment(1)=="lab"){ 
         $txt = "Workgroup";
       }else if($this->uri->segment(1)=="kategoriapp"){ 
